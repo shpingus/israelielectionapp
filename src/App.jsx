@@ -1,27 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import QuizCardStack from './components/QuizCardStack';
 import ResultsPanel from './components/ResultsPanel';
 import PartyDatabase from './components/PartyDatabase';
-import FontTester from './components/FontTester';
 import questionsData from './data/questions.json';
 import partiesData from './data/parties.json';
 
 function AppContent() {
   const { t, language } = useLanguage();
   const [screen, setScreen] = useState('welcome'); // 'welcome', 'quiz', 'results', 'database'
-  const [fontPairing, setFontPairing] = useState(() => {
-    return localStorage.getItem('israeli_elections_font') || 'vintage';
-  });
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({}); // { [questionId]: stanceValue }
   const [scores, setScores] = useState([]); // Array of sorted { partyId, score }
-
-  useEffect(() => {
-    localStorage.setItem('israeli_elections_font', fontPairing);
-    document.body.className = `font-pairing-${fontPairing}`;
-  }, [fontPairing]);
 
   const handleStartQuiz = () => {
     setAnswers({});
@@ -147,7 +138,6 @@ function AppContent() {
           />
         )}
       </main>
-      <FontTester fontPairing={fontPairing} setFontPairing={setFontPairing} />
     </div>
   );
 }

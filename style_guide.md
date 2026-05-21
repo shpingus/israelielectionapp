@@ -28,27 +28,14 @@ This style guide defines the visual language, design system tokens, and interact
 
 ## 3. Typography
 
-To accommodate bilingual layouts (Hebrew & English) and match the artsy, neo-brutalist character of the application, we support three distinct typography pairing profiles which can be switched dynamically:
+To accommodate bilingual layouts (Hebrew & English) and match the artsy, neo-brutalist character of the application, we use a custom **Vintage Slab & Serif** typography pairing:
 
-### Option 1: Vintage Slab & Serif (Selected)
 *   **Headings (Display)**: `Suez One` (Hebrew) / `Fraunces` (English)
-    *   *Character*: A chunky, heavy, print-press styling combining Suez One (Hebrew slab-serif) and Fraunces (soft English newspaper serif).
+    *   *Character*: A chunky, heavy, print-press styling combining Suez One (Hebrew slab-serif) and Fraunces (soft English newspaper serif). Gives the headers a retro poster and newspaper feel.
 *   **Body & UI Text**: `Heebo` (Hebrew) / `Outfit` (English)
-    *   *Character*: Highly readable, friendly, modern geometric sans-serif.
+    *   *Character*: Highly readable, modern, friendly geometric sans-serif that balances the heavy header fonts.
 *   **UI Metadata & Labels**: `Space Mono` (Monospace)
-
-### Option 2: Literary Newspaper Serif
-*   **Headings (Display)**: `Frank Ruhl Libre` (Hebrew) / `Fraunces` (English)
-    *   *Character*: A traditional high-contrast editorial look. Elegant contrast and academic/journalistic authority.
-*   **Body & UI Text**: `Assistant` (Hebrew) / `Plus Jakarta Sans` (English)
-    *   *Character*: Legible and clean sans-serif.
-*   **UI Metadata & Labels**: `Space Mono` (Monospace)
-
-### Option 3: Slab & Geometric Sans
-*   **Headings (Display)**: `Suez One` (Hebrew) / `Space Grotesk` (English)
-    *   *Character*: Bold, heavy Hebrew display slab paired with a digital-oriented geometric English display sans.
-*   **Body & UI Text**: `Heebo` (Hebrew) / `Plus Jakarta Sans` (English)
-*   **UI Metadata & Labels**: `Space Mono` (Monospace)
+    *   *Character*: Clean monospace used for button text, numbers, metrics, and metadata labels.
 
 ---
 

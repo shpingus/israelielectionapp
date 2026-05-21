@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,700..900;1,9..144,700..900&family=Heebo:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Secular+One&family=Space+Grotesk:wght@700;800&family=Space+Mono:wght@700&family=Suez+One&family=Syne:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@700&family=Suez+One&family=Fraunces:ital,opsz,wght@0,9..144,700..900;1,9..144,700..900&display=swap');
 
 :root {
   --bg-color: #F8F7F3;
@@ -49,24 +49,7 @@
   --hover-card-translate-x: -3px;
 }
 
-/* Font Pairing Overrides */
-.font-pairing-vintage {
-  --font-heading: 'Suez One', 'Fraunces', Georgia, serif;
-  --font-body: 'Heebo', 'Outfit', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Space Mono', monospace;
-}
 
-.font-pairing-editorial {
-  --font-heading: 'Frank Ruhl Libre', 'Fraunces', Georgia, serif;
-  --font-body: 'Assistant', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Space Mono', monospace;
-}
-
-.font-pairing-hybrid {
-  --font-heading: 'Suez One', 'Space Grotesk', system-ui, -apple-system, sans-serif;
-  --font-body: 'Heebo', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Space Mono', monospace;
-}
 
 *, *:before, *:after {
   box-sizing: inherit;
