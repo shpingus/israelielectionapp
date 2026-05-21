@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function QuizCardStack({ questions, currentIndex, onAnswer, onBack, answers }) {
@@ -88,8 +88,8 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           left: isAnimating ? `${offsetX}px` : `${offsetX * 2}px`,
           right: isAnimating ? `${-offsetX}px` : `${-offsetX * 2}px`,
           bottom: isAnimating ? '-8px' : '-16px',
-          border: '3px solid #121212',
-          backgroundColor: '#FFFFFF',
+          border: '3px solid var(--border-color, #121212)',
+          backgroundColor: 'var(--card-bg-color, #FFFFFF)',
           zIndex: 1,
           pointerEvents: 'none',
           transition: transitionStyle
@@ -106,7 +106,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             right: isAnimating ? '0px' : `${-offsetX}px`,
             bottom: isAnimating ? '0px' : '-8px',
             zIndex: 2,
-            backgroundColor: '#FBFBF9',
+            backgroundColor: 'var(--card-bg-color, #FBFBF9)',
             boxShadow: 'none',
             padding: '24px 24px 32px 24px',
             display: 'flex',
@@ -131,7 +131,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
               className="monospace-label" 
               style={{ 
                 fontWeight: 700, 
-                color: '#555555',
+                color: 'var(--text-color)', opacity: 0.7,
                 fontSize: '0.85rem'
               }}
             >
@@ -141,7 +141,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
               className="category-badge"
               style={{
                 backgroundColor: 'var(--accent-cyan)',
-                color: '#121212',
+                color: 'var(--text-color, #121212)',
                 fontWeight: 800,
                 fontSize: '0.75rem',
                 letterSpacing: '0.5px'
@@ -178,8 +178,8 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
                   textAlign: language === 'he' ? 'right' : 'left',
                   justifyContent: 'flex-start',
                   padding: '14px 20px',
-                  backgroundColor: '#FFFFFF',
-                  color: '#121212',
+                  backgroundColor: 'var(--card-bg-color, #FFFFFF)',
+                  color: 'var(--text-color, #121212)',
                   fontWeight: 600,
                   fontSize: '1.05rem',
                   borderRadius: '0px',
@@ -193,7 +193,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
                     display: 'inline-flex',
                     width: '20px',
                     height: '20px',
-                    border: '2px solid #121212',
+                    border: '2px solid var(--border-color, #121212)',
                     backgroundColor: 'transparent',
                     flexShrink: 0
                   }}
@@ -210,7 +210,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
               justifyContent: 'space-between', 
               alignItems: 'center', 
               marginTop: '28px',
-              borderTop: '2px dashed #121212',
+              borderTop: '2px dashed var(--border-color, #121212)',
               paddingTop: '16px',
               opacity: 0.5
             }}
@@ -227,8 +227,8 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             left: isAnimating ? '0px' : `${offsetX}px`,
             right: isAnimating ? '0px' : `${-offsetX}px`,
             bottom: isAnimating ? '0px' : '-8px',
-            border: '3px solid #121212',
-            backgroundColor: '#FFFFFF',
+            border: '3px solid var(--border-color, #121212)',
+            backgroundColor: 'var(--card-bg-color, #FFFFFF)',
             zIndex: 2,
             pointerEvents: 'none',
             transition: transitionStyle
@@ -242,7 +242,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
         style={{
           position: 'relative',
           zIndex: 3,
-          backgroundColor: '#FBFBF9',
+          backgroundColor: 'var(--card-bg-color, #FBFBF9)',
           boxShadow: 'none', // We have actual cards underneath for depth, no shadow needed
           padding: '24px 24px 32px 24px',
           display: 'flex',
@@ -265,7 +265,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             className="monospace-label" 
             style={{ 
               fontWeight: 700, 
-              color: '#555555',
+              color: 'var(--text-color)', opacity: 0.7,
               fontSize: '0.85rem'
             }}
           >
@@ -275,7 +275,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             className="category-badge"
             style={{
               backgroundColor: 'var(--accent-cyan)',
-              color: '#121212',
+              color: 'var(--text-color, #121212)',
               fontWeight: 800,
               fontSize: '0.75rem',
               letterSpacing: '0.5px'
@@ -315,7 +315,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
                   textAlign: language === 'he' ? 'right' : 'left',
                   justifyContent: 'flex-start',
                   padding: '14px 20px',
-                  color: '#121212',
+                  color: 'var(--text-color, #121212)',
                   fontWeight: 600,
                   fontSize: '1.05rem',
                   borderRadius: '0px',
@@ -329,7 +329,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
                     display: 'inline-flex',
                     width: '20px',
                     height: '20px',
-                    border: '2px solid #121212',
+                    border: '2px solid var(--border-color, #121212)',
                     backgroundColor: isSelected ? '#121212' : 'transparent',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -353,7 +353,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             justifyContent: 'space-between', 
             alignItems: 'center', 
             marginTop: '28px',
-            borderTop: '2px dashed #121212',
+            borderTop: '2px dashed var(--border-color, #121212)',
             paddingTop: '16px'
           }}
         >
@@ -364,7 +364,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             style={{
               padding: '6px 16px',
               fontSize: '0.85rem',
-              backgroundColor: '#FFFFFF'
+              backgroundColor: 'var(--card-bg-color, #FFFFFF)'
             }}
           >
             {backArrow} {t('back')}
@@ -376,7 +376,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             style={{
               padding: '6px 16px',
               fontSize: '0.85rem',
-              backgroundColor: '#FFFFFF'
+              backgroundColor: 'var(--card-bg-color, #FFFFFF)'
             }}
           >
             {t('noOpinion')} {nextArrow}

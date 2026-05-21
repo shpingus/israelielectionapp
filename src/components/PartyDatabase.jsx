@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function PartyDatabase({ parties, questions, onBack }) {
@@ -44,7 +44,7 @@ export default function PartyDatabase({ parties, questions, onBack }) {
         <button 
           onClick={onBack} 
           className="brutalist-button"
-          style={{ backgroundColor: '#FFFFFF', padding: '8px 16px', fontSize: '0.9rem' }}
+          style={{ backgroundColor: 'var(--card-bg-color, #FFFFFF)', padding: '8px 16px', fontSize: '0.9rem' }}
         >
           {backArrow} {t('backToHome')}
         </button>
@@ -69,7 +69,7 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                 boxShadow: isExpanded 
                   ? 'calc(var(--shadow-x) * 1.5) calc(var(--shadow-y) * 1.5) 0px #121212' 
                   : 'var(--shadow-x) var(--shadow-y) 0px #121212',
-                backgroundColor: '#FFFFFF'
+                backgroundColor: 'var(--card-bg-color, #FFFFFF)'
               }}
             >
               {/* Row Header */}
@@ -86,7 +86,7 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                   <h3 style={{ fontSize: '1.6rem', fontWeight: 800, margin: '0 0 4px 0' }}>
                     {partyName}
                   </h3>
-                  <div className="monospace-label" style={{ color: '#555555', fontSize: '0.9rem' }}>
+                  <div className="monospace-label" style={{ color: 'var(--text-color)', opacity: 0.7, fontSize: '0.9rem' }}>
                     {t('leader')}: {partyLeader}
                   </div>
                 </div>
@@ -106,7 +106,7 @@ export default function PartyDatabase({ parties, questions, onBack }) {
 
               {/* Collapsible Info */}
               {isExpanded && (
-                <div style={{ marginTop: '24px', borderTop: '2px dashed #121212', paddingTop: '20px' }}>
+                <div style={{ marginTop: '24px', borderTop: '2px dashed var(--border-color, #121212)', paddingTop: '20px' }}>
                   <p style={{ fontSize: '1.05rem', lineHeight: '1.6', marginBottom: '24px' }}>
                     {partyDesc}
                   </p>
@@ -124,7 +124,7 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                       maxHeight: '400px',
                       overflowY: 'auto',
                       paddingInlineEnd: '8px',
-                      border: '2px solid #121212',
+                      border: '2px solid var(--border-color, #121212)',
                       padding: '16px',
                       backgroundColor: '#FAF9F6'
                     }}

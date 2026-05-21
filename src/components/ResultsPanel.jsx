@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function ResultsPanel({ scores, answers, questions, parties, onRetake, onViewParties }) {
@@ -66,7 +65,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
           borderWidth: '4px',
           boxShadow: 'var(--shadow-x-card) var(--shadow-y-card) 0px #121212',
           marginBottom: '40px',
-          backgroundColor: '#FFFFFF',
+          backgroundColor: 'var(--card-bg-color, #FFFFFF)',
           textAlign: 'center'
         }}
       >
@@ -79,7 +78,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
             padding: '6px 16px',
             display: 'inline-block',
             marginBottom: '16px',
-            border: '2px solid #121212'
+            border: '2px solid var(--border-color, #121212)'
           }}
         >
           {t('yourBestMatch')}
@@ -89,7 +88,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
           {matchedPartyName}
         </h2>
         
-        <div className="monospace-label" style={{ fontSize: '1.1rem', color: '#555555', marginBottom: '24px' }}>
+        <div className="monospace-label" style={{ fontSize: '1.1rem', color: 'var(--text-color)', opacity: 0.7, marginBottom: '24px' }}>
           {t('leader')}: {matchedPartyLeader}
         </div>
  
@@ -101,7 +100,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
             alignItems: 'center',
             justifyContent: 'center',
             padding: '24px 32px',
-            border: '3px solid #121212',
+            border: '3px solid var(--border-color, #121212)',
             backgroundColor: 'var(--accent-cyan)',
             boxShadow: 'var(--shadow-x) var(--shadow-y) 0px #121212',
             marginBottom: '24px'
@@ -140,7 +139,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
         <button 
           onClick={onViewParties} 
           className="brutalist-button" 
-          style={{ fontSize: '1.05rem', padding: '14px 28px', backgroundColor: '#FFFFFF' }}
+          style={{ fontSize: '1.05rem', padding: '14px 28px', backgroundColor: 'var(--card-bg-color, #FFFFFF)' }}
         >
           {t('exploreParties')}
         </button>
@@ -151,7 +150,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
         className="brutalist-card" 
         style={{ 
           padding: '24px', 
-          backgroundColor: '#FFFFFF'
+          backgroundColor: 'var(--card-bg-color, #FFFFFF)'
         }}
       >
         <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '24px', textAlign: 'center' }}>
@@ -217,7 +216,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
                           backgroundColor: compat.color,
                           color: compat.textColor,
                           padding: '4px 8px',
-                          border: '2px solid #121212',
+                          border: '2px solid var(--border-color, #121212)',
                           display: 'inline-block',
                           whiteSpace: 'nowrap'
                         }}
@@ -240,14 +239,14 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
           style={{ 
             marginTop: '40px',
             padding: '24px',
-            backgroundColor: '#FFFFFF'
+            backgroundColor: 'var(--card-bg-color, #FFFFFF)'
           }}
         >
           <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '20px', textAlign: 'center' }}>
             {language === 'he' ? 'דירוג ההתאמה המלא' : 'Full Compatibility Ranking'}
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {scores.slice(1).map((s, idx) => {
+            {scores.slice(1).map((s) => {
               const party = parties.find(p => p.id === s.partyId);
               const partyName = language === 'he' ? party.nameHe : party.nameEn;
               const partyLeader = language === 'he' ? party.leaderHe : party.leaderEn;
@@ -259,8 +258,8 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     padding: '12px 18px',
-                    border: '2px solid #121212',
-                    backgroundColor: '#FFFFFF',
+                    border: '2px solid var(--border-color, #121212)',
+                    backgroundColor: 'var(--card-bg-color, #FFFFFF)',
                     borderLeft: `8px solid ${party.color || '#121212'}`
                   }}
                 >
@@ -275,7 +274,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
                     style={{
                       backgroundColor: 'var(--accent-cyan)',
                       padding: '4px 10px',
-                      border: '2px solid #121212',
+                      border: '2px solid var(--border-color, #121212)',
                       fontSize: '0.85rem'
                     }}
                   >

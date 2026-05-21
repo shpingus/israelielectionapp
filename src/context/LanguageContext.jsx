@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useState, useEffect, useContext } from 'react';
 
 const LanguageContext = createContext();
 
@@ -36,7 +37,28 @@ const translations = {
     security: "Security & Draft",
     religion_state: "Religion & State",
     judicial: "Judicial System",
-    economy: "Economy & Welfare"
+    economy: "Economy & Welfare",
+    accessibilityTitle: "Accessibility Settings",
+    accessibilityButton: "Accessibility Settings Menu",
+    highContrast: "High Contrast",
+    darkContrast: "Dark Contrast",
+    monochrome: "Monochrome Mode",
+    fontSize: "Font Size",
+    fontSizeSmall: "Small",
+    fontSizeMedium: "Medium",
+    fontSizeLarge: "Large",
+    dyslexiaFont: "Dyslexia-Friendly Font",
+    reducedMotion: "Reduced Motion / Animations",
+    accessibilityStatement: "Accessibility Statement",
+    close: "Close",
+    resetSettings: "Reset Settings",
+    accStatementTitle: "Accessibility Statement",
+    accStatementBody: "We are committed to making this platform accessible to all users, in accordance with the Equal Rights for Persons with Disabilities Law in Israel. We have made every effort to ensure that the site meets level AA criteria of the Web Content Accessibility Guidelines (WCAG 2.1).",
+    accCoordinator: "Accessibility Coordinator",
+    accCoordinatorName: "David Cohen",
+    accCoordinatorEmail: "accessibility@ballotbox2026.org.il",
+    accCoordinatorPhone: "+972-3-555-0199",
+    accLastUpdated: "Last Updated: May 2026"
   },
   he: {
     appTitle: "בחירות 2026: מפתח עמדות",
@@ -71,7 +93,28 @@ const translations = {
     security: "ביטחון וגיוס",
     religion_state: "דת ומדינה",
     judicial: "מערכת המשפט",
-    economy: "כלכלה וחברה"
+    economy: "כלכלה וחברה",
+    accessibilityTitle: "הגדרות נגישות",
+    accessibilityButton: "תפריט הגדרות נגישות",
+    highContrast: "ניגודיות גבוהה",
+    darkContrast: "ניגודיות כהה",
+    monochrome: "גווני אפור (מונוכרום)",
+    fontSize: "גודל גופן",
+    fontSizeSmall: "קטן",
+    fontSizeMedium: "רגיל",
+    fontSizeLarge: "גדול",
+    dyslexiaFont: "גופן מותאם לדיסלקציה",
+    reducedMotion: "הפחתת אנימציות ותנועה",
+    accessibilityStatement: "הצהרת נגישות",
+    close: "סגור",
+    resetSettings: "איפוס הגדרות",
+    accStatementTitle: "הצהרת נגישות",
+    accStatementBody: "אנו מחויבים להנגיש את הפלטפורמה לכלל המשתמשים, בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות בישראל. השקענו מאמצים רבים כדי להבטיח שהאתר יעמוד בקריטריונים של רמה AA של ההנחיות לנגישות תכנים באינטרנט (WCAG 2.1).",
+    accCoordinator: "רכז נגישות",
+    accCoordinatorName: "דוד כהן",
+    accCoordinatorEmail: "accessibility@ballotbox2026.org.il",
+    accCoordinatorPhone: "03-555-0199",
+    accLastUpdated: "עודכן לאחרונה: מאי 2026"
   }
 };
 

@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import QuizCardStack from './components/QuizCardStack';
 import ResultsPanel from './components/ResultsPanel';
 import PartyDatabase from './components/PartyDatabase';
+import AccessibilityWidget from './components/AccessibilityWidget';
 import questionsData from './data/questions.json';
 import partiesData from './data/parties.json';
 
 function AppContent() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [screen, setScreen] = useState('welcome'); // 'welcome', 'quiz', 'results', 'database'
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({}); // { [questionId]: stanceValue }
@@ -91,18 +92,18 @@ function AppContent() {
       {/* Main Content Area */}
       <main className="container">
         {screen === 'welcome' && (
-          <div className="brutalist-card slide-in-up" style={{ maxWidth: '600px', textAlign: 'center', backgroundColor: '#FFFFFF' }}>
+          <div className="brutalist-card slide-in-up" style={{ maxWidth: '600px', textAlign: 'center', backgroundColor: 'var(--card-bg-color, #FFFFFF)' }}>
             <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '16px', letterSpacing: '-0.5px' }}>
               {t('appTitle')}
             </h2>
-            <p style={{ fontSize: '1.2rem', marginBottom: '32px', color: '#333333' }}>
+            <p style={{ fontSize: '1.2rem', marginBottom: '32px', color: 'var(--text-color)' }}>
               {t('appSubtitle')}
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '320px', margin: '0 auto' }}>
               <button onClick={handleStartQuiz} className="brutalist-button primary" style={{ fontSize: '1.1rem', padding: '14px' }}>
                 {t('startQuiz')}
               </button>
-              <button onClick={() => setScreen('database')} className="brutalist-button" style={{ fontSize: '1.1rem', padding: '14px', backgroundColor: '#FFFFFF' }}>
+              <button onClick={() => setScreen('database')} className="brutalist-button" style={{ fontSize: '1.1rem', padding: '14px', backgroundColor: 'var(--card-bg-color, #FFFFFF)' }}>
                 {t('exploreParties')}
               </button>
             </div>
@@ -138,6 +139,7 @@ function AppContent() {
           />
         )}
       </main>
+      <AccessibilityWidget />
     </div>
   );
 }
