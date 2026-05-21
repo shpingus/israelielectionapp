@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useState, useEffect, useContext } from 'react';
 
 const LanguageContext = createContext();
 
@@ -36,7 +37,15 @@ const translations = {
     security: "Security & Draft",
     religion_state: "Religion & State",
     judicial: "Judicial System",
-    economy: "Economy & Welfare"
+    economy: "Economy & Welfare",
+    selectStatement: "Which statement aligns more with your views?",
+    statementA: "Statement A",
+    statementB: "Statement B",
+    history: "History",
+    pros: "Key Platforms & Strengths",
+    challenges: "Criticisms & Challenges",
+    compareWith: "Compare with:",
+    compareStances: "Compare Stances"
   },
   he: {
     appTitle: "בחירות 2026: מפתח עמדות",
@@ -71,7 +80,15 @@ const translations = {
     security: "ביטחון וגיוס",
     religion_state: "דת ומדינה",
     judicial: "מערכת המשפט",
-    economy: "כלכלה וחברה"
+    economy: "כלכלה וחברה",
+    selectStatement: "איזו קביעה מתאימה יותר לעמדותיך?",
+    statementA: "קביעה א'",
+    statementB: "קביעה ב'",
+    history: "רקע היסטורי",
+    pros: "עמדות מפתח ונקודות חוזק",
+    challenges: "אתגרים וביקורת ציבורית",
+    compareWith: "השווה עם:",
+    compareStances: "השוואת עמדות"
   }
 };
 

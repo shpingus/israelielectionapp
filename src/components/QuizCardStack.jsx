@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function QuizCardStack({ questions, currentIndex, onAnswer, onBack, answers }) {
@@ -20,11 +20,13 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
     }
     prevIndexRef.current = currentIndex;
   }, [currentIndex, dir]);
+
   const backArrow = dir === 'rtl' ? (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineEnd: '6px' }}><line x1="4" y1="12" x2="20" y2="12" /><polyline points="13 5 20 12 13 19" /></svg>
   ) : (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineEnd: '6px' }}><line x1="20" y1="12" x2="4" y2="12" /><polyline points="11 5 4 12 11 19" /></svg>
   );
+
   const nextArrow = dir === 'rtl' ? (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineStart: '6px' }}><line x1="20" y1="12" x2="4" y2="12" /><polyline points="11 5 4 12 11 19" /></svg>
   ) : (
@@ -36,7 +38,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
   const currentQuestion = questions[currentIndex];
   const total = questions.length;
 
-  const options = [
+  const likertOptions = [
     { labelKey: 'stronglyAgree', value: 2, className: 'strongly-agree' },
     { labelKey: 'agree', value: 1, className: 'agree' },
     { labelKey: 'disagree', value: -1, className: 'disagree' },
@@ -67,18 +69,307 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
   };
 
   const categoryName = language === 'he' ? currentQuestion.categoryHe : currentQuestion.categoryEn;
-  const questionText = language === 'he' ? currentQuestion.textHe : currentQuestion.textEn;
+  
+  // Define prompt text depending on question format
+  let questionPrompt;
+  if (currentQuestion.type === 'statement_pair') {
+    questionPrompt = t('selectStatement');
+  } else {
+    questionPrompt = language === 'he' ? currentQuestion.textHe : currentQuestion.textEn;
+  }
 
   const nextQuestion = currentIndex + 1 < total ? questions[currentIndex + 1] : null;
   const nextCategoryName = nextQuestion ? (language === 'he' ? nextQuestion.categoryHe : nextQuestion.categoryEn) : '';
-  const nextQuestionText = nextQuestion ? (language === 'he' ? nextQuestion.textHe : nextQuestion.textEn) : '';
+  
+  let nextQuestionPrompt = '';
+  if (nextQuestion) {
+    if (nextQuestion.type === 'statement_pair') {
+      nextQuestionPrompt = t('selectStatement');
+    } else {
+      nextQuestionPrompt = language === 'he' ? nextQuestion.textHe : nextQuestion.textEn;
+    }
+  }
 
   const offsetX = dir === 'rtl' ? 8 : -8;
   const isAnimating = !!animationClass;
   const transitionStyle = 'top 0.28s cubic-bezier(0.16, 1, 0.3, 1), left 0.28s cubic-bezier(0.16, 1, 0.3, 1), right 0.28s cubic-bezier(0.16, 1, 0.3, 1), bottom 0.28s cubic-bezier(0.16, 1, 0.3, 1)';
 
+  // Helper to render choice stack for the preloaded next card
+  const renderNextChoices = () => {
+    if (!nextQuestion) return null;
+
+    if (nextQuestion.type === 'statement_pair') {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', opacity: 0.7 }}>
+          <div className="brutalist-button small-shadow" style={{ width: '100%', textAlign: language === 'he' ? 'right' : 'left', justifyContent: 'flex-start', padding: '12px 16px', backgroundColor: '#FFFFFF', pointerEvents: 'none' }}>
+            <span className="monospace-label" style={{ fontSize: '0.7rem', padding: '2px 6px', border: '1px solid #121212', backgroundColor: '#FAF9F6', display: 'inline-block', marginBottom: '4px' }}>{t('statementA')}</span>
+            <div style={{ fontSize: '0.85rem', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {language === 'he' ? nextQuestion.statementAHe : nextQuestion.statementAEn}
+            </div>
+          </div>
+          <div className="brutalist-button small-shadow" style={{ width: '100%', textAlign: language === 'he' ? 'right' : 'left', justifyContent: 'flex-start', padding: '12px 16px', backgroundColor: '#FFFFFF', pointerEvents: 'none' }}>
+            <span className="monospace-label" style={{ fontSize: '0.7rem', padding: '2px 6px', border: '1px solid #121212', backgroundColor: '#FAF9F6', display: 'inline-block', marginBottom: '4px' }}>{t('statementB')}</span>
+            <div style={{ fontSize: '0.85rem', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {language === 'he' ? nextQuestion.statementBHe : nextQuestion.statementBEn}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (nextQuestion.type === 'multiple_choice') {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', opacity: 0.7 }}>
+          {nextQuestion.options && nextQuestion.options.slice(0, 4).map((opt, idx) => (
+            <div
+              key={idx}
+              className="brutalist-button small-shadow"
+              style={{
+                width: '100%',
+                textAlign: language === 'he' ? 'right' : 'left',
+                justifyContent: 'flex-start',
+                padding: '10px 16px',
+                backgroundColor: '#FFFFFF',
+                color: '#121212',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+                borderRadius: '0px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                pointerEvents: 'none'
+              }}
+            >
+              <span style={{ display: 'inline-flex', width: '16px', height: '16px', border: '2px solid #121212', borderRadius: '50%', backgroundColor: 'transparent', flexShrink: 0 }} />
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {language === 'he' ? opt.textHe : opt.textEn}
+              </span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    // Likert Default
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', opacity: 0.7 }}>
+        {likertOptions.map((opt) => (
+          <div
+            key={opt.value}
+            className="brutalist-button small-shadow"
+            style={{
+              width: '100%',
+              textAlign: language === 'he' ? 'right' : 'left',
+              justifyContent: 'flex-start',
+              padding: '10px 16px',
+              backgroundColor: '#FFFFFF',
+              color: '#121212',
+              fontWeight: 600,
+              fontSize: '0.9rem',
+              borderRadius: '0px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              pointerEvents: 'none'
+            }}
+          >
+            <span style={{ display: 'inline-flex', width: '16px', height: '16px', border: '2px solid #121212', backgroundColor: 'transparent', flexShrink: 0 }} />
+            <span>{t(opt.labelKey)}</span>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  // Helper to render choice stack for the primary top question card
+  const renderCurrentChoices = () => {
+    if (currentQuestion.type === 'statement_pair') {
+      const isASelected = answers[currentQuestion.id] === 2;
+      const isBSelected = answers[currentQuestion.id] === -2;
+
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+          {/* Statement A Card */}
+          <button
+            onClick={() => handleSelect(2)}
+            className={`brutalist-button ${isASelected ? 'selected' : 'small-shadow'}`}
+            style={{
+              width: '100%',
+              textAlign: language === 'he' ? 'right' : 'left',
+              padding: '20px',
+              backgroundColor: isASelected ? 'var(--accent-cyan)' : '#FFFFFF',
+              color: '#121212',
+              borderRadius: '0px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: '8px',
+              cursor: 'pointer',
+              border: '3px solid #121212'
+            }}
+          >
+            <span 
+              className="monospace-label" 
+              style={{ 
+                fontSize: '0.75rem', 
+                fontWeight: 800,
+                border: '2.5px solid #121212', 
+                backgroundColor: isASelected ? '#FFFFFF' : 'var(--accent-cyan)',
+                padding: '3px 10px',
+                color: '#121212',
+                display: 'inline-block'
+              }}
+            >
+              {t('statementA')}
+            </span>
+            <div style={{ fontSize: '1.05rem', fontWeight: 700, lineHeight: '1.45', textAlign: language === 'he' ? 'right' : 'left', width: '100%' }}>
+              {language === 'he' ? currentQuestion.statementAHe : currentQuestion.statementAEn}
+            </div>
+          </button>
+
+          {/* Statement B Card */}
+          <button
+            onClick={() => handleSelect(-2)}
+            className={`brutalist-button ${isBSelected ? 'selected' : 'small-shadow'}`}
+            style={{
+              width: '100%',
+              textAlign: language === 'he' ? 'right' : 'left',
+              padding: '20px',
+              backgroundColor: isBSelected ? 'var(--accent-cyan)' : '#FFFFFF',
+              color: '#121212',
+              borderRadius: '0px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: '8px',
+              cursor: 'pointer',
+              border: '3px solid #121212'
+            }}
+          >
+            <span 
+              className="monospace-label" 
+              style={{ 
+                fontSize: '0.75rem', 
+                fontWeight: 800,
+                border: '2.5px solid #121212', 
+                backgroundColor: isBSelected ? '#FFFFFF' : 'var(--accent-cyan)',
+                padding: '3px 10px',
+                color: '#121212',
+                display: 'inline-block'
+              }}
+            >
+              {t('statementB')}
+            </span>
+            <div style={{ fontSize: '1.05rem', fontWeight: 700, lineHeight: '1.45', textAlign: language === 'he' ? 'right' : 'left', width: '100%' }}>
+              {language === 'he' ? currentQuestion.statementBHe : currentQuestion.statementBEn}
+            </div>
+          </button>
+        </div>
+      );
+    }
+
+    if (currentQuestion.type === 'multiple_choice') {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+          {currentQuestion.options && currentQuestion.options.map((opt) => {
+            const isSelected = answers[currentQuestion.id] === opt.value;
+            return (
+              <button
+                key={opt.value}
+                onClick={() => handleSelect(opt.value)}
+                className={`brutalist-button ${isSelected ? 'selected' : 'small-shadow'}`}
+                style={{
+                  width: '100%',
+                  textAlign: language === 'he' ? 'right' : 'left',
+                  justifyContent: 'flex-start',
+                  padding: '14px 20px',
+                  color: '#121212',
+                  backgroundColor: isSelected ? 'var(--accent-cyan)' : '#FFFFFF',
+                  fontWeight: 600,
+                  fontSize: '1.05rem',
+                  borderRadius: '0px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  border: '3px solid #121212'
+                }}
+              >
+                <span 
+                  style={{
+                    display: 'inline-flex',
+                    width: '20px',
+                    height: '20px',
+                    border: '2px solid #121212',
+                    borderRadius: '50%',
+                    backgroundColor: isSelected ? '#121212' : 'transparent',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#FFFFFF',
+                    fontSize: '0.75rem',
+                    flexShrink: 0
+                  }}
+                >
+                  {isSelected && '✓'}
+                </span>
+                <span>{language === 'he' ? opt.textHe : opt.textEn}</span>
+              </button>
+            );
+          })}
+        </div>
+      );
+    }
+
+    // Likert Default
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+        {likertOptions.map((opt) => {
+          const isSelected = answers[currentQuestion.id] === opt.value;
+          return (
+            <button
+              key={opt.value}
+              onClick={() => handleSelect(opt.value)}
+              className={`brutalist-button ${isSelected ? 'selected' : 'small-shadow'}`}
+              style={{
+                width: '100%',
+                textAlign: language === 'he' ? 'right' : 'left',
+                justifyContent: 'flex-start',
+                padding: '14px 20px',
+                color: '#121212',
+                fontWeight: 600,
+                fontSize: '1.05rem',
+                borderRadius: '0px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                border: '3px solid #121212'
+              }}
+            >
+              <span 
+                style={{
+                  display: 'inline-flex',
+                  width: '20px',
+                  height: '20px',
+                  border: '2px solid #121212',
+                  backgroundColor: isSelected ? '#121212' : 'transparent',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#FFFFFF',
+                  fontSize: '0.75rem',
+                  flexShrink: 0
+                }}
+              >
+                {isSelected && '✓'}
+              </span>
+              <span>{t(opt.labelKey)}</span>
+            </button>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
-    <div style={{ position: 'relative', width: '100%', maxWidth: '520px', margin: '40px auto 0 auto' }}>
+    <div style={{ position: 'relative', width: '100%', maxWidth: '540px', margin: '40px auto 0 auto' }}>
       
       {/* Decorative Stack Cards (Offset underneath) */}
       <div 
@@ -95,6 +386,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           transition: transitionStyle
         }}
       />
+      
       {/* Next Question Card (Preloaded Underneath) */}
       {nextQuestion ? (
         <div
@@ -111,7 +403,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             padding: '24px 24px 32px 24px',
             display: 'flex',
             flexDirection: 'column',
-            minHeight: '480px',
+            minHeight: '520px',
             pointerEvents: 'none',
             transition: transitionStyle
           }}
@@ -154,8 +446,8 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           {/* Question Text */}
           <h2 
             style={{ 
-              fontSize: '1.65rem', 
-              lineHeight: '1.3', 
+              fontSize: '1.5rem', 
+              lineHeight: '1.35', 
               fontWeight: 800, 
               letterSpacing: '-0.5px',
               marginBottom: '28px',
@@ -164,44 +456,11 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
               alignItems: 'center'
             }}
           >
-            {nextQuestionText}
+            {nextQuestionPrompt}
           </h2>
 
-          {/* Choices Stack (Inactive) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', opacity: 0.8 }}>
-            {options.map((opt) => (
-              <div
-                key={opt.value}
-                className="brutalist-button small-shadow"
-                style={{
-                  width: '100%',
-                  textAlign: language === 'he' ? 'right' : 'left',
-                  justifyContent: 'flex-start',
-                  padding: '14px 20px',
-                  backgroundColor: '#FFFFFF',
-                  color: '#121212',
-                  fontWeight: 600,
-                  fontSize: '1.05rem',
-                  borderRadius: '0px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px'
-                }}
-              >
-                <span 
-                  style={{
-                    display: 'inline-flex',
-                    width: '20px',
-                    height: '20px',
-                    border: '2px solid #121212',
-                    backgroundColor: 'transparent',
-                    flexShrink: 0
-                  }}
-                />
-                <span>{t(opt.labelKey)}</span>
-              </div>
-            ))}
-          </div>
+          {/* Choice Stack Mock */}
+          {renderNextChoices()}
 
           {/* Footer Spacer */}
           <div 
@@ -243,11 +502,11 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           position: 'relative',
           zIndex: 3,
           backgroundColor: '#FBFBF9',
-          boxShadow: 'none', // We have actual cards underneath for depth, no shadow needed
+          boxShadow: 'none', 
           padding: '24px 24px 32px 24px',
           display: 'flex',
           flexDirection: 'column',
-          minHeight: '480px'
+          minHeight: '520px'
         }}
       >
         {/* Card Header Info */}
@@ -285,11 +544,11 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           </span>
         </div>
 
-        {/* Question Text */}
+        {/* Question Text / Prompt */}
         <h2 
           style={{ 
-            fontSize: '1.65rem', 
-            lineHeight: '1.3', 
+            fontSize: '1.5rem', 
+            lineHeight: '1.35', 
             fontWeight: 800, 
             letterSpacing: '-0.5px',
             marginBottom: '28px',
@@ -298,53 +557,11 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             alignItems: 'center'
           }}
         >
-          {questionText}
+          {questionPrompt}
         </h2>
 
         {/* Action Choice Stack */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
-          {options.map((opt) => {
-            const isSelected = answers[currentQuestion.id] === opt.value;
-            return (
-              <button
-                key={opt.value}
-                onClick={() => handleSelect(opt.value)}
-                className={`brutalist-button ${isSelected ? 'selected' : 'small-shadow'}`}
-                style={{
-                  width: '100%',
-                  textAlign: language === 'he' ? 'right' : 'left',
-                  justifyContent: 'flex-start',
-                  padding: '14px 20px',
-                  color: '#121212',
-                  fontWeight: 600,
-                  fontSize: '1.05rem',
-                  borderRadius: '0px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px'
-                }}
-              >
-                <span 
-                  style={{
-                    display: 'inline-flex',
-                    width: '20px',
-                    height: '20px',
-                    border: '2px solid #121212',
-                    backgroundColor: isSelected ? '#121212' : 'transparent',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#FFFFFF',
-                    fontSize: '0.75rem',
-                    flexShrink: 0
-                  }}
-                >
-                  {isSelected && '✓'}
-                </span>
-                <span>{t(opt.labelKey)}</span>
-              </button>
-            );
-          })}
-        </div>
+        {renderCurrentChoices()}
 
         {/* Back and Skip Footer */}
         <div 

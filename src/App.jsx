@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import QuizCardStack from './components/QuizCardStack';
@@ -8,7 +8,7 @@ import questionsData from './data/questions.json';
 import partiesData from './data/parties.json';
 
 function AppContent() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [screen, setScreen] = useState('welcome'); // 'welcome', 'quiz', 'results', 'database'
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({}); // { [questionId]: stanceValue }
@@ -48,9 +48,23 @@ function AppContent() {
         const userStance = finalAnswers[q.id];
         // Only evaluate questions where the user did not choose "neutral/skip" (value 0)
         if (userStance !== undefined && userStance !== 0) {
-          const partyStance = party.stances[q.id] !== undefined ? party.stances[q.id] : 0;
-          const maxDist = 4; // distance between +2 and -2
-          const dist = Math.abs(userStance - partyStance);
+          let dist;
+          const maxDist = 4; // distance between +2 and -2 (used as normalized max distance)
+          
+          if (q.type === 'multiple_choice') {
+            const partyStance = party.stances[q.id] !== undefined ? party.stances[q.id] : 0;
+            if (userStance === partyStance) {
+              dist = 0;
+            } else if (partyStance === 0) {
+              dist = 2; // neutral distance
+            } else {
+              dist = 4; // fully opposed
+            }
+          } else {
+            // likert or statement_pair
+            const partyStance = party.stances[q.id] !== undefined ? party.stances[q.id] : 0;
+            dist = Math.abs(userStance - partyStance);
+          }
           
           totalMaxDistance += maxDist;
           totalUserDistance += dist;
