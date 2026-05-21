@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function PartyDatabase({ parties, questions, onBack }) {
-  const { t, language } = useLanguage();
+  const { t, language, dir } = useLanguage();
   const [expandedPartyId, setExpandedPartyId] = useState(null);
+  const backArrow = dir === 'rtl' ? (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineEnd: '6px' }}><line x1="4" y1="12" x2="20" y2="12" /><polyline points="13 5 20 12 13 19" /></svg>
+  ) : (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineEnd: '6px' }}><line x1="20" y1="12" x2="4" y2="12" /><polyline points="11 5 4 12 11 19" /></svg>
+  );
 
   const getStanceLabel = (val) => {
     if (val === 2) return t('stronglyAgree');
@@ -41,7 +46,7 @@ export default function PartyDatabase({ parties, questions, onBack }) {
           className="brutalist-button"
           style={{ backgroundColor: '#FFFFFF', padding: '8px 16px', fontSize: '0.9rem' }}
         >
-          ← {t('backToHome')}
+          {backArrow} {t('backToHome')}
         </button>
       </div>
 
@@ -88,12 +93,11 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                 
                 <button
                   onClick={() => setExpandedPartyId(isExpanded ? null : party.id)}
-                  className="brutalist-button"
+                  className={`brutalist-button half-shadow ${isExpanded ? 'active-profile' : ''}`}
                   style={{
                     backgroundColor: isExpanded ? 'var(--accent-cyan)' : '#FFFFFF',
                     padding: '8px 16px',
-                    fontSize: '0.8rem',
-                    boxShadow: 'calc(var(--shadow-x) * 0.5) calc(var(--shadow-y) * 0.5) 0px #121212'
+                    fontSize: '0.8rem'
                   }}
                 >
                   {isExpanded ? (language === 'he' ? 'סגור פרופיל ▲' : 'Close Profile ▲') : t('viewPlatform')}
@@ -108,7 +112,7 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                   </p>
 
                   <h4 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '16px' }}>
-                    📌 {t('platformStances')}:
+                    {t('platformStances')}:
                   </h4>
 
                   {/* List of stances */}

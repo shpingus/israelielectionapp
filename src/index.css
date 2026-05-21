@@ -188,6 +188,45 @@ p {
   background-color: var(--accent-coral);
 }
 
+.brutalist-button.selected {
+  background-color: var(--accent-cyan);
+  box-shadow: var(--shadow-x) var(--shadow-y) 0px 0px var(--border-color);
+}
+.brutalist-button.selected:hover {
+  box-shadow: var(--shadow-x-hover) var(--shadow-y-hover) 0px 0px var(--border-color);
+}
+.brutalist-button.selected:active {
+  box-shadow: var(--shadow-x-active) var(--shadow-y-active) 0px 0px var(--border-color);
+}
+
+.brutalist-button.small-shadow {
+  box-shadow: calc(var(--shadow-x) * 0.75) calc(var(--shadow-y) * 0.75) 0px 0px var(--border-color);
+}
+.brutalist-button.small-shadow:hover {
+  box-shadow: calc(var(--shadow-x-hover) * 0.75) calc(var(--shadow-y-hover) * 0.75) 0px 0px var(--border-color);
+}
+.brutalist-button.small-shadow:active {
+  box-shadow: calc(var(--shadow-x-active) * 0.75) calc(var(--shadow-y-active) * 0.75) 0px 0px var(--border-color);
+}
+
+.brutalist-button.half-shadow {
+  box-shadow: calc(var(--shadow-x) * 0.5) calc(var(--shadow-y) * 0.5) 0px 0px var(--border-color);
+}
+.brutalist-button.half-shadow:hover {
+  box-shadow: calc(var(--shadow-x-hover) * 0.5) calc(var(--shadow-y-hover) * 0.5) 0px 0px var(--border-color);
+}
+.brutalist-button.half-shadow:active {
+  box-shadow: calc(var(--shadow-x-active) * 0.5) calc(var(--shadow-y-active) * 0.5) 0px 0px var(--border-color);
+}
+
+.brutalist-button:disabled,
+.brutalist-button.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
 /* Utility Badges & Labels */
 .monospace-label {
   font-family: var(--font-mono);
@@ -227,6 +266,16 @@ p {
   100% { transform: translate(120%, 10%) rotate(10deg); opacity: 0; }
 }
 
+@keyframes slideInLeft {
+  0% { transform: translate(-120%, 10%) rotate(-10deg); opacity: 0; }
+  100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  0% { transform: translate(120%, 10%) rotate(10deg); opacity: 0; }
+  100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+}
+
 @keyframes slideInUp {
   0% { transform: translateY(30px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
@@ -238,6 +287,14 @@ p {
 
 .slide-out-right {
   animation: slideOutRight 0.28s forwards ease-in;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.28s forwards ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.28s forwards ease-out;
 }
 
 .slide-in-up {

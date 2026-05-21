@@ -1,9 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function QuizCardStack({ questions, currentIndex, onAnswer, onBack, answers }) {
   const { t, language, dir } = useLanguage();
   const [animationClass, setAnimationClass] = useState('');
+  const prevIndexRef = useRef(currentIndex);
+
+  useEffect(() => {
+    if (prevIndexRef.current - currentIndex === 1) {
+      const isRtl = dir === 'rtl';
+      const directionClass = isRtl ? 'slide-in-left' : 'slide-in-right';
+      
+      setAnimationClass(directionClass);
+      const timer = setTimeout(() => {
+        setAnimationClass('');
+      }, 280);
+      
+      return () => clearTimeout(timer);
+    }
+    prevIndexRef.current = currentIndex;
+  }, [currentIndex, dir]);
+  const backArrow = dir === 'rtl' ? (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineEnd: '6px' }}><line x1="4" y1="12" x2="20" y2="12" /><polyline points="13 5 20 12 13 19" /></svg>
+  ) : (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineEnd: '6px' }}><line x1="20" y1="12" x2="4" y2="12" /><polyline points="11 5 4 12 11 19" /></svg>
+  );
+  const nextArrow = dir === 'rtl' ? (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineStart: '6px' }}><line x1="20" y1="12" x2="4" y2="12" /><polyline points="11 5 4 12 11 19" /></svg>
+  ) : (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineStart: '6px' }}><line x1="4" y1="12" x2="20" y2="12" /><polyline points="13 5 20 12 13 19" /></svg>
+  );
 
   if (!questions || questions.length === 0) return null;
 
@@ -18,10 +44,8 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
   ];
 
   const handleSelect = (val) => {
-    // Determine exit animation direction
-    // Agree moves right, Disagree/Strongly Disagree moves left
-    const isAgree = val > 0;
-    const directionClass = isAgree ? 'slide-out-right' : 'slide-out-left';
+    const isRtl = dir === 'rtl';
+    const directionClass = isRtl ? 'slide-out-left' : 'slide-out-right';
     
     setAnimationClass(directionClass);
     
@@ -32,7 +56,10 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
   };
 
   const handleSkip = () => {
-    setAnimationClass('slide-out-left');
+    const isRtl = dir === 'rtl';
+    const directionClass = isRtl ? 'slide-out-left' : 'slide-out-right';
+    
+    setAnimationClass(directionClass);
     setTimeout(() => {
       onAnswer(currentQuestion.id, 0); // Neutral / Skip
       setAnimationClass('');
@@ -145,7 +172,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             {options.map((opt) => (
               <div
                 key={opt.value}
-                className="brutalist-button"
+                className="brutalist-button small-shadow"
                 style={{
                   width: '100%',
                   textAlign: language === 'he' ? 'right' : 'left',
@@ -153,7 +180,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
                   padding: '14px 20px',
                   backgroundColor: '#FFFFFF',
                   color: '#121212',
-                  boxShadow: 'calc(var(--shadow-x) * 0.75) calc(var(--shadow-y) * 0.75) 0px #121212',
                   fontWeight: 600,
                   fontSize: '1.05rem',
                   borderRadius: '0px',
@@ -189,8 +215,8 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
               opacity: 0.5
             }}
           >
-            <span style={{ fontSize: '0.85rem' }}>← {t('back')}</span>
-            <span style={{ fontSize: '0.85rem' }}>{t('noOpinion')} →</span>
+            <span style={{ fontSize: '0.85rem' }}>{backArrow} {t('back')}</span>
+            <span style={{ fontSize: '0.85rem' }}>{t('noOpinion')} {nextArrow}</span>
           </div>
         </div>
       ) : (
@@ -283,15 +309,13 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
               <button
                 key={opt.value}
                 onClick={() => handleSelect(opt.value)}
-                className="brutalist-button"
+                className={`brutalist-button ${isSelected ? 'selected' : 'small-shadow'}`}
                 style={{
                   width: '100%',
                   textAlign: language === 'he' ? 'right' : 'left',
                   justifyContent: 'flex-start',
                   padding: '14px 20px',
-                  backgroundColor: isSelected ? 'var(--accent-cyan)' : '#FFFFFF',
                   color: '#121212',
-                  boxShadow: isSelected ? 'var(--shadow-x) var(--shadow-y) 0px #121212' : 'calc(var(--shadow-x) * 0.75) calc(var(--shadow-y) * 0.75) 0px #121212',
                   fontWeight: 600,
                   fontSize: '1.05rem',
                   borderRadius: '0px',
@@ -336,31 +360,26 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           <button
             onClick={onBack}
             disabled={currentIndex === 0}
-            className="brutalist-button"
+            className="brutalist-button small-shadow"
             style={{
               padding: '6px 16px',
               fontSize: '0.85rem',
-              opacity: currentIndex === 0 ? 0.4 : 1,
-              cursor: currentIndex === 0 ? 'not-allowed' : 'pointer',
-              backgroundColor: '#FFFFFF',
-              boxShadow: currentIndex === 0 ? '0px 0px 0px #121212' : 'calc(var(--shadow-x) * 0.75) calc(var(--shadow-y) * 0.75) 0px #121212',
-              transform: 'none'
+              backgroundColor: '#FFFFFF'
             }}
           >
-            ← {t('back')}
+            {backArrow} {t('back')}
           </button>
           
           <button
             onClick={handleSkip}
-            className="brutalist-button"
+            className="brutalist-button small-shadow"
             style={{
               padding: '6px 16px',
               fontSize: '0.85rem',
-              backgroundColor: '#FFFFFF',
-              boxShadow: 'calc(var(--shadow-x) * 0.75) calc(var(--shadow-y) * 0.75) 0px #121212',
+              backgroundColor: '#FFFFFF'
             }}
           >
-            {t('noOpinion')} →
+            {t('noOpinion')} {nextArrow}
           </button>
         </div>
       </div>

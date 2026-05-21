@@ -81,7 +81,7 @@ function AppContent() {
       {/* Header */}
       <header className="brutalist-header">
         <h1 style={{ cursor: 'pointer' }} onClick={() => setScreen('welcome')}>
-          🗳️ {t('appTitle')}
+          {t('appTitle')}
         </h1>
         <div className="header-switcher-container">
           <LanguageSwitcher />
@@ -100,10 +100,10 @@ function AppContent() {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '320px', margin: '0 auto' }}>
               <button onClick={handleStartQuiz} className="brutalist-button primary" style={{ fontSize: '1.1rem', padding: '14px' }}>
-                ⚡ {t('startQuiz')}
+                {t('startQuiz')}
               </button>
               <button onClick={() => setScreen('database')} className="brutalist-button" style={{ fontSize: '1.1rem', padding: '14px', backgroundColor: '#FFFFFF' }}>
-                📚 {t('exploreParties')}
+                {t('exploreParties')}
               </button>
             </div>
           </div>

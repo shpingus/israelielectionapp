@@ -135,14 +135,14 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
           className="brutalist-button primary" 
           style={{ fontSize: '1.05rem', padding: '14px 28px' }}
         >
-          🔄 {t('retakeQuiz')}
+          {t('retakeQuiz')}
         </button>
         <button 
           onClick={onViewParties} 
           className="brutalist-button" 
           style={{ fontSize: '1.05rem', padding: '14px 28px', backgroundColor: '#FFFFFF' }}
         >
-          📋 {t('exploreParties')}
+          {t('exploreParties')}
         </button>
       </div>
 

@@ -12,13 +12,11 @@ export default function LanguageSwitcher() {
         padding: '6px 12px',
         fontSize: '0.85rem',
         backgroundColor: '#FFFFFF',
-        borderColor: '#121212',
-        boxShadow: 'var(--shadow-x) var(--shadow-y) 0px #121212',
         cursor: 'pointer'
       }}
       aria-label="Toggle language"
     >
-      {language === 'he' ? '🇺🇸 EN' : '🇮🇱 עב'}
+      {language === 'he' ? 'English' : 'עברית'}
     </button>
   );
 }
