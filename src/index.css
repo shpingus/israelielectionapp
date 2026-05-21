@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,700..900;1,9..144,700..900&family=Heebo:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Secular+One&family=Space+Grotesk:wght@700;800&family=Space+Mono:wght@700&family=Suez+One&family=Syne:wght@700;800&display=swap');
+
+:root {
+  --bg-color: #F8F7F3;
+  --text-color: #121212;
+  --accent-cyan: #00E5FF;
+  --accent-cobalt: #2979FF;
+  --accent-coral: #FF5252;
+  --border-color: #121212;
+  --border-width: 3px;
+  
+  /* Fallbacks / Default (Pairing 1: Vintage Slab & Serif) */
+  --font-heading: 'Suez One', 'Fraunces', Georgia, serif;
+  --font-body: 'Heebo', 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* LTR Default Shadows (Left & Bottom) */
+  --shadow-x: -4px;
+  --shadow-y: 4px;
+  --shadow-x-hover: -6px;
+  --shadow-y-hover: 6px;
+  --shadow-x-active: -2px;
+  --shadow-y-active: 2px;
+  --hover-translate-x: 2px;
+  --hover-translate-y: -2px;
+  --active-translate-x: -2px;
+  --active-translate-y: 2px;
+
+  --shadow-x-card: -8px;
+  --shadow-y-card: 8px;
+  --shadow-x-card-hover: -11px;
+  --shadow-y-card-hover: 11px;
+  --hover-card-translate-x: 3px;
+  --hover-card-translate-y: -3px;
+
+  box-sizing: border-box;
+}
+
+/* RTL Override Shadows (Right & Bottom) */
+[dir="rtl"] {
+  --shadow-x: 4px;
+  --shadow-x-hover: 6px;
+  --shadow-x-active: 2px;
+  --hover-translate-x: -2px;
+  --active-translate-x: 2px;
+
+  --shadow-x-card: 8px;
+  --shadow-x-card-hover: 11px;
+  --hover-card-translate-x: -3px;
+}
+
+/* Font Pairing Overrides */
+.font-pairing-vintage {
+  --font-heading: 'Suez One', 'Fraunces', Georgia, serif;
+  --font-body: 'Heebo', 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+.font-pairing-editorial {
+  --font-heading: 'Frank Ruhl Libre', 'Fraunces', Georgia, serif;
+  --font-body: 'Assistant', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+.font-pairing-hybrid {
+  --font-heading: 'Suez One', 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: 'Heebo', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  background-image: radial-gradient(var(--text-color) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  color: var(--text-color);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  margin-top: 0;
+  color: var(--text-color);
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* Neo-Brutalist Layout Components */
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+/* Brutalist Header - Centered Layout */
+.brutalist-header {
+  position: relative;
+  width: 100%;
+  border-bottom: var(--border-width) solid var(--border-color);
+  background-color: var(--bg-color);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 72px;
+  z-index: 100;
+}
+
+.brutalist-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+/* Header switcher container stays pinned in same spot */
+.header-switcher-container {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 105;
+}
+
+/* Brutalist Card */
+.brutalist-card {
+  background-color: #FFFFFF;
+  border: var(--border-width) solid var(--border-color);
+  padding: 32px;
+  width: 100%;
+  position: relative;
+  box-shadow: var(--shadow-x-card) var(--shadow-y-card) 0px 0px var(--border-color);
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brutalist-card.interactive:hover {
+  transform: translate(var(--hover-card-translate-x), var(--hover-card-translate-y));
+  box-shadow: var(--shadow-x-card-hover) var(--shadow-y-card-hover) 0px 0px var(--border-color);
+  cursor: pointer;
+}
+
+/* Brutalist Button */
+.brutalist-button {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  background-color: #FFFFFF;
+  color: var(--text-color);
+  border: var(--border-width) solid var(--border-color);
+  padding: 12px 24px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: var(--shadow-x) var(--shadow-y) 0px 0px var(--border-color);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.brutalist-button:hover {
+  transform: translate(var(--hover-translate-x), var(--hover-translate-y));
+  box-shadow: var(--shadow-x-hover) var(--shadow-y-hover) 0px 0px var(--border-color);
+}
+
+.brutalist-button:active {
+  transform: translate(var(--active-translate-x), var(--active-translate-y));
+  box-shadow: var(--shadow-x-active) var(--shadow-y-active) 0px 0px var(--border-color);
+}
+
+.brutalist-button.primary {
+  background-color: var(--accent-cyan);
+}
+
+.brutalist-button.secondary {
+  background-color: var(--accent-cobalt);
+  color: #FFFFFF;
+}
+
+.brutalist-button.alert {
+  background-color: var(--accent-coral);
+}
+
+/* Utility Badges & Labels */
+.monospace-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.category-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border: 2px solid var(--border-color);
+  background-color: var(--accent-cyan);
+  text-transform: uppercase;
+}
+
+/* RTL Helpers */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .brutalist-button {
+  letter-spacing: 0;
+}
+
+/* Animations */
+@keyframes slideOutLeft {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(-120%, 10%) rotate(-10deg); opacity: 0; }
+}
+
+@keyframes slideOutRight {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(120%, 10%) rotate(10deg); opacity: 0; }
+}
+
+@keyframes slideInUp {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.slide-out-left {
+  animation: slideOutLeft 0.28s forwards ease-in;
+}
+
+.slide-out-right {
+  animation: slideOutRight 0.28s forwards ease-in;
+}
+
+.slide-in-up {
+  animation: slideInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

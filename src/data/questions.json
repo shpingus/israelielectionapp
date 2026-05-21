@@ -1,0 +1,98 @@
+[
+  {
+    "id": "haredi_draft",
+    "category": "security",
+    "categoryEn": "SECURITY & DRAFT",
+    "categoryHe": "ביטחון וגיוס",
+    "textEn": "Should military or civilian service exemptions for yeshiva students be fully repealed?",
+    "textHe": "האם יש לבטל לחלוטין את הפטור מגיוס או שירות אזרחי לתלמידי ישיבות?"
+  },
+  {
+    "id": "gaza_control",
+    "category": "security",
+    "categoryEn": "SECURITY & DRAFT",
+    "categoryHe": "ביטחון וגיוס",
+    "textEn": "Should Israel maintain long-term security control and military presence inside the Gaza Strip?",
+    "textHe": "האם על ישראל לשמור על שליטה ביטחונית ונוכחות צבאית ארוכת טווח ברצועת עזה?"
+  },
+  {
+    "id": "two_state",
+    "category": "security",
+    "categoryEn": "SECURITY & DRAFT",
+    "categoryHe": "ביטחון וגיוס",
+    "textEn": "Should Israel support the establishment of a demilitarized Palestinian state as part of a regional peace agreement?",
+    "textHe": "האם על ישראל לתמוך בהקמת מדינה פלסטינית מפורזת כחלק מהסכם שלום אזורי?"
+  },
+  {
+    "id": "west_bank_settlements",
+    "category": "security",
+    "categoryEn": "SECURITY & DRAFT",
+    "categoryHe": "ביטחון וגיוס",
+    "textEn": "Should government housing and infrastructure resources be prioritized for expanding settlements in Judea and Samaria?",
+    "textHe": "האם יש לתעדף תקציבי דיור ותשתיות להרחבת ההתיישבות ביהודה ושומרון?"
+  },
+  {
+    "id": "shabbat_transport",
+    "category": "religion_state",
+    "categoryEn": "RELIGION & STATE",
+    "categoryHe": "דת ומדינה",
+    "textEn": "Should local municipalities be permitted to operate public transportation on Saturdays?",
+    "textHe": "האם יש לאפשר לעיריות ורשויות מקומיות להפעיל תחבורה ציבורית בשבתות?"
+  },
+  {
+    "id": "civil_marriage",
+    "category": "religion_state",
+    "categoryEn": "RELIGION & STATE",
+    "categoryHe": "דת ומדינה",
+    "textEn": "Should Israel introduce civil marriage and divorce options, bypassing the Chief Rabbinate?",
+    "textHe": "האם על ישראל להנהיג נישואין וגירושין אזרחיים, ללא תלות ברבנות הראשית?"
+  },
+  {
+    "id": "haredi_curriculum",
+    "category": "religion_state",
+    "categoryEn": "RELIGION & STATE",
+    "categoryHe": "דת ומדינה",
+    "textEn": "Should Haredi schools receive government funding only if they teach core academic subjects (math, English, science)?",
+    "textHe": "האם יש להתנות תקציבים למוסדות חינוך חרדיים בלימוד מקצועות ליבה (מתמטיקה, אנגלית ומדעים)?"
+  },
+  {
+    "id": "judicial_committee",
+    "category": "judicial",
+    "categoryEn": "JUDICIAL SYSTEM",
+    "categoryHe": "מערכת המשפט",
+    "textEn": "Should the government hold a majority in the Judicial Selection Committee to control Supreme Court appointments?",
+    "textHe": "האם יש להעניק לקואליציה/ממשלה רוב בוועדה לבחירת שופטים למינוי שופטי בית המשפט העליון?"
+  },
+  {
+    "id": "override_clause",
+    "category": "judicial",
+    "categoryEn": "JUDICIAL SYSTEM",
+    "categoryHe": "מערכת המשפט",
+    "textEn": "Should the Knesset have the power to override Supreme Court rulings invalidating laws by a simple majority (61 MKs)?",
+    "textHe": "האם יש להעניק לכנסת את הכוח להתגבר על פסילת חוקים של בג\"ץ באמצעות רוב רגיל (61 ח\"כים)?"
+  },
+  {
+    "id": "food_imports",
+    "category": "economy",
+    "categoryEn": "ECONOMY & WELFARE",
+    "categoryHe": "כלכלה וחברה",
+    "textEn": "Should Israel completely open the agricultural and food markets to duty-free imports, even if it harms local farming?",
+    "textHe": "האם על ישראל לפתוח לחלוטין את שוק המזון והחקלאות לייבוא ללא מכסים, גם במחיר פגיעה בחקלאים המקומיים?"
+  },
+  {
+    "id": "privatization",
+    "category": "economy",
+    "categoryEn": "ECONOMY & WELFARE",
+    "categoryHe": "כלכלה וחברה",
+    "textEn": "Should the government privatize major state-owned utilities and companies (like the electric company or sea ports) to foster competition?",
+    "textHe": "האם על המדינה להפריט חברות ומונופולים ממשלתיים גדולים (כגון חברת החשמל או נמלים) כדי לעודד תחרות?"
+  },
+  {
+    "id": "welfare_tax",
+    "category": "economy",
+    "categoryEn": "ECONOMY & WELFARE",
+    "categoryHe": "כלכלה וחברה",
+    "textEn": "Should tax rates on high-income earners and corporations be increased to fund expanded social welfare and healthcare services?",
+    "textHe": "האם יש להעלות את מס הכנסה לבעלי שכר גבוה ולתאגידים כדי לממן הרחבה של תקציבי הרווחה והבריאות?"
+  }
+]
