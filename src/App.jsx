@@ -153,6 +153,42 @@ function AppContent() {
           />
         )}
       </main>
+
+      {/* Footer */}
+      <footer 
+        style={{
+          borderTop: 'var(--border-width) solid var(--border-color)',
+          backgroundColor: 'var(--bg-color)',
+          padding: '16px 24px',
+          marginTop: 'auto',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '16px',
+          zIndex: 10
+        }}
+      >
+        <span className="monospace-label" style={{ fontSize: '0.8rem', opacity: 0.7 }}>
+          © 2026 {t('appTitle')}
+        </span>
+        <button
+          onClick={() => {
+            window.dispatchEvent(new CustomEvent('toggle-accessibility'));
+          }}
+          className="brutalist-button half-shadow"
+          style={{
+            padding: '6px 12px',
+            fontSize: '0.8rem',
+            backgroundColor: 'var(--card-bg-color, #FFFFFF)',
+            textTransform: 'none',
+            fontFamily: 'var(--font-mono)'
+          }}
+        >
+          ⚙️ {t('accessibilityTitle')} (Alt+A)
+        </button>
+      </footer>
+
       <AccessibilityWidget />
     </div>
   );

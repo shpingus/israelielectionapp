@@ -464,17 +464,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           {renderNextChoices()}
 
           {/* Footer Spacer */}
-          <div 
-            style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center', 
-              marginTop: '28px',
-              borderTop: '2px dashed var(--border-color, #121212)',
-              paddingTop: '16px',
-              opacity: 0.5
-            }}
-          >
+          <div className="quiz-card-footer" style={{ opacity: 0.5 }}>
             <span style={{ fontSize: '0.85rem' }}>{backArrow} {t('back')}</span>
             <span style={{ fontSize: '0.85rem' }}>{t('noOpinion')} {nextArrow}</span>
           </div>
@@ -565,16 +555,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
         {renderCurrentChoices()}
 
         {/* Back and Skip Footer */}
-        <div 
-          style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            marginTop: '28px',
-            borderTop: '2px dashed var(--border-color, #121212)',
-            paddingTop: '16px'
-          }}
-        >
+        <div className="quiz-card-footer">
           <button
             onClick={onBack}
             disabled={currentIndex === 0 || isAnimating}

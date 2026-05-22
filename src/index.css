@@ -402,3 +402,51 @@ select:focus-visible,
   outline: 3px solid #FFFFFF !important;
   outline-offset: 4px !important;
 }
+
+/* --- Responsive Quiz Footer Buttons --- */
+.quiz-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  border-top: 2px dashed var(--border-color, #121212);
+  padding-top: 16px;
+  gap: 12px;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .quiz-card-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .quiz-card-footer button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --- Mobile Header Layout Adjustments --- */
+@media (max-width: 600px) {
+  .brutalist-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    min-height: auto;
+  }
+  
+  .brutalist-header h1 {
+    font-size: 1.3rem;
+    text-align: center;
+    padding: 0 10px;
+  }
+  
+  .header-switcher-container {
+    position: static;
+    transform: none;
+    margin-top: 4px;
+  }
+}
+
