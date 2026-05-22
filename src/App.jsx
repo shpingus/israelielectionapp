@@ -153,29 +153,6 @@ function AppContent() {
           />
         )}
       </main>
-
-      {/* Footer (Mobile Only) */}
-      <footer className="brutalist-footer">
-        <span className="monospace-label" style={{ fontSize: '0.8rem', opacity: 0.7 }}>
-          © 2026 {t('appTitle')}
-        </span>
-        <button
-          onClick={() => {
-            window.dispatchEvent(new CustomEvent('toggle-accessibility'));
-          }}
-          className="brutalist-button half-shadow"
-          style={{
-            padding: '6px 12px',
-            fontSize: '0.8rem',
-            backgroundColor: 'var(--card-bg-color, #FFFFFF)',
-            textTransform: 'none',
-            fontFamily: 'var(--font-mono)'
-          }}
-        >
-          ⚙️ {t('accessibilityTitle')} (Alt+A)
-        </button>
-      </footer>
-
       <AccessibilityWidget />
     </div>
   );

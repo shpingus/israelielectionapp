@@ -450,23 +450,62 @@ select:focus-visible,
   }
 }
 
-/* --- Brutalist Footer (Mobile-only to avoid altering desktop web layout) --- */
-.brutalist-footer {
+/* --- Accessibility Drawer Panel --- */
+.accessibility-drawer-panel {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  width: calc(100% - 48px);
+  max-width: 320px;
+  background-color: var(--card-bg-color, #FFFFFF);
+  box-shadow: -6px 6px 0px #121212;
+  padding: 20px !important;
+  z-index: 994;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 3px solid var(--border-color, #121212);
+  border-radius: 4px;
+  overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+  .accessibility-drawer-panel {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 24px !important;
+  }
+}
+
+/* --- Mobile-only bottom accessibility trigger --- */
+.mobile-only-bottom-trigger {
   display: none;
 }
 
 @media (max-width: 600px) {
-  .brutalist-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 16px 24px;
-    margin-top: auto;
-    border-top: var(--border-width) solid var(--border-color);
-    background-color: var(--bg-color);
-    z-index: 10;
+  .mobile-only-bottom-trigger {
+    display: block;
+    width: calc(100% - 48px);
+    max-width: 320px;
+    margin: 24px auto 40px auto;
+  }
+  
+  .mobile-only-bottom-trigger button {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    background-color: var(--card-bg-color, #FFFFFF);
+    font-family: var(--font-mono);
   }
 }
 

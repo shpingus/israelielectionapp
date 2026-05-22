@@ -123,6 +123,15 @@ export default function AccessibilityWidget() {
     localStorage.removeItem('acc_widget_hidden');
   };
 
+  const handleCloseDrawer = () => {
+    setIsOpen(false);
+    // On mobile, pressing X once hides the floating widget and shows the bottom button instead
+    if (window.innerWidth <= 600) {
+      setIsWidgetHidden(true);
+      localStorage.setItem('acc_widget_hidden', 'true');
+    }
+  };
+
   return (
     <div ref={widgetRef} style={{ position: 'relative', zIndex: 990 }}>
       {/* Floating Sticky Accessibility Trigger Button */}
@@ -173,23 +182,7 @@ export default function AccessibilityWidget() {
           id="accessibility-drawer"
           role="region"
           aria-label={t('accessibilityTitle')}
-          className="brutalist-card"
-          style={{
-            position: 'fixed',
-            bottom: '90px',
-            right: '24px',
-            width: 'calc(100% - 48px)',
-            maxWidth: '320px',
-            backgroundColor: 'var(--card-bg-color, #FFFFFF)',
-            boxShadow: '-6px 6px 0px #121212',
-            padding: '20px',
-            zIndex: 994,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-            border: '3px solid var(--border-color, #121212)',
-            borderRadius: '4px'
-          }}
+          className="brutalist-card accessibility-drawer-panel"
         >
           {/* Header */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2.5px solid var(--border-color, #121212)', paddingBottom: '10px' }}>
@@ -197,7 +190,7 @@ export default function AccessibilityWidget() {
               {t('accessibilityTitle')}
             </h3>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={handleCloseDrawer}
               className="brutalist-button half-shadow"
               style={{
                 padding: '4px 8px',
@@ -416,6 +409,20 @@ export default function AccessibilityWidget() {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Fallback Mobile Bottom Trigger Button */}
+      {isWidgetHidden && (
+        <div className="mobile-only-bottom-trigger">
+          <button
+            id="acc-widget-bottom-trigger"
+            onClick={() => setIsOpen(true)}
+            className="brutalist-button half-shadow"
+            aria-label={t('accessibilityTitle')}
+          >
+            ⚙️ {t('accessibilityTitle')}
+          </button>
         </div>
       )}
     </div>
