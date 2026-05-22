@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { trackAction } from '../utils/tracker';
 
 export default function AccessibilityWidget() {
   const { t, language } = useLanguage();
@@ -59,6 +60,21 @@ export default function AccessibilityWidget() {
     }
     localStorage.setItem('acc_reduced_motion', reducedMotion.toString());
   }, [contrast, monochrome, fontSize, dyslexiaFont, reducedMotion]);
+
+  // Track accessibility modifications
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    trackAction(
+      'toggle_accessibility', 
+      'settings_changed', 
+      JSON.stringify({ contrast, monochrome, fontSize, dyslexiaFont, reducedMotion }), 
+      language
+    );
+  }, [contrast, monochrome, fontSize, dyslexiaFont, reducedMotion, language]);
 
   // Handle keyboard events (e.g., closing drawer on Escape)
   useEffect(() => {

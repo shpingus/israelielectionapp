@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local development secrets
+.dev.vars
+
+# Local scratch files
+scratch/
+
+.wrangler/

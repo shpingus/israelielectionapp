@@ -1,0 +1,11 @@
+{
+  "name": "israelielections",
+  "pages_build_output_dir": "dist",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "elections-db",
+      "database_id": "87688694-6c7a-4476-9dc5-f6a9eaca80c4"
+    }
+  ]
+}

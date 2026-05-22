@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { submitConsiderationFeedback, trackAction } from '../utils/tracker';
 
 export default function ResultsPanel({ scores, answers, questions, parties, onRetake, onViewParties }) {
   const { t, language, dir } = useLanguage();
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
   // Allow comparing with any party, default to the best match
   const [comparedPartyId, setComparedPartyId] = useState(() => {
@@ -187,6 +189,71 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
         <p style={{ fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto 16px auto', lineHeight: '1.6' }}>
           {matchedPartyDesc}
         </p>
+
+        {/* Post-quiz Voting Consideration Questionnaire */}
+        <div 
+          style={{ 
+            marginTop: '32px', 
+            paddingTop: '24px', 
+            borderTop: '3px dashed var(--border-color, #121212)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '16px'
+          }}
+        >
+          <h4 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0 }}>
+            {t('considerVotingQuestion')}
+          </h4>
+          
+          {!feedbackSubmitted ? (
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <button
+                onClick={() => {
+                  submitConsiderationFeedback('yes');
+                  setFeedbackSubmitted(true);
+                }}
+                className="brutalist-button half-shadow"
+                style={{ padding: '8px 24px', fontSize: '1rem', backgroundColor: '#00E5FF', fontWeight: 800, cursor: 'pointer' }}
+              >
+                {t('yes')}
+              </button>
+              <button
+                onClick={() => {
+                  submitConsiderationFeedback('no');
+                  setFeedbackSubmitted(true);
+                }}
+                className="brutalist-button half-shadow"
+                style={{ padding: '8px 24px', fontSize: '1rem', backgroundColor: '#FF5252', color: '#FFFFFF', fontWeight: 800, cursor: 'pointer' }}
+              >
+                {t('no')}
+              </button>
+              <button
+                onClick={() => {
+                  submitConsiderationFeedback('maybe');
+                  setFeedbackSubmitted(true);
+                }}
+                className="brutalist-button half-shadow"
+                style={{ padding: '8px 24px', fontSize: '1rem', backgroundColor: '#FFFFFF', fontWeight: 800, cursor: 'pointer' }}
+              >
+                {t('maybe')}
+              </button>
+            </div>
+          ) : (
+            <div 
+              style={{ 
+                fontSize: '1.1rem', 
+                fontWeight: 700, 
+                color: 'var(--accent-cobalt, #0D47A1)', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px' 
+              }}
+            >
+              <span>✓ {t('feedbackReceived')}</span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Action Navigation */}
@@ -248,7 +315,11 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
             <select
               id="compare-party-select"
               value={comparedPartyId}
-              onChange={(e) => setComparedPartyId(e.target.value)}
+              onChange={(e) => {
+                const val = e.target.value;
+                setComparedPartyId(val);
+                trackAction('compare_party', 'comparison_dropdown', val, language);
+              }}
               className="monospace-label"
               style={{
                 padding: '8px 12px',
@@ -428,6 +499,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
                     <button
                       onClick={() => {
                         setComparedPartyId(party.id);
+                        trackAction('compare_party', 'ranking_compare_button', party.id, language);
                         const compareSection = document.getElementById('comparison-breakdown-section');
                         if (compareSection) {
                           compareSection.scrollIntoView({ behavior: 'smooth' });
