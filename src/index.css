@@ -493,19 +493,9 @@ select:focus-visible,
 
 @media (max-width: 600px) {
   .mobile-only-bottom-trigger {
-    display: block;
-    width: calc(100% - 48px);
-    max-width: 320px;
-    margin: 24px auto 40px auto;
-  }
-  
-  .mobile-only-bottom-trigger button {
-    width: 100%;
+    display: flex;
     justify-content: center;
-    padding: 10px 16px;
-    font-size: 0.9rem;
-    background-color: var(--card-bg-color, #FFFFFF);
-    font-family: var(--font-mono);
+    margin: 24px auto 40px auto;
   }
 }
 

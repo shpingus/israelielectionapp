@@ -418,10 +418,36 @@ export default function AccessibilityWidget() {
           <button
             id="acc-widget-bottom-trigger"
             onClick={() => setIsOpen(true)}
-            className="brutalist-button half-shadow"
-            aria-label={t('accessibilityTitle')}
+            className="brutalist-button"
+            style={{
+              borderRadius: '4px',
+              width: '56px',
+              height: '56px',
+              padding: 0,
+              backgroundColor: '#00E5FF',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '-4px 4px 0px #121212',
+              cursor: 'pointer'
+            }}
+            aria-label={t('accessibilityButton')}
+            aria-expanded={isOpen}
+            aria-controls="accessibility-drawer"
           >
-            ⚙️ {t('accessibilityTitle')}
+            <svg 
+              width="30" 
+              height="30" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="#121212" 
+              strokeWidth="2.5" 
+              strokeLinecap="square"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="5" r="2.5" />
+              <path d="M4 11h16M12 7.5v8M8.5 21.5l3.5-6 3.5 6" />
+            </svg>
           </button>
         </div>
       )}
