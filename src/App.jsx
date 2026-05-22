@@ -200,9 +200,6 @@ function AppContent() {
         )}
       </main>
       <AccessibilityWidget />
-      <footer className="brutalist-footer">
-        <div>{t('copyrightsReserved')}</div>
-      </footer>
     </div>
   );
 }
