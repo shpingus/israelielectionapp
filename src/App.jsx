@@ -8,6 +8,7 @@ import AdminDashboard from './components/AdminDashboard';
 import AccessibilityWidget from './components/AccessibilityWidget';
 import questionsData from './data/questions.json';
 import partiesData from './data/parties.json';
+import partyStances from './data/party-stances.json';
 import { trackAction, startNewSession, submitSessionResults } from './utils/tracker';
 
 function AppContent() {
@@ -75,15 +76,16 @@ function AppContent() {
       let totalUserDistance = 0;
       let activeQuestionsCount = 0;
 
+      const stances = partyStances[party.id] || {};
       questionsData.forEach(q => {
         const userStance = finalAnswers[q.id];
         // Only evaluate questions where the user did not choose "neutral/skip" (value 0)
         if (userStance !== undefined && userStance !== 0) {
           let dist;
           const maxDist = 4; // distance between +2 and -2 (used as normalized max distance)
-          
+          const partyStance = stances[q.id] !== undefined ? stances[q.id] : 0;
+
           if (q.type === 'multiple_choice') {
-            const partyStance = party.stances[q.id] !== undefined ? party.stances[q.id] : 0;
             if (userStance === partyStance) {
               dist = 0;
             } else if (partyStance === 0) {
@@ -93,7 +95,6 @@ function AppContent() {
             }
           } else {
             // likert or statement_pair
-            const partyStance = party.stances[q.id] !== undefined ? party.stances[q.id] : 0;
             dist = Math.abs(userStance - partyStance);
           }
           
@@ -177,6 +178,7 @@ function AppContent() {
             answers={answers}
             questions={questionsData}
             parties={partiesData}
+            partyStances={partyStances}
             onRetake={handleStartQuiz}
             onViewParties={() => { trackAction('explore_parties', 'results_database_button', null, language); setScreen('database'); }}
           />
@@ -186,6 +188,7 @@ function AppContent() {
           <PartyDatabase
             parties={partiesData}
             questions={questionsData}
+            partyStances={partyStances}
             onBack={() => { trackAction('navigate_home', 'database_back_button', null, language); setScreen('welcome'); }}
           />
         )}
