@@ -9,6 +9,7 @@ This style guide defines the visual language, design system tokens, and interact
 *   **Objective Clarity**: Strict grids, readable typography, and structured layouts represent the platform's non-partisan, objective stance.
 *   **Tactile Feedback (The Soul)**: Micro-animations, responsive hover shifts, and layered depth make the interface feel alive and interactive.
 *   **Geometric Boldness**: Solid borders, strong offset shadows, and structural divisions.
+*   **No Emojis (Visual Purity)**: Do not use colored or graphical emojis (e.g., ⚙️, 🚀, 👍) in the UI. Emojis clash with the clean editorial typography and the objective design language. Instead, use clean SVG icons, CSS styling, or simple monochrome text-based typography symbols (like `✕` or `✓`) only when strictly necessary.
 
 ---
 
