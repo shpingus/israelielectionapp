@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useState, useEffect, useContext } from 'react';
 
 const LanguageContext = createContext();
 
@@ -18,6 +19,7 @@ const translations = {
     yourBestMatch: "YOUR BEST MATCH",
     stanceAlignment: "Stance-Alignment",
     detailedBreakdown: "Detailed Stance Comparison",
+    selectPartyCompare: "Compare Stances With:",
     issue: "Issue",
     yourStance: "Your Stance",
     partyStance: "Party Stance",
@@ -27,6 +29,9 @@ const translations = {
     partyDatabase: "Political Party Profiles",
     leader: "Leader",
     platformStances: "Platform Stances",
+    history: "History",
+    strengths: "Strengths & Platform",
+    challenges: "Challenges & Criticisms",
     noOpinion: "No Opinion / Neutral",
     neutralStance: "Neutral Stance",
     viewPlatform: "View Platform Stances",
@@ -53,6 +58,7 @@ const translations = {
     yourBestMatch: "ההתאמה הטובה ביותר עבורך",
     stanceAlignment: "התאמה רעיונית",
     detailedBreakdown: "השוואת עמדות מפורטת",
+    selectPartyCompare: "השווה עמדות עם:",
     issue: "נושא",
     yourStance: "העמדה שלך",
     partyStance: "עמדת המפלגה",
@@ -62,6 +68,9 @@ const translations = {
     partyDatabase: "פרופילי המפלגות בישראל",
     leader: "יושב ראש",
     platformStances: "עמדות רשמיות בנושאי מפתח",
+    history: "היסטוריה",
+    strengths: "חוזקות ומצע מרכזי",
+    challenges: "אתגרים וביקורת ציבורית",
     noOpinion: "ללא דעה / נייטרלי",
     neutralStance: "עמדה נייטרלית",
     viewPlatform: "הצג עמדות מפלגה",

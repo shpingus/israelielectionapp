@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function PartyDatabase({ parties, questions, onBack }) {
@@ -57,6 +57,9 @@ export default function PartyDatabase({ parties, questions, onBack }) {
           const partyName = language === 'he' ? party.nameHe : party.nameEn;
           const partyLeader = language === 'he' ? party.leaderHe : party.leaderEn;
           const partyDesc = language === 'he' ? party.descriptionHe : party.descriptionEn;
+          const historyText = language === 'he' ? party.historyHe : party.historyEn;
+          const prosList = language === 'he' ? party.prosHe : party.prosEn;
+          const challengesList = language === 'he' ? party.challengesHe : party.challengesEn;
 
           return (
             <div 
@@ -107,11 +110,56 @@ export default function PartyDatabase({ parties, questions, onBack }) {
               {/* Collapsible Info */}
               {isExpanded && (
                 <div style={{ marginTop: '24px', borderTop: '2px dashed #121212', paddingTop: '20px' }}>
-                  <p style={{ fontSize: '1.05rem', lineHeight: '1.6', marginBottom: '24px' }}>
+                  <p style={{ fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '24px', fontWeight: 500 }}>
                     {partyDesc}
                   </p>
 
-                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '28px' }}>
+                    {/* History Section */}
+                    {historyText && (
+                      <div style={{ border: '3px solid #121212', padding: '20px', backgroundColor: '#FFFFFF', boxShadow: 'var(--shadow-x) var(--shadow-y) 0px #121212' }}>
+                        <h4 className="monospace-label" style={{ fontSize: '0.95rem', fontWeight: 800, margin: '0 0 12px 0', display: 'inline-block', backgroundColor: 'var(--accent-cyan)', padding: '4px 8px', border: '2px solid #121212' }}>
+                          {t('history')}
+                        </h4>
+                        <p style={{ margin: 0, fontSize: '0.95rem', lineHeight: '1.6' }}>
+                          {historyText}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Pros and Challenges Grid */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+                      {/* Strengths */}
+                      {prosList && prosList.length > 0 && (
+                        <div style={{ border: '3px solid #121212', padding: '20px', backgroundColor: '#FFFFFF', boxShadow: 'var(--shadow-x) var(--shadow-y) 0px #121212' }}>
+                          <h4 className="monospace-label" style={{ fontSize: '0.95rem', fontWeight: 800, margin: '0 0 12px 0', display: 'inline-block', backgroundColor: 'rgba(0, 229, 255, 0.2)', padding: '4px 8px', border: '2px solid #121212' }}>
+                            {t('strengths')}
+                          </h4>
+                          <ul style={{ margin: 0, paddingInlineStart: '20px', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                            {prosList.map((pro, index) => (
+                              <li key={index} style={{ marginBottom: '8px' }}>{pro}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Challenges */}
+                      {challengesList && challengesList.length > 0 && (
+                        <div style={{ border: '3px solid #121212', padding: '20px', backgroundColor: '#FFFFFF', boxShadow: 'var(--shadow-x) var(--shadow-y) 0px #121212' }}>
+                          <h4 className="monospace-label" style={{ fontSize: '0.95rem', fontWeight: 800, margin: '0 0 12px 0', display: 'inline-block', backgroundColor: 'rgba(255, 82, 82, 0.2)', padding: '4px 8px', border: '2px solid #121212' }}>
+                            {t('challenges')}
+                          </h4>
+                          <ul style={{ margin: 0, paddingInlineStart: '20px', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                            {challengesList.map((challenge, index) => (
+                              <li key={index} style={{ marginBottom: '8px' }}>{challenge}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '16px' }}>
                     {t('platformStances')}:
                   </h4>
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import QuizCardStack from './components/QuizCardStack';
@@ -8,7 +8,7 @@ import questionsData from './data/questions.json';
 import partiesData from './data/parties.json';
 
 function AppContent() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [screen, setScreen] = useState('welcome'); // 'welcome', 'quiz', 'results', 'database'
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({}); // { [questionId]: stanceValue }

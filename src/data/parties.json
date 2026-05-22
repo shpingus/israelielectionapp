@@ -8,6 +8,28 @@
     "color": "#1565C0",
     "descriptionEn": "Major center-right national-liberal party. Emphasizes national security, free-market economics, and strong military stance.",
     "descriptionHe": "מפלגת ימין לאומית-ליברלית. מדגישה את ביטחון המדינה, כלכלה חופשית ושמירה על זהותה היהודית והדמוקרטית של ישראל.",
+    "historyEn": "Established in 1973 as a coalition of right-wing and liberal parties under Menachem Begin, Likud achieved a historic victory in 1977, ending decades of left-wing dominance. It has since been one of the primary ruling parties in Israel, shaping major economic and defense policies, including the privatization of state enterprises and peace treaties with several Arab nations.",
+    "historyHe": "הוקמה בשנת 1973 כקואליציה של מפלגות ימין וליברלים בהובלת מנחם בגין, והשיגה מהפך היסטורי בבחירות 1977 שסיייע לסיים עשורים של שלטון השמאל. מאז היא מהווה אחת ממפלגות השלטון המרכזיות בישראל, והובילה מהלכים כלכליים וביטחוניים משמעותיים, כולל הפרטת חברות ממשלתיות וחתימה על הסכמי שלום עם מדינות ערב.",
+    "prosEn": [
+      "Strong experience in governance and national security leadership.",
+      "Advocates for free-market economic policies and deregulation.",
+      "Proven record of expanding Israel's diplomatic relations (e.g., Abraham Accords)."
+    ],
+    "prosHe": [
+      "ניסיון רב בניהול המדינה ובהנהגה ביטחונית.",
+      "קידום מדיניות שוק חופשי והפחתת רגולציה.",
+      "הישגים מוכחים בהרחבת היחסים הדיפלומטיים של ישראל (למשל הסכמי אברהם)."
+    ],
+    "challengesEn": [
+      "Criticized for centralizing power and challenging judicial independence.",
+      "Faced controversies surrounding the long tenure and legal cases of its leader.",
+      "Accused by critics of prioritizing political survival over long-term strategic planning."
+    ],
+    "challengesHe": [
+      "ביקורת על ריכוז כוח ופגיעה לכאורה בעצמאות מערכת המשפט.",
+      "מחלוקות ציבוריות סביב כהונתו הממושכת וההליכים המשפטיים של העומד בראשה.",
+      "טענות מצד מתנגדים לתיעדוף הישרדות פוליטית על פני תכנון אסטרטגי ארוך טווח."
+    ],
     "stances": {
       "haredi_draft": -1,
       "gaza_control": 2,
@@ -32,6 +54,28 @@
     "color": "#0D47A1",
     "descriptionEn": "Centrist liberal party. Champions secularism, judicial independence, middle-class economic relief, and clean governance.",
     "descriptionHe": "מפלגת מרכז ליברלית. מובילה מאבקים לשמירה על שלטון החוק ומערכת המשפט, גיוס לכולם, שוויון זכויות ומעמד הביניים.",
+    "historyEn": "Founded in 2012 by journalist Yair Lapid as a centrist secular movement representing the middle class. The party quickly became a major political force, serving in multiple coalition governments and leading the parliamentary opposition, focusing on anti-corruption, electoral reform, and secular rights.",
+    "historyHe": "הוקמה בשנת 2012 על ידי העיתונאי יאיר לפיד כתנועת מרכז חילונית המייצגת את מעמד הביניים. המפלגה הפכה במהירות לכוח פוליטי מרכזי, השתתפה במספר ממשלות קואליציה והובילה את האופוזיציה תוך התמקדות במלחמה בשחיתות, רפורמות ממשלתיות וזכויות הציבור החילוני.",
+    "prosEn": [
+      "Strong commitment to judicial independence and the rule of law.",
+      "Champions equal sharing of civic burdens, including Haredi enlistment.",
+      "Promotes liberal values, civil marriage, and municipal public transit on Shabbat."
+    ],
+    "prosHe": [
+      "מחויבות עמוקה לשמירה על עצמאות מערכת המשפט ושלטון החוק.",
+      "תמיכה בשוויון בנטל האזרחי וגיוס בני ישיבות.",
+      "קידום ערכים ליברליים, נישואין אזרחיים ותחבורה ציבורית בשבת ברשויות מקומיות."
+    ],
+    "challengesEn": [
+      "Often criticized for lacking a clear, decisive ideology on core security issues.",
+      "Viewed by political opponents as overly focused on secularist struggles, alienating religious demographics.",
+      "Accused of top-down internal decision-making without primary elections."
+    ],
+    "challengesHe": [
+      "ביקורת על היעדר אידיאולוגיה ביטחונית מוצקה וחד-משמעית.",
+      "נתפסת על ידי מתנגדים כמתמקדת יתר על המידה במאבקים חילוניים שמדירים את הציבור הדתי.",
+      "טענות לקבלת החלטות ריכוזית מלמעלה למטה ללא קיום בחירות מקדימות (פריימריז)."
+    ],
     "stances": {
       "haredi_draft": 2,
       "gaza_control": -1,
@@ -56,6 +100,28 @@
     "color": "#00BCD4",
     "descriptionEn": "Centrist state-pragmatic party. Aims to unite secular and religious groups, seeks broad political consensus, and focuses on security stability.",
     "descriptionHe": "מפלגת מרכז ממלכתית. שואפת לאחד את החברה הישראלית, ליצור הסכמות רחבות ולשמור על ביטחון ישראל לצד שלטון החוק.",
+    "historyEn": "Formed as an alliance of centrist and center-right figures, led by former IDF Chief of Staff Benny Gantz. The party positions itself as a state-pragmatic alternative, emphasizing institutional stability, national reconciliation, and military preparedness.",
+    "historyHe": "הוקמה כברית של פוליטיקאים מהמרכז ומהימין המתון, בהנהגת הרמטכ\"ל לשעבר בני גנץ. המפלגה מציגה את עצמה כחלופה ממלכתית ופרגמטית, המדגישה יציבות מוסדית, פיוס לאומי ומוכנות ביטחונית.",
+    "prosEn": [
+      "Led by experienced security and military figures, boosting defense credibility.",
+      "Aims for broad political consensus and bridging secular-religious divides.",
+      "Maintains a pragmatic, non-dogmatic approach to regional and foreign policy."
+    ],
+    "prosHe": [
+      "מונהגת על ידי דמויות ביטחוניות וצבאיות בעלות ניסיון עשיר.",
+      "שאיפה לקונצנזוס פוליטי רחב וגישור על הפערים בין חילונים לדתיים.",
+      "מדיניות פרגמטית ולא דוגמטית ביחסי החוץ ובסוגיות האזוריות."
+    ],
+    "challengesEn": [
+      "Critics argue the party's platform is vague and attempts to appeal to everyone, weakening its policy profile.",
+      "Skeptics point to past compromises in entering coalitions that fractured its support base.",
+      "Accused of lacking a clear economic agenda beyond general stability goals."
+    ],
+    "challengesHe": [
+      "טענות כי מצע המפלגה עמום ומנסה לקרוץ לכולם, מה שמחליש את זהותה המדיניותית.",
+      "ביקורת על פשרות פוליטיות בעבר בכניסה לקואליציות שסדקו את בסיס התמיכה שלה.",
+      "היעדר מצע כלכלי מפורט מעבר ליעדי יציבות כלליים."
+    ],
     "stances": {
       "haredi_draft": 2,
       "gaza_control": 1,
@@ -80,6 +146,28 @@
     "color": "#3E2723",
     "descriptionEn": "Ultra-Orthodox Sephardic party. Dedicated to religious preservation, expanding social welfare funding for lower classes, and yeshiva independence.",
     "descriptionHe": "מפלגה חרדית-ספרדית. מייצגת את הציבור הדתי-מסורתי והשכבות החלשות. פועלת לחיזוק מוסדות הדת והבטחת קצבאות רווחה.",
+    "historyEn": "Founded in 1984 under the spiritual leadership of Rabbi Ovadia Yosef to represent Sephardic and Mizrahi ultra-Orthodox Jews. Shas has played a key role as a kingmaker in Israeli politics, utilizing its influence to fund religious institutions and advocate for lower socioeconomic classes.",
+    "historyHe": "הוקמה בשנת 1984 תחת מנהיגותו הרוחנית של הרב עובדיה יוסף כדי לייצג את הציבור החרדי הספרדי והמזרחי. ש\"ס מילאה תפקיד מפתח כלשון מאזניים בפוליטיקה הישראלית, והשתמשה בכוחה למימון מוסדות דת ולתמיכה בשכבות סוציו-אקונומיות חלשות.",
+    "prosEn": [
+      "Strong focus on social welfare, poverty alleviation, and support for marginalized communities.",
+      "Deeply connected to traditional Sephardic heritage and cultural preservation.",
+      "High constituency loyalty and stable political representation."
+    ],
+    "prosHe": [
+      "מיקוד רב בנושאי רווחה, צמצום העוני ותמיכה בשכבות מוחלשות.",
+      "חיבור עמוק למסורת ולמורשת יהדות ספרד והמזרח.",
+      "נאמנות גבוהה של קהל הבוחרים ונציגות פוליטית יציבה."
+    ],
+    "challengesEn": [
+      "Strongly opposes secular reforms in marriage, public transport, and military enlistment.",
+      "Demands high state budgets for non-working sector institutions, drawing criticism from secular taxpayers.",
+      "Faced criticism over internal governance issues and convictions of senior leaders."
+    ],
+    "challengesHe": [
+      "התנגדות נחרצת לרפורמות חילוניות בנישואין, תחבורה ציבורית וגיוס לצה\"ל.",
+      "דרישה לתקציבים משמעותיים למוסדות של מגזרים שאינם משתלבים בשוק העבודה, דבר המעורר ביקורת בקרב משלמי המיסים.",
+      "ביקורת ציבורית על התנהלות פנימית והרשעות פליליות של כמה מבכיריה בעבר."
+    ],
     "stances": {
       "haredi_draft": -2,
       "gaza_control": 1,
@@ -104,6 +192,28 @@
     "color": "#424242",
     "descriptionEn": "Ultra-Orthodox Ashkenazic alliance. Strongly opposes yeshiva student drafts, demands full educational funding without core curricula, and guards Shabbat.",
     "descriptionHe": "ברית מפלגות חרדיות-אשכנזיות. פועלת לשימור הסטטוס-קוו בענייני דת ומדינה, עצמאות מוסדות החינוך החרדיים והסדרת הפטור מגיוס.",
+    "historyEn": "An alliance of Ashkenazi Haredi parties (Agudat Yisrael and Degel HaTorah) formed in 1992. Its primary agenda is preserving the status quo in state-religion relations, safeguarding religious laws, and securing exemptions from military service for yeshiva students.",
+    "historyHe": "ברית של מפלגות חרדיות-אשכנזיות (אגודת ישראל ודגל התורה) שהוקמה בשנת 1992. מטרתה העיקרית היא שמירה על הסטטוס-קוו ביחסי דת ומדינה, הבטחת חוקי ההלכה והסדרת הפטור מגיוס לתלמידי ישיבות.",
+    "prosEn": [
+      "Unyielding defense of religious study, traditional family units, and Shabbat observance.",
+      "Provides community welfare support and represents ultra-Orthodox rights effectively.",
+      "Disciplined parliamentary faction focused on core sector goals."
+    ],
+    "prosHe": [
+      "הגנה בלתי מתפשרת על לימוד התורה, ערכי המשפחה המסורתיים ושמירת השבת.",
+      "ייצוג יעיל של זכויות המגזר החרדי ומתן תמיכה קהילתית.",
+      "סיעה פרלמנטרית ממושמעת וממוקדת ביעדי המגזר שלה."
+    ],
+    "challengesEn": [
+      "Resists the integration of core academic curricula (math, science) in ultra-Orthodox schools.",
+      "Rejects military and civil service obligations, widening social rifts with secular Israelis.",
+      "Accused of promoting sectoral budgets at the expense of national economic sustainability."
+    ],
+    "challengesHe": [
+      "התנגדות לשילוב לימודי ליבה (מתמטיקה, אנגלית ומדעים) בבתי הספר החרדיים.",
+      "שלילת שירות צבאי או אזרחי חובה, דבר המעמיק את השסע החברתי מול הציבור החילוני והדתי-לאומי.",
+      "ביקורת על קידום תקציבים מגזריים על חשבון היציבות הכלכלית הלאומית."
+    ],
     "stances": {
       "haredi_draft": -2,
       "gaza_control": 0,
@@ -128,6 +238,28 @@
     "color": "#1E88E5",
     "descriptionEn": "Right-wing secular-nationalist party. Strongly opposes religious exemptions, advocates mandatory service, and supports free-market capitalism.",
     "descriptionHe": "מפלגת ימין לאומית-חילונית. דוגלת בגיוס חובה לכולם, הפרדת מוסדות הדת מהפוליטיקה וקידום שוק חופשי וצמצום בירוקרטיה.",
+    "historyEn": "Founded in 1999 by Avigdor Liberman, primarily appealing to Russian-speaking immigrants. Over time, the party shifted from a sector-based nationalist party to a staunchly secularist right-wing movement, combining hawkish defense views with free-market capitalism.",
+    "historyHe": "הוקמה בשנת 1999 על ידי אביגדור ליברמן, ופנתה תחילה בעיקר לעולים ממדינות חבר העמים לשעבר. עם השנים, המפלגה שינתה את פניה ממפלגה מגזרית לתנועת ימין חילונית מובהקת, המשלבת עמדות ביטחוניות ניציות עם כלכלת שוק חופשי.",
+    "prosEn": [
+      "Firm advocacy for the draft of all citizens (military/civil service) and secular reforms.",
+      "Promotes business-friendly, capitalistic economic models and cutting bureaucracy.",
+      "Consistent national security positions with a strong focus on law and order."
+    ],
+    "prosHe": [
+      "דרישה עקבית לחובת גיוס לכולם (צבאי או אזרחי) וקידום רפורמות חילוניות.",
+      "תמיכה במודל כלכלי קפיטליסטי, עידוד עסקים וצמצום בירוקרטיה.",
+      "עמדות עקביות בנושאי ביטחון לאומי ודגש על חוק וסדר."
+    ],
+    "challengesEn": [
+      "Criticized for polarizing rhetoric against religious sectors and political opponents.",
+      "Faced investigations and corruption controversies involving former party members in the past.",
+      "Security policies are viewed by critics as overly aggressive or impractical."
+    ],
+    "challengesHe": [
+      "ביקורת על שימוש ברטוריקה מפלגת ומקטבת כלפי הציבור החרדי ומתחרים פוליטיים.",
+      "פרשיות שחיתות וחקירות בעבר שבהן היו מעורבים חלק מחברי המפלגה.",
+      "מדיניות ביטחונית שנתפסת על ידי מבקרים כאגרסיבית מדי או בלתי ישימה."
+    ],
     "stances": {
       "haredi_draft": 2,
       "gaza_control": 2,
@@ -152,6 +284,28 @@
     "color": "#4CAF50",
     "descriptionEn": "Social-democratic Zionist left alliance. Advocates for a two-state solution, separation of religion and state, and robust public welfare systems.",
     "descriptionHe": "איחוד מפלגות השמאל הציוני (העבודה ומרצ). דוגל בפתרון שתי המדינות, שוויון זכויות מלא, הפרדת דת ומדינה וכלכלה סוציאל-דמוקרטית.",
+    "historyEn": "Formed as a merger between the historic Labor party (which led the nation during its foundation) and the left-wing Meretz party. The platform focuses on social democracy, peace negotiations based on a two-state solution, and secular, pluralistic civic equality.",
+    "historyHe": "הוקמה כאיחוד בין מפלגת העבודה ההיסטורית (שהובילה את המדינה בעשורים הראשונים להקמתה) לבין מפלגת השמאל מרצ. מצע המפלגה מתמקד בסוציאל-דמוקרטיה, פתרון שתי המדינות ושוויון אזרחי חילוני ופלורליסטי.",
+    "prosEn": [
+      "Strong advocacy for social welfare, worker protections, and income equality.",
+      "Clear commitment to human rights, LGBTQ+ equality, and democratic institutions.",
+      "Proposes a diplomatic resolution to the conflict with Palestinians through international coordination."
+    ],
+    "prosHe": [
+      "תמיכה חזקה במדינת רווחה, הגנת עובדים וצמצום פערים כלכליים.",
+      "מחויבות ברורה לזכויות אדם, שוויון לקהילת הלהט\"ב והגנה על מוסדות הדמוקרטיה.",
+      "הצגת חזון מדיני לפתרון הסכסוך עם הפלסטינים בתיאום בינלאומי."
+    ],
+    "challengesEn": [
+      "Accused by critics of holding an unrealistic security doctrine in the current Middle East.",
+      "Faced declining electorates due to challenges in connecting with religious and conservative voters.",
+      "Economic proposals are criticized by free-market advocates as high-tax and anti-competitive."
+    ],
+    "challengesHe": [
+      "ביקורת מצד מתנגדים על דוקטרינה ביטחונית לא מציאותית במזרח התיכון הנוכחי.",
+      "התמודדות עם ירידה בכוחה האלקטורלי וקושי בחיבור לקהלים דתיים ושמרניים.",
+      "הצעות כלכליות שנתפסות בעיני תומכי שוק חופשי כמכבידות בשל מיסוי גבוה ופגיעה בתחרות."
+    ],
     "stances": {
       "haredi_draft": 2,
       "gaza_control": -2,
@@ -176,6 +330,28 @@
     "color": "#E65100",
     "descriptionEn": "Far-right religious-nationalist party. Supports settlement annexation, judicial committee control, and opposes secularization and Palestinian statehood.",
     "descriptionHe": "מפלגת ימין דתית-לאומית. תומכת בבנייה נרחבת ביהודה ושומרון, רפורמה מקיפה במערכת המשפט וחיזוק זהותה היהודית האורתודוקסית של המדינה.",
+    "historyEn": "A right-wing to far-right religious nationalist party representing the settlement movement and orthodox nationalist demographics. It advocates for Israeli sovereignty over the West Bank (Judea and Samaria), judicial reform to curb court power, and strengthening the orthodox Jewish character of the state.",
+    "historyHe": "מפלגת ימין לאומית-דתית המייצגת את מפעל ההתיישבות וציבורים דתיים-לאומיים שמרניים. היא דוגלת בהחלת ריבונות ישראלית ביהודה ושומרון, רפורמה משפטית לצמצום כוחו של בית המשפט וחיזוק האופי היהודי-אורתודוקסי של המדינה.",
+    "prosEn": [
+      "Strong dedication to the growth of Jewish settlements and peripheral development.",
+      "Clear and uncompromising national and religious ideology.",
+      "Supports major judicial reforms to increase the role of elected officials."
+    ],
+    "prosHe": [
+      "מחויבות בלתי מתפשרת לפיתוח ההתיישבות ביהודה ושומרון ובפריפריה.",
+      "אידיאולוגיה לאומית ודתית ברורה ועקבית.",
+      "תמיכה ברפורמות משפטיות להעברת כוח ההכרעה לנבחרי הציבור."
+    ],
+    "challengesEn": [
+      "Strongly criticized internationally and domestically for stances that hinder a two-state solution.",
+      "Accused of promoting exclusionary nationalist policies that alienate non-Orthodox and Arab minorities.",
+      "Policies are viewed by opponents as pushing toward isolation and international sanctions."
+    ],
+    "challengesHe": [
+      "ביקורת חריפה בארץ ובעולם על מדיניות שמסכלת את פתרון שתי המדינות.",
+      "טענות לקידום קו לאומני ומדיר המרחיק מיעוטים ויהודים שאינם אורתודוקסים.",
+      "מהלכים שנתפסים על ידי מתנגדים כדוחפים את ישראל לבידוד בינלאומי ולסנקציות."
+    ],
     "stances": {
       "haredi_draft": -1,
       "gaza_control": 2,
@@ -200,6 +376,28 @@
     "color": "#D32F2F",
     "descriptionEn": "Arab-Jewish socialist-communist list. Promotes full civil equality, opposes the occupation, and champions worker rights and social justice.",
     "descriptionHe": "רשימה ערבית-יהודית סוציאליסטית. דוגלת בשוויון אזרחי ולאומי מלא לציבור הערבי, סיום הכיבוש והקמת מדינה פלסטינית, והגנה על זכויות עובדים.",
+    "historyEn": "A joint list formed by Hadash (a socialist Arab-Jewish alliance) and Ta'al (an Arab nationalist party led by Ahmad Tibi). The faction focuses on ending the Israeli occupation of the territories, establishing a Palestinian state, and ensuring full national and civil equality for Arab citizens of Israel.",
+    "historyHe": "רשימה משותפת המורכבת מחד\"ש (חזית דמוקרטית לשוויון ושלום - ערבית-יהודית סוציאליסטית) ותע\"ל (תנועה ערבית להתחדשות בהנהגת אחמד טיבי). הרשימה מתמקדת בסיום הכיבוש, הקמת מדינה פלסטינית והבטחת שוויון אזרחי ולאומי מלא לאזרחים הערבים בישראל.",
+    "prosEn": [
+      "Consistent voice for civil rights, social justice, and equality for Arab-Israelis.",
+      "Supports worker rights, public services, and progressive economic redistribution.",
+      "Maintains a platform of Arab-Jewish cooperation on social and labor issues."
+    ],
+    "prosHe": [
+      "קול עקבי למען זכויות אזרח, צדק חברתי ושוויון למגזר הערבי בישראל.",
+      "תמיכה בזכויות עובדים, שירותים ציבוריים וחלוקה מחדש של עושר.",
+      "שימור פלטפורמה של שיתוף פעולה יהודי-ערבי בנושאים חברתיים ומעמדיים."
+    ],
+    "challengesEn": [
+      "Strictly non-Zionist stance leads to frequent clashes with the mainstream Jewish-Israeli public.",
+      "Refusal to support coalition governments limits its ability to secure direct resources for its voters.",
+      "Often criticized for focusing on Palestinian national struggles over local municipal concerns."
+    ],
+    "challengesHe": [
+      "עמדה לא-ציונית מובהקת המביאה לחיכוך מתמיד עם רוב הציבור היהודי-ישראלי.",
+      "הימנעות קבועה מתמיכה בממשלות קואליציה המגבילה את יכולתה להשיג תקציבים ישירים לבוחריה.",
+      "ביקורת על התמקדות בסוגיות לאומיות פלסטיניות על פני טיפול בבעיות מוניציפליות יומיומיות."
+    ],
     "stances": {
       "haredi_draft": 0,
       "gaza_control": -2,
@@ -224,6 +422,28 @@
     "color": "#00796B",
     "descriptionEn": "Conservative Islamic party representing Arab-Israeli interests. Focuses on local community budget allocation, housing, crime prevention, and civil rights.",
     "descriptionHe": "מפלגה ערבית-שמרנית המייצגת את התנועה האסלאמית. מתמקדת בפתרון בעיות הפנים של החברה הערבית (תקציבים, פשיעה ודיור) ודוגלת בדו-קיום.",
+    "historyEn": "Formed as the political wing of the Southern Branch of the Islamic Movement in Israel. In 2021, Ra'am made history by becoming the first Arab party in decades to join a governing coalition, focusing on tangible budgets and civil advancements for Arab-Israelis.",
+    "historyHe": "הוקמה כזרוע הפוליטית של הפלג הדרומי של התנועה האסלאמית בישראל. בשנת 2021 עשתה היסטוריה כשהייתה למפלגה הערבית הראשונה מזה עשורים שהצטרפה לקואליציה ממשלתית, תוך התמקדות בהשגת תקציבים מוחשיים וקידום אזרחי לחברה הערבית.",
+    "prosEn": [
+      "Pragmatic political approach focusing on solving domestic Arab issues (crime, housing, infrastructure).",
+      "Willingness to negotiate and participate in coalition governance to benefit constituents.",
+      "Strong commitment to traditional conservative family values and community charity."
+    ],
+    "prosHe": [
+      "גישה פוליטית פרגמטית המתמקדת בפתרון בעיות פנים של החברה הערבית (פשיעה, דיור, תשתיות).",
+      "נכונות למשא ומתן והשתתפות בקואליציה לטובת הציבור המיוצג.",
+      "מחויבות חזקה לערכי משפחה מסורתיים שמרניים ופעילות צדקה קהילתית."
+    ],
+    "challengesEn": [
+      "Conservative social stances on gender and LGBTQ+ rights clash with liberal political allies.",
+      "Accused by nationalist Arab opponents of compromising on Palestinian national goals.",
+      "Zionist critics express concerns over the party's ideological affiliation with the Islamic Movement."
+    ],
+    "challengesHe": [
+      "עמדות חברתיות שמרניות בנושא מגדר ולהט\"ב המעוררות חיכוך עם שותפים פוליטיים ליברליים.",
+      "ביקורת מצד גורמים לאומיים ערביים על נכונות לפשרות בנושא המאבק הלאומי הפלסטיני.",
+      "חששות מצד מתנגדים ציוניים בשל שיוכה האידיאולוגי של המפלגה לתנועה האסלאמית."
+    ],
     "stances": {
       "haredi_draft": 0,
       "gaza_control": -2,

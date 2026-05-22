@@ -1,14 +1,20 @@
-import React from 'react';
+import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function ResultsPanel({ scores, answers, questions, parties, onRetake, onViewParties }) {
-  const { t, language } = useLanguage();
+  const { t, language, dir } = useLanguage();
+
+  const [comparePartyId, setComparePartyId] = useState(() => {
+    return scores && scores.length > 0 ? scores[0].partyId : null;
+  });
 
   if (!scores || scores.length === 0) return null;
 
   // Best match is the first element since scores are pre-sorted descending
   const bestMatch = scores[0];
   const matchedParty = parties.find(p => p.id === bestMatch.partyId);
+
+  const compareParty = parties.find(p => p.id === comparePartyId) || matchedParty;
 
   // Helper to translate stance values into user-friendly text
   const getStanceLabel = (val) => {
@@ -154,9 +160,55 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
           backgroundColor: '#FFFFFF'
         }}
       >
-        <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '24px', textAlign: 'center' }}>
-          {t('detailedBreakdown')} ({matchedPartyName})
-        </h3>
+        <div 
+          style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            flexWrap: 'wrap', 
+            gap: '16px',
+            marginBottom: '24px',
+            borderBottom: '3px solid #121212',
+            paddingBottom: '16px'
+          }}
+        >
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>
+            {t('detailedBreakdown')}
+          </h3>
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+            <label htmlFor="compare-party-select" className="monospace-label" style={{ fontSize: '0.85rem' }}>
+              {t('selectPartyCompare')}
+            </label>
+            <select
+              id="compare-party-select"
+              value={comparePartyId}
+              onChange={(e) => setComparePartyId(e.target.value)}
+              className="monospace-label"
+              style={{
+                padding: '8px 12px',
+                fontSize: '0.85rem',
+                border: '3px solid #121212',
+                backgroundColor: '#FFFFFF',
+                boxShadow: `${dir === 'rtl' ? '3px' : '-3px'} 3px 0px #121212`,
+                fontWeight: 700,
+                outline: 'none',
+                cursor: 'pointer',
+                fontFamily: 'var(--font-mono)'
+              }}
+            >
+              {scores.map((s) => {
+                const party = parties.find(p => p.id === s.partyId);
+                const name = language === 'he' ? party.nameHe : party.nameEn;
+                return (
+                  <option key={s.partyId} value={s.partyId}>
+                    {name} ({s.score}%)
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
         
         <div style={{ overflowX: 'auto' }}>
           <table 
@@ -177,7 +229,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
             <tbody>
               {questions.map((q) => {
                 const userVal = answers[q.id] || 0;
-                const partyVal = matchedParty.stances[q.id] !== undefined ? matchedParty.stances[q.id] : 0;
+                const partyVal = compareParty.stances[q.id] !== undefined ? compareParty.stances[q.id] : 0;
                 const compat = getCompatibilityInfo(userVal, partyVal);
                 
                 const questionText = language === 'he' ? q.textHe : q.textEn;
@@ -247,7 +299,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
             {language === 'he' ? 'דירוג ההתאמה המלא' : 'Full Compatibility Ranking'}
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {scores.slice(1).map((s, idx) => {
+            {scores.slice(1).map((s) => {
               const party = parties.find(p => p.id === s.partyId);
               const partyName = language === 'he' ? party.nameHe : party.nameEn;
               const partyLeader = language === 'he' ? party.leaderHe : party.leaderEn;

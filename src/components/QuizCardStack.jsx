@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function QuizCardStack({ questions, currentIndex, onAnswer, onBack, answers }) {
   const { t, language, dir } = useLanguage();
   const [animationClass, setAnimationClass] = useState('');
   const prevIndexRef = useRef(currentIndex);
+  const isAnimating = !!animationClass;
 
   useEffect(() => {
     if (prevIndexRef.current - currentIndex === 1) {
@@ -30,20 +31,21 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
   ) : (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineStart: '6px' }}><line x1="4" y1="12" x2="20" y2="12" /><polyline points="13 5 20 12 13 19" /></svg>
   );
-
+ 
   if (!questions || questions.length === 0) return null;
-
+ 
   const currentQuestion = questions[currentIndex];
   const total = questions.length;
-
+ 
   const options = [
     { labelKey: 'stronglyAgree', value: 2, className: 'strongly-agree' },
     { labelKey: 'agree', value: 1, className: 'agree' },
     { labelKey: 'disagree', value: -1, className: 'disagree' },
     { labelKey: 'stronglyDisagree', value: -2, className: 'strongly-disagree' }
   ];
-
+ 
   const handleSelect = (val) => {
+    if (isAnimating) return;
     const isRtl = dir === 'rtl';
     const directionClass = isRtl ? 'slide-out-left' : 'slide-out-right';
     
@@ -54,8 +56,9 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
       setAnimationClass('');
     }, 280);
   };
-
+ 
   const handleSkip = () => {
+    if (isAnimating) return;
     const isRtl = dir === 'rtl';
     const directionClass = isRtl ? 'slide-out-left' : 'slide-out-right';
     
@@ -74,7 +77,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
   const nextQuestionText = nextQuestion ? (language === 'he' ? nextQuestion.textHe : nextQuestion.textEn) : '';
 
   const offsetX = dir === 'rtl' ? 8 : -8;
-  const isAnimating = !!animationClass;
   const transitionStyle = 'top 0.28s cubic-bezier(0.16, 1, 0.3, 1), left 0.28s cubic-bezier(0.16, 1, 0.3, 1), right 0.28s cubic-bezier(0.16, 1, 0.3, 1), bottom 0.28s cubic-bezier(0.16, 1, 0.3, 1)';
 
   return (
@@ -309,7 +311,8 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
               <button
                 key={opt.value}
                 onClick={() => handleSelect(opt.value)}
-                className={`brutalist-button ${isSelected ? 'selected' : 'small-shadow'}`}
+                disabled={isAnimating}
+                className={`brutalist-button quiz-option-button ${isSelected ? 'selected' : 'small-shadow'}`}
                 style={{
                   width: '100%',
                   textAlign: language === 'he' ? 'right' : 'left',
@@ -359,7 +362,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
         >
           <button
             onClick={onBack}
-            disabled={currentIndex === 0}
+            disabled={currentIndex === 0 || isAnimating}
             className="brutalist-button small-shadow"
             style={{
               padding: '6px 16px',
@@ -372,6 +375,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           
           <button
             onClick={handleSkip}
+            disabled={isAnimating}
             className="brutalist-button small-shadow"
             style={{
               padding: '6px 16px',
