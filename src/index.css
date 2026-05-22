@@ -499,3 +499,44 @@ select:focus-visible,
   }
 }
 
+.brutalist-footer {
+  width: 100%;
+  border-top: var(--border-width) solid var(--border-color);
+  background-color: var(--bg-color);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+.brutalist-footer-link {
+  color: var(--text-color);
+  text-decoration: none;
+  opacity: 0.4;
+  transition: opacity 0.15s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0;
+}
+
+.brutalist-footer-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .brutalist-footer {
+    display: none;
+  }
+}
+
+

@@ -29,6 +29,7 @@ To maintain content parity across Hebrew and English:
 *   **Meaning Equivalence**: Ensure that the direct and unflinching tone translates perfectly. Do not soften the English translation of a Hebrew term, or vice versa, to suit different cultural expectations.
 *   **Length & Density**: Hebrew is typically more concise than English. When writing in English, be highly economical with words to ensure the text remains punchy and matches the informational density of the Hebrew version.
 *   **Terminology Mapping**: Use precise political and legal translations (e.g., "Indictment" = "כתב אישום", "Conviction" = "הרשעה").
+*   **Hebrew Gender Neutrality**: In Hebrew, use plural language (פנייה בלשון רבים) when addressing the user to remain as gender-neutral as possible. For example, use *"גלו איפה אתם עומדים"* (Discover where you stand) rather than *"גלה איפה אתה עומד"* (singular masculine).
 
 ---
 
