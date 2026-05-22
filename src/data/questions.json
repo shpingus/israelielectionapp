@@ -43,8 +43,8 @@
     "categoryHe": "ביטחון וגיוס",
     "statementAEn": "Israel must prioritize diplomatic agreements and international alliances to achieve long-term security.",
     "statementAHe": "על ישראל לתעדף הסכמים דיפלומטיים ובריתות בינלאומיות כדי להשיג ביטחון לטווח ארוך.",
-    "statementBEn": "Israel must rely solely on military dominance and unilateral security actions to ensure its survival.",
-    "statementBHe": "על ישראל להסתמך אך ורק על עוצמה צבאית ופעולות ביטחוניות חד-צדדיות כדי להבטיח את שרידותה."
+    "statementBEn": "Israel must rely on military dominance and unilateral security actions to ensure its survival.",
+    "statementBHe": "על ישראל להסתמך על עוצמה צבאית ופעולות ביטחוניות חד-צדדיות כדי להבטיח את שרידותה."
   },
   {
     "id": "shabbat_transport",
@@ -139,8 +139,8 @@
     "category": "economy",
     "categoryEn": "ECONOMY & WELFARE",
     "categoryHe": "כלכלה וחברה",
-    "textEn": "Should Israel completely open the agricultural and food markets to duty-free imports, even if it harms local farming?",
-    "textHe": "האם על ישראל לפתוח לחלוטין את שוק המזון והחקלאות לייבוא ללא מכסים, גם במחיר פגיעה בחקלאים המקומיים?"
+    "textEn": "Should Israel open the agricultural and food markets to duty-free imports, even if it harms local farming?",
+    "textHe": "האם על ישראל לפתוח את שוק המזון והחקלאות לייבוא ללא מכסים, גם במחיר פגיעה בחקלאים המקומיים?"
   },
   {
     "id": "privatization",
