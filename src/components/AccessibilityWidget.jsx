@@ -169,7 +169,6 @@ export default function AccessibilityWidget() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '-4px 4px 0px #121212',
             cursor: 'pointer'
           }}
           aria-label={t('accessibilityButton')}
@@ -444,7 +443,6 @@ export default function AccessibilityWidget() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '-4px 4px 0px #121212',
               cursor: 'pointer'
             }}
             aria-label={t('accessibilityButton')}
