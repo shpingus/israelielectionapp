@@ -107,8 +107,6 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
   const matchedPartyLeader = language === 'he' ? matchedParty.leaderHe : matchedParty.leaderEn;
   const matchedPartyDesc = language === 'he' ? matchedParty.descriptionHe : matchedParty.descriptionEn;
 
-  const comparedPartyName = language === 'he' ? comparedParty.nameHe : comparedParty.nameEn;
-
   return (
     <div className="slide-in-up" style={{ width: '100%', maxWidth: '800px', margin: '20px auto 40px auto' }}>
       

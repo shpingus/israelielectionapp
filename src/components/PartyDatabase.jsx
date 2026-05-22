@@ -93,7 +93,6 @@ export default function PartyDatabase({ parties, questions, onBack }) {
               key={party.id}
               className="brutalist-card"
               style={{
-                backgroundColor: '#FFFFFF',
                 borderLeftWidth: '10px',
                 borderLeftColor: party.color || '#121212',
                 padding: '24px',
@@ -136,6 +135,7 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                 </button>
               </div>
 
+              {isExpanded && (
                 <div style={{ marginTop: '24px', borderTop: '2.5px dashed var(--border-color, #121212)', paddingTop: '20px' }}>
                   <p style={{ fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '24px', fontWeight: 500 }}>
                     {partyDesc}
