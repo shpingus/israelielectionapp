@@ -1,6 +1,7 @@
 [
   {
     "id": "haredi_draft",
+    "type": "likert",
     "category": "security",
     "categoryEn": "SECURITY & DRAFT",
     "categoryHe": "ביטחון וגיוס",
@@ -9,6 +10,7 @@
   },
   {
     "id": "gaza_control",
+    "type": "likert",
     "category": "security",
     "categoryEn": "SECURITY & DRAFT",
     "categoryHe": "ביטחון וגיוס",
@@ -17,6 +19,7 @@
   },
   {
     "id": "two_state",
+    "type": "likert",
     "category": "security",
     "categoryEn": "SECURITY & DRAFT",
     "categoryHe": "ביטחון וגיוס",
@@ -25,6 +28,7 @@
   },
   {
     "id": "west_bank_settlements",
+    "type": "likert",
     "category": "security",
     "categoryEn": "SECURITY & DRAFT",
     "categoryHe": "ביטחון וגיוס",
@@ -32,7 +36,19 @@
     "textHe": "האם יש לתעדף תקציבי דיור ותשתיות להרחבת ההתיישבות ביהודה ושומרון?"
   },
   {
+    "id": "diplomatic_approach",
+    "type": "statement_pair",
+    "category": "security",
+    "categoryEn": "SECURITY & DRAFT",
+    "categoryHe": "ביטחון וגיוס",
+    "statementAEn": "Israel must prioritize diplomatic agreements and international alliances to achieve long-term security.",
+    "statementAHe": "על ישראל לתעדף הסכמים דיפלומטיים ובריתות בינלאומיות כדי להשיג ביטחון לטווח ארוך.",
+    "statementBEn": "Israel must rely solely on military dominance and unilateral security actions to ensure its survival.",
+    "statementBHe": "על ישראל להסתמך אך ורק על עוצמה צבאית ופעולות ביטחוניות חד-צדדיות כדי להבטיח את שרידותה."
+  },
+  {
     "id": "shabbat_transport",
+    "type": "likert",
     "category": "religion_state",
     "categoryEn": "RELIGION & STATE",
     "categoryHe": "דת ומדינה",
@@ -41,6 +57,7 @@
   },
   {
     "id": "civil_marriage",
+    "type": "likert",
     "category": "religion_state",
     "categoryEn": "RELIGION & STATE",
     "categoryHe": "דת ומדינה",
@@ -49,6 +66,7 @@
   },
   {
     "id": "haredi_curriculum",
+    "type": "likert",
     "category": "religion_state",
     "categoryEn": "RELIGION & STATE",
     "categoryHe": "דת ומדינה",
@@ -56,7 +74,19 @@
     "textHe": "האם יש להתנות תקציבים למוסדות חינוך חרדיים בלימוד מקצועות ליבה (מתמטיקה, אנגלית ומדעים)?"
   },
   {
+    "id": "religion_influence",
+    "type": "statement_pair",
+    "category": "religion_state",
+    "categoryEn": "RELIGION & STATE",
+    "categoryHe": "דת ומדינה",
+    "statementAEn": "State and religious institutions must be fully separated, ensuring complete freedom of and from religion.",
+    "statementAHe": "יש להפריד לחלוטין בין מוסדות המדינה לדת, ולהבטיח חופש דת וחופש מדת באופן מלא.",
+    "statementBEn": "The state must actively promote and enforce Jewish religious values in public space and national life.",
+    "statementBHe": "על המדינה לקדם ולכפות באופן פעיל ערכים דתיים-יהודיים במרחב הציבורי ובחיים הלאומיים."
+  },
+  {
     "id": "judicial_committee",
+    "type": "likert",
     "category": "judicial",
     "categoryEn": "JUDICIAL SYSTEM",
     "categoryHe": "מערכת המשפט",
@@ -65,6 +95,7 @@
   },
   {
     "id": "override_clause",
+    "type": "likert",
     "category": "judicial",
     "categoryEn": "JUDICIAL SYSTEM",
     "categoryHe": "מערכת המשפט",
@@ -72,7 +103,39 @@
     "textHe": "האם יש להעניק לכנסת את הכוח להתגבר על פסילת חוקים של בג\"ץ באמצעות רוב רגיל (61 ח\"כים)?"
   },
   {
+    "id": "judicial_override_majority",
+    "type": "multiple_choice",
+    "category": "judicial",
+    "categoryEn": "JUDICIAL SYSTEM",
+    "categoryHe": "מערכת המשפט",
+    "textEn": "What should be the required Knesset majority to override a Supreme Court decision?",
+    "textHe": "מה צריך להיות הרוב הנדרש בכנסת כדי להתגבר על החלטת בג\"ץ לפסילת חוק?",
+    "options": [
+      {
+        "value": 1,
+        "textEn": "A simple majority of 61 Knesset members.",
+        "textHe": "רוב רגיל של 61 חברי כנסת."
+      },
+      {
+        "value": 2,
+        "textEn": "A special majority of 70 or more Knesset members.",
+        "textHe": "רוב מיוחד של 70 חברי כנסת או יותר."
+      },
+      {
+        "value": 3,
+        "textEn": "A supermajority of 80 Knesset members including opposition support.",
+        "textHe": "רוב מיוחס של 80 חברי כנסת הכולל תמיכה מהאופוזיציה."
+      },
+      {
+        "value": 4,
+        "textEn": "The Knesset should not have the authority to override Supreme Court rulings at all.",
+        "textHe": "אין להעניק לכנסת סמכות להתגבר על החלטות בג\"ץ כלל."
+      }
+    ]
+  },
+  {
     "id": "food_imports",
+    "type": "likert",
     "category": "economy",
     "categoryEn": "ECONOMY & WELFARE",
     "categoryHe": "כלכלה וחברה",
@@ -81,6 +144,7 @@
   },
   {
     "id": "privatization",
+    "type": "likert",
     "category": "economy",
     "categoryEn": "ECONOMY & WELFARE",
     "categoryHe": "כלכלה וחברה",
@@ -89,10 +153,42 @@
   },
   {
     "id": "welfare_tax",
+    "type": "likert",
     "category": "economy",
     "categoryEn": "ECONOMY & WELFARE",
     "categoryHe": "כלכלה וחברה",
     "textEn": "Should tax rates on high-income earners and corporations be increased to fund expanded social welfare and healthcare services?",
     "textHe": "האם יש להעלות את מס הכנסה לבעלי שכר גבוה ולתאגידים כדי לממן הרחבה של תקציבי הרווחה והבריאות?"
+  },
+  {
+    "id": "gas_revenues",
+    "type": "multiple_choice",
+    "category": "economy",
+    "categoryEn": "ECONOMY & WELFARE",
+    "categoryHe": "כלכלה וחברה",
+    "textEn": "How should the state utilize its natural gas tax revenues and sovereign wealth fund?",
+    "textHe": "כיצד על המדינה להשתמש בהכנסות ממסי הגז הטבעי ובקרן העושר הלאומית?",
+    "options": [
+      {
+        "value": 1,
+        "textEn": "Directly distribute cash dividends or tax cuts to all Israeli citizens.",
+        "textHe": "חלוקה ישירה של דיבידנדים במזומן או הפחתת מסים לכלל אזרחי ישראל."
+      },
+      {
+        "value": 2,
+        "textEn": "Invest exclusively in long-term infrastructure, green energy, and education.",
+        "textHe": "השקעה בלעדית בתשתיות לטווח ארוך, אנרגיה ירוקה וחינוך."
+      },
+      {
+        "value": 3,
+        "textEn": "Subsidize local industries and lower the prices of basic goods.",
+        "textHe": "סבסוד תעשיות מקומיות והורדת מחירי מוצרי יסוד."
+      },
+      {
+        "value": 4,
+        "textEn": "Use them to pay down the national debt and maintain fiscal stability.",
+        "textHe": "שימוש בהם להורדת החוב הלאומי ושמירה על יציבות פיסקלית."
+      }
+    ]
   }
 ]

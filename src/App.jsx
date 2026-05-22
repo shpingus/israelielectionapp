@@ -4,6 +4,7 @@ import LanguageSwitcher from './components/LanguageSwitcher';
 import QuizCardStack from './components/QuizCardStack';
 import ResultsPanel from './components/ResultsPanel';
 import PartyDatabase from './components/PartyDatabase';
+import AccessibilityWidget from './components/AccessibilityWidget';
 import questionsData from './data/questions.json';
 import partiesData from './data/parties.json';
 
@@ -48,9 +49,23 @@ function AppContent() {
         const userStance = finalAnswers[q.id];
         // Only evaluate questions where the user did not choose "neutral/skip" (value 0)
         if (userStance !== undefined && userStance !== 0) {
-          const partyStance = party.stances[q.id] !== undefined ? party.stances[q.id] : 0;
-          const maxDist = 4; // distance between +2 and -2
-          const dist = Math.abs(userStance - partyStance);
+          let dist;
+          const maxDist = 4; // distance between +2 and -2 (used as normalized max distance)
+          
+          if (q.type === 'multiple_choice') {
+            const partyStance = party.stances[q.id] !== undefined ? party.stances[q.id] : 0;
+            if (userStance === partyStance) {
+              dist = 0;
+            } else if (partyStance === 0) {
+              dist = 2; // neutral distance
+            } else {
+              dist = 4; // fully opposed
+            }
+          } else {
+            // likert or statement_pair
+            const partyStance = party.stances[q.id] !== undefined ? party.stances[q.id] : 0;
+            dist = Math.abs(userStance - partyStance);
+          }
           
           totalMaxDistance += maxDist;
           totalUserDistance += dist;
@@ -91,18 +106,18 @@ function AppContent() {
       {/* Main Content Area */}
       <main className="container">
         {screen === 'welcome' && (
-          <div className="brutalist-card slide-in-up" style={{ maxWidth: '600px', textAlign: 'center', backgroundColor: '#FFFFFF' }}>
+          <div className="brutalist-card slide-in-up" style={{ maxWidth: '600px', textAlign: 'center', backgroundColor: 'var(--card-bg-color, #FFFFFF)' }}>
             <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '16px', letterSpacing: '-0.5px' }}>
               {t('appTitle')}
             </h2>
-            <p style={{ fontSize: '1.2rem', marginBottom: '32px', color: '#333333' }}>
+            <p style={{ fontSize: '1.2rem', marginBottom: '32px', color: 'var(--text-color)' }}>
               {t('appSubtitle')}
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '320px', margin: '0 auto' }}>
               <button onClick={handleStartQuiz} className="brutalist-button primary" style={{ fontSize: '1.1rem', padding: '14px' }}>
                 {t('startQuiz')}
               </button>
-              <button onClick={() => setScreen('database')} className="brutalist-button" style={{ fontSize: '1.1rem', padding: '14px', backgroundColor: '#FFFFFF' }}>
+              <button onClick={() => setScreen('database')} className="brutalist-button" style={{ fontSize: '1.1rem', padding: '14px', backgroundColor: 'var(--card-bg-color, #FFFFFF)' }}>
                 {t('exploreParties')}
               </button>
             </div>
@@ -138,6 +153,7 @@ function AppContent() {
           />
         )}
       </main>
+      <AccessibilityWidget />
     </div>
   );
 }

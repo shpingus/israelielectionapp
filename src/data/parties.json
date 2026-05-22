@@ -42,7 +42,11 @@
       "override_clause": 1,
       "food_imports": 1,
       "privatization": 2,
-      "welfare_tax": -2
+      "welfare_tax": -2,
+      "diplomatic_approach": -1,
+      "religion_influence": -1,
+      "gas_revenues": 4,
+      "judicial_override_majority": 1
     }
   },
   {
@@ -88,7 +92,11 @@
       "override_clause": -2,
       "food_imports": 1,
       "privatization": 1,
-      "welfare_tax": -1
+      "welfare_tax": -1,
+      "diplomatic_approach": 2,
+      "religion_influence": 2,
+      "gas_revenues": 2,
+      "judicial_override_majority": 4
     }
   },
   {
@@ -134,7 +142,11 @@
       "override_clause": -2,
       "food_imports": 0,
       "privatization": 0,
-      "welfare_tax": 0
+      "welfare_tax": 0,
+      "diplomatic_approach": 1,
+      "religion_influence": 1,
+      "gas_revenues": 2,
+      "judicial_override_majority": 2
     }
   },
   {
@@ -180,7 +192,11 @@
       "override_clause": 2,
       "food_imports": 1,
       "privatization": -1,
-      "welfare_tax": 2
+      "welfare_tax": 2,
+      "diplomatic_approach": -1,
+      "religion_influence": -2,
+      "gas_revenues": 3,
+      "judicial_override_majority": 1
     }
   },
   {
@@ -226,7 +242,11 @@
       "override_clause": 2,
       "food_imports": 1,
       "privatization": 0,
-      "welfare_tax": 1
+      "welfare_tax": 1,
+      "diplomatic_approach": -1,
+      "religion_influence": -2,
+      "gas_revenues": 3,
+      "judicial_override_majority": 1
     }
   },
   {
@@ -272,7 +292,11 @@
       "override_clause": -2,
       "food_imports": 0,
       "privatization": 1,
-      "welfare_tax": -2
+      "welfare_tax": -2,
+      "diplomatic_approach": -1,
+      "religion_influence": 2,
+      "gas_revenues": 4,
+      "judicial_override_majority": 4
     }
   },
   {
@@ -318,7 +342,11 @@
       "override_clause": -2,
       "food_imports": -1,
       "privatization": -2,
-      "welfare_tax": 2
+      "welfare_tax": 2,
+      "diplomatic_approach": 2,
+      "religion_influence": 2,
+      "gas_revenues": 2,
+      "judicial_override_majority": 4
     }
   },
   {
@@ -364,7 +392,11 @@
       "override_clause": 2,
       "food_imports": 0,
       "privatization": 1,
-      "welfare_tax": -1
+      "welfare_tax": -1,
+      "diplomatic_approach": -2,
+      "religion_influence": -2,
+      "gas_revenues": 2,
+      "judicial_override_majority": 1
     }
   },
   {
@@ -410,7 +442,11 @@
       "override_clause": -2,
       "food_imports": -1,
       "privatization": -2,
-      "welfare_tax": 2
+      "welfare_tax": 2,
+      "diplomatic_approach": 2,
+      "religion_influence": 1,
+      "gas_revenues": 3,
+      "judicial_override_majority": 4
     }
   },
   {
@@ -456,7 +492,11 @@
       "override_clause": -2,
       "food_imports": -1,
       "privatization": -1,
-      "welfare_tax": 1
+      "welfare_tax": 1,
+      "diplomatic_approach": 2,
+      "religion_influence": -1,
+      "gas_revenues": 3,
+      "judicial_override_majority": 4
     }
   }
 ]
