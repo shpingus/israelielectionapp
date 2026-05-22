@@ -141,8 +141,25 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
           {matchedPartyName}
         </h2>
         
-        <div className="monospace-label" style={{ fontSize: '1.1rem', color: 'var(--text-color)', opacity: 0.7, marginBottom: '24px' }}>
-          {t('leader')}: {matchedPartyLeader}
+        <div className="monospace-label" style={{ fontSize: '1.1rem', color: 'var(--text-color)', opacity: 0.7, marginBottom: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          <span>{t('leader')}: {matchedPartyLeader}</span>
+          {matchedParty.website && (
+            <>
+              <span style={{ opacity: 0.5 }}>|</span>
+              <a 
+                href={matchedParty.website} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ 
+                  color: 'var(--accent-cobalt, #0D47A1)', 
+                  textDecoration: 'underline', 
+                  fontWeight: 700 
+                }}
+              >
+                {language === 'he' ? 'אתר רשמי' : 'Official Website'}
+              </a>
+            </>
+          )}
         </div>
  
         {/* Scoring circle box */}

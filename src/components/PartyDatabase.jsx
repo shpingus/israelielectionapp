@@ -117,8 +117,25 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                   <h3 style={{ fontSize: '1.8rem', fontWeight: 800, margin: '0 0 4px 0' }}>
                     {partyName}
                   </h3>
-                  <div className="monospace-label" style={{ color: 'var(--text-color, #555555)', opacity: 0.7, fontSize: '0.9rem' }}>
-                    {t('leader')}: {partyLeader}
+                  <div className="monospace-label" style={{ color: 'var(--text-color, #555555)', opacity: 0.7, fontSize: '0.9rem', display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                    <span>{t('leader')}: {partyLeader}</span>
+                    {party.website && (
+                      <>
+                        <span style={{ opacity: 0.5 }}>|</span>
+                        <a 
+                          href={party.website} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          style={{ 
+                            color: 'var(--accent-cobalt, #0D47A1)', 
+                            textDecoration: 'underline', 
+                            fontWeight: 700 
+                          }}
+                        >
+                          {language === 'he' ? 'אתר רשמי' : 'Official Website'}
+                        </a>
+                      </>
+                    )}
                   </div>
                 </div>
                 
