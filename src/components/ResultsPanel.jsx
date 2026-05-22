@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { submitConsiderationFeedback, trackAction } from '../utils/tracker';
 
-export default function ResultsPanel({ scores, answers, questions, parties, onRetake, onViewParties }) {
+export default function ResultsPanel({ scores, answers, questions, parties, partyStances, onRetake, onViewParties }) {
   const { t, language, dir } = useLanguage();
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
@@ -366,7 +366,8 @@ export default function ResultsPanel({ scores, answers, questions, parties, onRe
             <tbody>
               {questions.map((q) => {
                 const userVal = answers[q.id] || 0;
-                const partyVal = comparedParty.stances[q.id] !== undefined ? comparedParty.stances[q.id] : 0;
+                const comparedStances = (partyStances && partyStances[comparedParty.id]) || {};
+                const partyVal = comparedStances[q.id] !== undefined ? comparedStances[q.id] : 0;
                 const compat = getCompatibilityInfo(q, userVal, partyVal);
                 
                 const questionText = language === 'he' ? (q.type === 'statement_pair' ? t('selectStatement') : q.textHe) : (q.type === 'statement_pair' ? t('selectStatement') : q.textEn);

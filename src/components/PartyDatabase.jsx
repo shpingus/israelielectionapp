@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function PartyDatabase({ parties, questions, onBack }) {
+export default function PartyDatabase({ parties, questions, partyStances, onBack }) {
   const { t, language, dir } = useLanguage();
   const [expandedPartyId, setExpandedPartyId] = useState(null);
 
@@ -222,7 +222,8 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                     }}
                   >
                     {questions.map((q) => {
-                      const stanceValue = party.stances[q.id] !== undefined ? party.stances[q.id] : 0;
+                      const stances = (partyStances && partyStances[party.id]) || {};
+                      const stanceValue = stances[q.id] !== undefined ? stances[q.id] : 0;
                       const stanceStyle = getStanceStyle(stanceValue);
                       
                       const questionText = language === 'he' ? (q.type === 'statement_pair' ? t('selectStatement') : q.textHe) : (q.type === 'statement_pair' ? t('selectStatement') : q.textEn);
