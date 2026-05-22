@@ -93,3 +93,11 @@ Neo-brutalist offset shadows are typically solid, but dotted halftone shadows ar
         *   **Choices**: A vertical stack of pill/box options. The active/hovered choice button is filled with electric cyan (`#00E5FF`) and offset with a thick solid black shadow (`box-shadow: 4px 4px 0px #121212`).
     *   **Animations**: Fluid transition as cards are answered (sliding/swiping off-screen or fading out to reveal the next card in the stack).
 *   **Result Screen**: Clean top section displaying the closest matched party. Below it, a split screen with a two-column grid showing aligned agendas on one side and misaligned agendas on the other.
+
+---
+
+## 6. Information Architecture & Content Distribution
+
+*   **Single Element per Info-Point**: To avoid redundancy and visual clutter, each key information point or identifier (such as the application title or main headings) must appear only once on any given view or screen.
+    *   *Example*: If the application title `"Elections 2026: Stance Alignment"` is displayed in the sticky header, it must not be repeated inside the welcome/main menu card on the same page. A distinct welcoming header should be used instead.
+

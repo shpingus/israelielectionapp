@@ -1,27 +1,54 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import QuizCardStack from './components/QuizCardStack';
 import ResultsPanel from './components/ResultsPanel';
 import PartyDatabase from './components/PartyDatabase';
+import AdminDashboard from './components/AdminDashboard';
 import AccessibilityWidget from './components/AccessibilityWidget';
 import questionsData from './data/questions.json';
 import partiesData from './data/parties.json';
+import { trackAction, startNewSession, submitSessionResults } from './utils/tracker';
 
 function AppContent() {
-  const { t } = useLanguage();
-  const [screen, setScreen] = useState('welcome'); // 'welcome', 'quiz', 'results', 'database'
+  const { t, language } = useLanguage();
+  const [screen, setScreen] = useState('welcome'); // 'welcome', 'quiz', 'results', 'database', 'admin'
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({}); // { [questionId]: stanceValue }
   const [scores, setScores] = useState([]); // Array of sorted { partyId, score }
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#admin') {
+        setScreen('admin');
+      } else {
+        setScreen(prev => prev === 'admin' ? 'welcome' : prev);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    if (window.location.hash === '#admin') {
+      setScreen('admin');
+    }
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
+
   const handleStartQuiz = () => {
+    const newSessionId = startNewSession();
+    trackAction('start_quiz', 'quiz_button', newSessionId, language);
     setAnswers({});
     setCurrentQuestionIndex(0);
     setScreen('quiz');
   };
 
   const handleAnswer = (questionId, stanceValue) => {
+    const isChange = answers[questionId] !== undefined;
+    trackAction(isChange ? 'change_answer' : 'answer_question', questionId, stanceValue, language);
+
     const updatedAnswers = { ...answers, [questionId]: stanceValue };
     setAnswers(updatedAnswers);
 
@@ -35,7 +62,10 @@ function AppContent() {
 
   const handleBack = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(prev => prev - 1);
+      const prevIndex = currentQuestionIndex - 1;
+      const questionId = questionsData[currentQuestionIndex].id;
+      trackAction('navigate_back', questionId, prevIndex, language);
+      setCurrentQuestionIndex(prevIndex);
     }
   };
 
@@ -89,13 +119,20 @@ function AppContent() {
     calculatedScores.sort((a, b) => b.score - a.score);
     setScores(calculatedScores);
     setScreen('results');
+
+    // Finalize the quiz attempt session and submit results
+    const topMatch = calculatedScores[0];
+    if (topMatch) {
+      submitSessionResults(topMatch.partyId, topMatch.score, language);
+      trackAction('view_results', topMatch.partyId, topMatch.score, language);
+    }
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Header */}
       <header className="brutalist-header">
-        <h1 style={{ cursor: 'pointer' }} onClick={() => setScreen('welcome')}>
+        <h1 style={{ cursor: 'pointer' }} onClick={() => { trackAction('navigate_home', 'header_logo', null, language); setScreen('welcome'); }}>
           {t('appTitle')}
         </h1>
         <div className="header-switcher-container">
@@ -108,7 +145,7 @@ function AppContent() {
         {screen === 'welcome' && (
           <div className="brutalist-card slide-in-up" style={{ maxWidth: '600px', textAlign: 'center', backgroundColor: 'var(--card-bg-color, #FFFFFF)' }}>
             <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '16px', letterSpacing: '-0.5px' }}>
-              {t('appTitle')}
+              {t('welcomeHeader')}
             </h2>
             <p style={{ fontSize: '1.2rem', marginBottom: '32px', color: 'var(--text-color)' }}>
               {t('appSubtitle')}
@@ -117,7 +154,7 @@ function AppContent() {
               <button onClick={handleStartQuiz} className="brutalist-button primary" style={{ fontSize: '1.1rem', padding: '14px' }}>
                 {t('startQuiz')}
               </button>
-              <button onClick={() => setScreen('database')} className="brutalist-button" style={{ fontSize: '1.1rem', padding: '14px', backgroundColor: 'var(--card-bg-color, #FFFFFF)' }}>
+              <button onClick={() => { trackAction('explore_parties', 'welcome_database_button', null, language); setScreen('database'); }} className="brutalist-button" style={{ fontSize: '1.1rem', padding: '14px', backgroundColor: 'var(--card-bg-color, #FFFFFF)' }}>
                 {t('exploreParties')}
               </button>
             </div>
@@ -141,7 +178,7 @@ function AppContent() {
             questions={questionsData}
             parties={partiesData}
             onRetake={handleStartQuiz}
-            onViewParties={() => setScreen('database')}
+            onViewParties={() => { trackAction('explore_parties', 'results_database_button', null, language); setScreen('database'); }}
           />
         )}
 
@@ -149,11 +186,23 @@ function AppContent() {
           <PartyDatabase
             parties={partiesData}
             questions={questionsData}
-            onBack={() => setScreen('welcome')}
+            onBack={() => { trackAction('navigate_home', 'database_back_button', null, language); setScreen('welcome'); }}
+          />
+        )}
+
+        {screen === 'admin' && (
+          <AdminDashboard
+            onClose={() => {
+              window.location.hash = '';
+              setScreen('welcome');
+            }}
           />
         )}
       </main>
       <AccessibilityWidget />
+      <footer className="brutalist-footer">
+        <div>© 2026 {t('appTitle')}</div>
+      </footer>
     </div>
   );
 }
