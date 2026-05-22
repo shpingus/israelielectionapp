@@ -154,21 +154,8 @@ function AppContent() {
         )}
       </main>
 
-      {/* Footer */}
-      <footer 
-        style={{
-          borderTop: 'var(--border-width) solid var(--border-color)',
-          backgroundColor: 'var(--bg-color)',
-          padding: '16px 24px',
-          marginTop: 'auto',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '16px',
-          zIndex: 10
-        }}
-      >
+      {/* Footer (Mobile Only) */}
+      <footer className="brutalist-footer">
         <span className="monospace-label" style={{ fontSize: '0.8rem', opacity: 0.7 }}>
           © 2026 {t('appTitle')}
         </span>
