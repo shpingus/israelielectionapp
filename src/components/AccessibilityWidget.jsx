@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function AccessibilityWidget() {
-  const { t, dir } = useLanguage();
+  const { t, language } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [showStatement, setShowStatement] = useState(false);
   
@@ -12,6 +12,7 @@ export default function AccessibilityWidget() {
   const [fontSize, setFontSize] = useState(() => localStorage.getItem('acc_font_size') || 'medium');
   const [dyslexiaFont, setDyslexiaFont] = useState(() => localStorage.getItem('acc_dyslexia_font') === 'true');
   const [reducedMotion, setReducedMotion] = useState(() => localStorage.getItem('acc_reduced_motion') === 'true');
+  const [isWidgetHidden, setIsWidgetHidden] = useState(() => localStorage.getItem('acc_widget_hidden') === 'true');
 
   const widgetRef = useRef(null);
   const statementModalRef = useRef(null);
@@ -91,57 +92,89 @@ export default function AccessibilityWidget() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
+  // Handle toggle via custom event (e.g. from footer link)
+  useEffect(() => {
+    const handleToggle = () => {
+      setIsOpen(prev => !prev);
+    };
+    window.addEventListener('toggle-accessibility', handleToggle);
+    return () => window.removeEventListener('toggle-accessibility', handleToggle);
+  }, []);
+
+  // Global Alt+A keyboard shortcut
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      if (e.altKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        setIsOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
+
   const handleReset = () => {
     setContrast('default');
     setMonochrome(false);
     setFontSize('medium');
     setDyslexiaFont(false);
     setReducedMotion(false);
+    setIsWidgetHidden(false);
+    localStorage.removeItem('acc_widget_hidden');
   };
 
-  const isRtl = dir === 'rtl';
+  const handleCloseDrawer = () => {
+    setIsOpen(false);
+    // On mobile, pressing X once hides the floating widget and shows the bottom button instead
+    if (window.innerWidth <= 600) {
+      setIsWidgetHidden(true);
+      localStorage.setItem('acc_widget_hidden', 'true');
+    }
+  };
 
   return (
     <div ref={widgetRef} style={{ position: 'relative', zIndex: 990 }}>
       {/* Floating Sticky Accessibility Trigger Button */}
-      <button
-        id="acc-widget-trigger"
-        onClick={() => setIsOpen(!isOpen)}
-        className="brutalist-button"
-        style={{
-          position: 'fixed',
-          bottom: '24px',
-          [isRtl ? 'left' : 'right']: '24px',
-          zIndex: 995,
-          borderRadius: '4px',
-          width: '56px',
-          height: '56px',
-          padding: 0,
-          backgroundColor: '#00E5FF',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: isRtl ? '4px 4px 0px #121212' : '-4px 4px 0px #121212',
-          cursor: 'pointer'
-        }}
-        aria-label={t('accessibilityButton')}
-        aria-expanded={isOpen}
-        aria-controls="accessibility-drawer"
-      >
-        <svg 
-          width="30" 
-          height="30" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="#121212" 
-          strokeWidth="2.5" 
-          strokeLinecap="square"
-          aria-hidden="true"
+      {!isWidgetHidden && (
+        <button
+          id="acc-widget-trigger"
+          onClick={() => setIsOpen(!isOpen)}
+          className="brutalist-button"
+          style={{
+            position: 'fixed',
+            bottom: '24px',
+            right: '24px',
+            zIndex: 995,
+            borderRadius: '4px',
+            width: '56px',
+            height: '56px',
+            padding: 0,
+            backgroundColor: '#00E5FF',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '-4px 4px 0px #121212',
+            cursor: 'pointer'
+          }}
+          aria-label={t('accessibilityButton')}
+          aria-expanded={isOpen}
+          aria-controls="accessibility-drawer"
         >
-          <circle cx="12" cy="5" r="2.5" />
-          <path d="M4 11h16M12 7.5v8M8.5 21.5l3.5-6 3.5 6" />
-        </svg>
-      </button>
+          <svg 
+            width="30" 
+            height="30" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="#121212" 
+            strokeWidth="2.5" 
+            strokeLinecap="square"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="5" r="2.5" />
+            <path d="M4 11h16M12 7.5v8M8.5 21.5l3.5-6 3.5 6" />
+          </svg>
+        </button>
+      )}
 
       {/* Drawer Panel */}
       {isOpen && (
@@ -149,22 +182,7 @@ export default function AccessibilityWidget() {
           id="accessibility-drawer"
           role="region"
           aria-label={t('accessibilityTitle')}
-          className="brutalist-card"
-          style={{
-            position: 'fixed',
-            bottom: '90px',
-            [isRtl ? 'left' : 'right']: '24px',
-            width: '320px',
-            backgroundColor: 'var(--card-bg-color, #FFFFFF)',
-            boxShadow: isRtl ? '6px 6px 0px #121212' : '-6px 6px 0px #121212',
-            padding: '20px',
-            zIndex: 994,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-            border: '3px solid var(--border-color, #121212)',
-            borderRadius: '4px'
-          }}
+          className="brutalist-card accessibility-drawer-panel"
         >
           {/* Header */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2.5px solid var(--border-color, #121212)', paddingBottom: '10px' }}>
@@ -172,7 +190,7 @@ export default function AccessibilityWidget() {
               {t('accessibilityTitle')}
             </h3>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={handleCloseDrawer}
               className="brutalist-button half-shadow"
               style={{
                 padding: '4px 8px',
@@ -257,6 +275,26 @@ export default function AccessibilityWidget() {
               aria-pressed={reducedMotion}
             >
               {reducedMotion ? 'ON' : 'OFF'}
+            </button>
+          </div>
+
+          {/* Floating Widget Toggle (Hideable Button) */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <label htmlFor="hide-widget-toggle" className="monospace-label" style={{ fontSize: '0.85rem' }}>
+              {language === 'he' ? 'כפתור נגישות צף' : 'Floating Button'}
+            </label>
+            <button
+              id="hide-widget-toggle"
+              onClick={() => {
+                const nextHidden = !isWidgetHidden;
+                setIsWidgetHidden(nextHidden);
+                localStorage.setItem('acc_widget_hidden', nextHidden.toString());
+              }}
+              className={`brutalist-button half-shadow ${!isWidgetHidden ? 'selected' : ''}`}
+              style={{ padding: '6px 12px', fontSize: '0.8rem' }}
+              aria-pressed={!isWidgetHidden}
+            >
+              {!isWidgetHidden ? 'ON' : 'OFF'}
             </button>
           </div>
 
@@ -371,6 +409,20 @@ export default function AccessibilityWidget() {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Fallback Mobile Bottom Trigger Button */}
+      {isWidgetHidden && (
+        <div className="mobile-only-bottom-trigger">
+          <button
+            id="acc-widget-bottom-trigger"
+            onClick={() => setIsOpen(true)}
+            className="brutalist-button half-shadow"
+            aria-label={t('accessibilityTitle')}
+          >
+            ⚙️ {t('accessibilityTitle')}
+          </button>
         </div>
       )}
     </div>
