@@ -351,27 +351,6 @@ export default function AccessibilityWidget() {
               {t('accStatementBody')}
             </p>
 
-            <div 
-              style={{ 
-                backgroundColor: 'rgba(0, 229, 255, 0.15)', 
-                border: '2px solid var(--border-color, #121212)', 
-                padding: '16px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '8px',
-                marginTop: '8px'
-              }}
-            >
-              <h4 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800 }}>
-                {t('accCoordinator')}:
-              </h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.95rem' }} className="monospace-label">
-                <div><strong>{t('leader')}:</strong> {t('accCoordinatorName')}</div>
-                <div><strong>Email:</strong> <a href={`mailto:${t('accCoordinatorEmail')}`} style={{ color: 'var(--accent-cobalt, #2979FF)' }}>{t('accCoordinatorEmail')}</a></div>
-                <div><strong>Phone:</strong> {t('accCoordinatorPhone')}</div>
-              </div>
-            </div>
-
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>
               <span className="monospace-label" style={{ fontSize: '0.8rem', opacity: 0.6 }}>
                 {t('accLastUpdated')}
