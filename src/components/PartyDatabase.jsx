@@ -68,7 +68,11 @@ export default function PartyDatabase({ parties, questions, onBack }) {
         <h2 style={{ fontSize: '2.2rem', fontWeight: 800, margin: 0, letterSpacing: '-0.5px' }}>
           {t('partyDatabase')}
         </h2>
-        <button onClick={onBack} className="brutalist-button" style={{ backgroundColor: '#FFFFFF', padding: '8px 16px' }}>
+        <button 
+          onClick={onBack} 
+          className="brutalist-button"
+          style={{ backgroundColor: 'var(--card-bg-color, #FFFFFF)', padding: '8px 16px', fontSize: '0.9rem' }}
+        >
           {backArrow} {t('backToHome')}
         </button>
       </div>
@@ -91,9 +95,10 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                 borderLeftColor: party.color || '#121212',
                 padding: '24px',
                 boxShadow: isExpanded 
-                  ? 'var(--shadow-x-card) var(--shadow-y-card) 0px #121212'
-                  : '4px 4px 0px #121212',
-                transition: 'box-shadow 0.2s ease, transform 0.2s ease'
+                  ? 'calc(var(--shadow-x) * 1.5) calc(var(--shadow-y) * 1.5) 0px #121212' 
+                  : 'var(--shadow-x) var(--shadow-y) 0px #121212',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                backgroundColor: 'var(--card-bg-color, #FFFFFF)'
               }}
             >
               {/* Party Header Info */}
@@ -110,7 +115,7 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                   <h3 style={{ fontSize: '1.8rem', fontWeight: 800, margin: '0 0 4px 0' }}>
                     {partyName}
                   </h3>
-                  <div className="monospace-label" style={{ fontSize: '0.85rem', color: '#555555' }}>
+                  <div className="monospace-label" style={{ color: 'var(--text-color, #555555)', opacity: 0.7, fontSize: '0.9rem' }}>
                     {t('leader')}: {partyLeader}
                   </div>
                 </div>
@@ -130,8 +135,7 @@ export default function PartyDatabase({ parties, questions, onBack }) {
 
               {/* Collapsible Info */}
               {isExpanded && (
-                <div style={{ marginTop: '24px', borderTop: '2.5px dashed #121212', paddingTop: '20px' }}>
-                  
+                <div style={{ marginTop: '24px', borderTop: '2.5px dashed var(--border-color, #121212)', paddingTop: '20px' }}>
                   {/* General Description */}
                   <p style={{ fontSize: '1.05rem', lineHeight: '1.6', marginBottom: '24px' }}>
                     {partyDesc}
@@ -213,8 +217,20 @@ export default function PartyDatabase({ parties, questions, onBack }) {
                     {t('platformStances')}:
                   </h4>
 
-                  {/* Stance List */}
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  {/* List of stances */}
+                  <div 
+                    style={{ 
+                      display: 'grid', 
+                      gridTemplateColumns: '1fr', 
+                      gap: '12px',
+                      maxHeight: '400px',
+                      overflowY: 'auto',
+                      paddingInlineEnd: '8px',
+                      border: '2px solid var(--border-color, #121212)',
+                      padding: '16px',
+                      backgroundColor: '#FAF9F6'
+                    }}
+                  >
                     {questions.map((q) => {
                       const stanceValue = party.stances[q.id] !== undefined ? party.stances[q.id] : 0;
                       const stanceStyle = getStanceStyle(stanceValue);

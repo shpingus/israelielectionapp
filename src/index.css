@@ -130,7 +130,7 @@ p {
 
 /* Brutalist Card */
 .brutalist-card {
-  background-color: #FFFFFF;
+  background-color: var(--card-bg-color, #FFFFFF);
   border: var(--border-width) solid var(--border-color);
   padding: 32px;
   width: 100%;
@@ -151,7 +151,7 @@ p {
   font-weight: 700;
   font-size: 1rem;
   text-transform: uppercase;
-  background-color: #FFFFFF;
+  background-color: var(--card-bg-color, #FFFFFF);
   color: var(--text-color);
   border: var(--border-width) solid var(--border-color);
   padding: 12px 24px;
@@ -299,4 +299,101 @@ p {
 
 .slide-in-up {
   animation: slideInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Accessibility Modifications --- */
+
+/* Base font scaling on html element */
+html {
+  transition: font-size 0.15s ease;
+}
+
+/* Grayscale Mode */
+.accessibility-monochrome {
+  filter: grayscale(100%) !important;
+}
+
+/* High Contrast Mode (Light) */
+.accessibility-high-contrast {
+  --bg-color: #FFFFFF !important;
+  --text-color: #000000 !important;
+  --card-bg-color: #FFFFFF !important;
+  --accent-cyan: #00FFFF !important;
+  --accent-cobalt: #0000FF !important;
+  --accent-coral: #FF0000 !important;
+  --border-color: #000000 !important;
+}
+
+.accessibility-high-contrast body {
+  background-image: none !important;
+}
+
+/* Dark Contrast Mode */
+.accessibility-dark-contrast {
+  --bg-color: #121212 !important;
+  --text-color: #FFFFFF !important;
+  --card-bg-color: #222222 !important;
+  --accent-cyan: #00E5FF !important;
+  --accent-cobalt: #82B1FF !important;
+  --accent-coral: #FF8A80 !important;
+  --border-color: #FFFFFF !important;
+}
+
+.accessibility-dark-contrast body {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px) !important;
+  background-color: var(--bg-color) !important;
+}
+
+.accessibility-dark-contrast .brutalist-button.secondary {
+  color: #121212 !important;
+}
+
+/* Font Sizing scale */
+.accessibility-font-small {
+  font-size: 85% !important;
+}
+
+.accessibility-font-medium {
+  font-size: 100% !important;
+}
+
+.accessibility-font-large {
+  font-size: 120% !important;
+}
+
+/* Dyslexia Friendly font override */
+.accessibility-dyslexia-font,
+.accessibility-dyslexia-font * {
+  font-family: Arial, sans-serif !important;
+  letter-spacing: 0.08em !important;
+  word-spacing: 0.12em !important;
+  line-height: 1.7 !important;
+}
+
+/* Reduced Motion Mode */
+.accessibility-reduced-motion,
+.accessibility-reduced-motion * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Robust Keyboard Focus Outlines */
+.brutalist-button:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent-cobalt, #2979FF) !important;
+  outline-offset: 4px !important;
+}
+
+.accessibility-dark-contrast .brutalist-button:focus-visible,
+.accessibility-dark-contrast button:focus-visible,
+.accessibility-dark-contrast a:focus-visible,
+.accessibility-dark-contrast input:focus-visible,
+.accessibility-dark-contrast select:focus-visible,
+.accessibility-dark-contrast [tabindex]:focus-visible {
+  outline: 3px solid #FFFFFF !important;
+  outline-offset: 4px !important;
 }

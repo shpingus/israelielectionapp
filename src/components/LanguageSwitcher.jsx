@@ -10,7 +10,7 @@ export default function LanguageSwitcher() {
       style={{
         padding: '6px 12px',
         fontSize: '0.85rem',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: 'var(--card-bg-color, #FFFFFF)',
         cursor: 'pointer'
       }}
       aria-label="Toggle language"
