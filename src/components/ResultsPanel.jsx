@@ -260,7 +260,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
           {t('yourBestMatch')}
         </div>
         
-        <h2 style={{ fontSize: '3rem', fontWeight: 800, margin: '8px 0', letterSpacing: '-1px' }}>
+        <h2 style={{ fontSize: '3rem', fontWeight: 400, margin: '8px 0', letterSpacing: '-1px' }}>
           {matchedPartyName}
         </h2>
         

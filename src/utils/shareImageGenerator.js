@@ -90,7 +90,7 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   ctx.fillText(brandingText.toUpperCase(), 540, 50);
 
   // 3. Measure party and leader names dynamically to adjust card height
-  ctx.font = isRtl ? '400 70px "Suez One", Georgia, serif' : '800 66px "Fraunces", Georgia, serif';
+  ctx.font = '400 70px "Suez One", Georgia, serif';
   const partyLines = getWrappedLines(ctx, partyName, 680);
   const partyLineHeight = isRtl ? 74 : 70;
   const partyTextHeight = partyLines.length * partyLineHeight;
@@ -106,9 +106,11 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   const totalCardHeight = 160 + whiteSectionHeight;
   const alignmentCardBottom = 240 + totalCardHeight;
 
-  // Draw Solid Offset Shadow for main alignment block
+  const shadowOffsetX = isRtl ? 20 : -20;
+  
+  // Solid Offset Shadows
   ctx.fillStyle = '#121212';
-  ctx.fillRect(160, 260, 760, totalCardHeight);
+  ctx.fillRect(140 + shadowOffsetX, 240 + 20, 760, totalCardHeight);
   
   // Content block border & background
   ctx.fillStyle = '#FFFFFF';
@@ -136,7 +138,7 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
 
   // 5. Party Name & Leader in white section
   ctx.fillStyle = '#121212';
-  ctx.font = isRtl ? '400 70px "Suez One", Georgia, serif' : '800 66px "Fraunces", Georgia, serif';
+  ctx.font = '400 70px "Suez One", Georgia, serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
 
@@ -169,7 +171,7 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
 
   // Draw shadow for description card
   ctx.fillStyle = '#121212';
-  ctx.fillRect(160, cardY + 20, 760, cardHeight);
+  ctx.fillRect(140 + shadowOffsetX, cardY + 20, 760, cardHeight);
 
   // Draw white card for description
   ctx.fillStyle = '#FFFFFF';
