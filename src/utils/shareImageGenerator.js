@@ -56,6 +56,7 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   
   // Clear Canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.direction = isRtl ? 'rtl' : 'ltr';
 
   // 1. Draw Cream Background
   ctx.fillStyle = '#F8F7F3';
@@ -89,7 +90,7 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   ctx.fillText(brandingText.toUpperCase(), 540, 50);
 
   // 3. Measure party and leader names dynamically to adjust card height
-  ctx.font = isRtl ? '800 70px "Suez One", Georgia, serif' : '800 66px "Fraunces", Georgia, serif';
+  ctx.font = isRtl ? '400 70px "Suez One", Georgia, serif' : '800 66px "Fraunces", Georgia, serif';
   const partyLines = getWrappedLines(ctx, partyName, 680);
   const partyLineHeight = isRtl ? 74 : 70;
   const partyTextHeight = partyLines.length * partyLineHeight;
@@ -135,7 +136,7 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
 
   // 5. Party Name & Leader in white section
   ctx.fillStyle = '#121212';
-  ctx.font = isRtl ? '800 70px "Suez One", Georgia, serif' : '800 66px "Fraunces", Georgia, serif';
+  ctx.font = isRtl ? '400 70px "Suez One", Georgia, serif' : '800 66px "Fraunces", Georgia, serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
 
@@ -262,6 +263,7 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   ctx.stroke();
 
   // Draw clickable-style footer link (RTL-aware positioning, without https://)
+  ctx.direction = 'ltr'; // Override direction for manual LTR layout construction
   ctx.font = '700 26px "Space Mono", monospace';
   ctx.textBaseline = 'middle';
   
