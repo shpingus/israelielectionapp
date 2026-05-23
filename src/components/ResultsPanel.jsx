@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { submitConsiderationFeedback, trackAction } from '../utils/tracker';
+import { generateShareCanvas } from '../utils/shareImageGenerator';
 
 export default function ResultsPanel({ scores, answers, questions, parties, partyStances, onRetake, onViewParties }) {
   const { t, language, dir } = useLanguage();
@@ -14,12 +15,139 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
     return '';
   });
 
-  if (!scores || scores.length === 0) return null;
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [isFallbackOpen, setIsFallbackOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [fallbackData, setFallbackData] = useState({ filename: '', size: '', payload: '' });
+  const canvasRef = useRef(null);
+  const hiddenCanvasRef = useRef(null);
 
-  // Best match is the first element since scores are pre-sorted descending
-  const bestMatch = scores[0];
-  const matchedParty = parties.find(p => p.id === bestMatch.partyId);
-  const comparedParty = parties.find(p => p.id === comparedPartyId) || matchedParty;
+  const bestMatch = scores && scores.length > 0 ? scores[0] : null;
+  const matchedParty = bestMatch ? parties.find(p => p.id === bestMatch.partyId) : null;
+  const comparedParty = (bestMatch && parties.find(p => p.id === comparedPartyId)) || matchedParty;
+
+  const matchedPartyName = matchedParty ? (language === 'he' ? matchedParty.nameHe : matchedParty.nameEn) : '';
+  const matchedPartyLeader = matchedParty ? (language === 'he' ? matchedParty.leaderHe : matchedParty.leaderEn) : '';
+  const matchedPartyDesc = matchedParty ? (language === 'he' ? matchedParty.descriptionHe : matchedParty.descriptionEn) : '';
+
+  // Pre-draw the sharing card onto the hidden canvas as soon as the results load
+  useEffect(() => {
+    if (hiddenCanvasRef.current && matchedParty) {
+      document.fonts.ready.then(async () => {
+        try {
+          await generateShareCanvas(
+            hiddenCanvasRef.current,
+            {
+              partyName: matchedPartyName,
+              leaderName: matchedPartyLeader,
+              score: bestMatch.score,
+              description: matchedPartyDesc,
+              accentColor: matchedParty.color
+            },
+            language === 'he',
+            t,
+            'Cinzel'
+          );
+        } catch (err) {
+          console.error("Failed to pre-generate canvas:", err);
+        }
+      });
+    }
+  }, [matchedPartyName, matchedPartyLeader, bestMatch, matchedPartyDesc, matchedParty, language, t]);
+
+  // Render modal canvas on open
+  useEffect(() => {
+    if (isShareModalOpen && canvasRef.current && matchedParty) {
+      document.fonts.ready.then(async () => {
+        try {
+          await generateShareCanvas(
+            canvasRef.current,
+            {
+              partyName: matchedPartyName,
+              leaderName: matchedPartyLeader,
+              score: bestMatch.score,
+              description: matchedPartyDesc,
+              accentColor: matchedParty.color
+            },
+            language === 'he',
+            t,
+            'Cinzel'
+          );
+        } catch (err) {
+          console.error("Failed to generate modal canvas:", err);
+        }
+      });
+    }
+  }, [isShareModalOpen, matchedPartyName, matchedPartyLeader, bestMatch, matchedPartyDesc, matchedParty, language, t]);
+
+  const handleShareClick = async () => {
+    trackAction('share_button_click', matchedParty.id, bestMatch.score, language);
+    const canvas = hiddenCanvasRef.current;
+    if (canvas) {
+      try {
+        canvas.toBlob(async (blob) => {
+          if (!blob) {
+            setIsShareModalOpen(true);
+            return;
+          }
+          const file = new File([blob], 'elections_match.png', { type: 'image/png' });
+          const title = language === 'he' ? 'תוצאות התאמת הבחירות שלי' : 'My Election Match Result';
+          const text = language === 'he' 
+            ? `קיבלתי התאמה של ${bestMatch.score}% עם ${matchedPartyName}! גלו את המפלגה שלכם:`
+            : `I matched ${bestMatch.score}% with ${matchedPartyName}! Find your match:`;
+          const url = 'https://elections.ruppin.dev';
+
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              files: [file],
+              title: title,
+              text: text,
+              url: url
+            });
+          } else {
+            setIsShareModalOpen(true);
+          }
+        }, 'image/png');
+      } catch (err) {
+        console.error("Direct native share failed, opening modal:", err);
+        setIsShareModalOpen(true);
+      }
+    } else {
+      setIsShareModalOpen(true);
+    }
+  };
+
+  const handleDownload = () => {
+    const canvas = canvasRef.current || hiddenCanvasRef.current;
+    if (!canvas || !matchedParty || !bestMatch) return;
+    trackAction('download_image', matchedParty.id, bestMatch.score, language);
+    const dataUrl = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.download = `elections_match_${matchedParty.id}.png`;
+    link.href = dataUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleCopyToClipboard = async () => {
+    const canvas = canvasRef.current || hiddenCanvasRef.current;
+    if (!canvas || !matchedParty || !bestMatch) return;
+    trackAction('copy_clipboard', matchedParty.id, bestMatch.score, language);
+    try {
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+        const item = new ClipboardItem({ 'image/png': blob });
+        await navigator.clipboard.write([item]);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }, 'image/png');
+    } catch (err) {
+      console.error('Clipboard copy failed:', err);
+    }
+  };
+
+  if (!scores || scores.length === 0 || !matchedParty) return null;
 
   // Helper to translate stance values into user-friendly text based on question type
   const getStanceLabel = (q, val) => {
@@ -105,10 +233,6 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
     }
   };
 
-  const matchedPartyName = language === 'he' ? matchedParty.nameHe : matchedParty.nameEn;
-  const matchedPartyLeader = language === 'he' ? matchedParty.leaderHe : matchedParty.leaderEn;
-  const matchedPartyDesc = language === 'he' ? matchedParty.descriptionHe : matchedParty.descriptionEn;
-
   return (
     <div className="slide-in-up" style={{ width: '100%', maxWidth: '800px', margin: '20px auto 40px auto' }}>
       
@@ -189,6 +313,49 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
         <p style={{ fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto 16px auto', lineHeight: '1.6' }}>
           {matchedPartyDesc}
         </p>
+
+        {/* Stylish Share Call-to-Action Box */}
+        <div 
+          className="brutalist-card" 
+          style={{ 
+            marginTop: '24px', 
+            marginBottom: '12px',
+            padding: '20px', 
+            backgroundColor: '#FAF9F6', 
+            border: '3px dashed var(--border-color, #121212)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '12px',
+            boxShadow: 'none',
+            transform: 'none'
+          }}
+        >
+          <div className="monospace-label" style={{ fontSize: '0.85rem', color: '#666666', fontWeight: '700' }}>
+            {language === 'he' ? 'שתפו את ההתאמה שלכם בסטורי!' : 'SHARE YOUR MATCH TO STORIES!'}
+          </div>
+          
+          <button 
+            onClick={handleShareClick} 
+            className="brutalist-button primary interactive" 
+            style={{ 
+              width: '100%', 
+              maxWidth: '340px', 
+              fontSize: '1.1rem', 
+              fontWeight: 800, 
+              backgroundColor: 'var(--accent-cyan, #00E5FF)', 
+              padding: '12px 24px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              gap: '10px',
+              cursor: 'pointer'
+            }}
+          >
+            <span>⚡</span>
+            <span>{language === 'he' ? 'שתפו עכשיו' : 'SHARE NOW'}</span>
+          </button>
+        </div>
 
         {/* Post-quiz Voting Consideration Questionnaire */}
         <div 
@@ -272,6 +439,16 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
           style={{ fontSize: '1.05rem', padding: '14px 28px' }}
         >
           {t('retakeQuiz')}
+        </button>
+        <button 
+          onClick={() => {
+            trackAction('open_share_modal', matchedParty.id, bestMatch.score, language);
+            setIsShareModalOpen(true);
+          }} 
+          className="brutalist-button" 
+          style={{ fontSize: '1.05rem', padding: '14px 28px', backgroundColor: 'var(--accent-cyan)' }}
+        >
+          ⚡ {t('shareResults')}
         </button>
         <button 
           onClick={onViewParties} 
@@ -524,6 +701,190 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
           </div>
         </div>
       )}
+
+      {/* Share Modal Dialog Overlay */}
+      {isShareModalOpen && (
+        <div 
+          className="modal-overlay" 
+          style={{ 
+            position: 'fixed', 
+            top: 0, 
+            left: 0, 
+            right: 0, 
+            bottom: 0, 
+            backgroundColor: 'rgba(18, 18, 18, 0.45)', 
+            backdropFilter: 'blur(6px)', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            zIndex: 1000, 
+            padding: '20px' 
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsShareModalOpen(false);
+          }}
+        >
+          <div 
+            className="brutalist-card slide-in-up" 
+            style={{ 
+              maxWidth: '440px', 
+              backgroundColor: '#FFFFFF', 
+              boxShadow: 'var(--shadow-x-card) var(--shadow-y-card) 0px #121212',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px',
+              padding: '24px',
+              border: '3px solid #121212'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid var(--border-color, #121212)', paddingBottom: '8px' }}>
+              <h3 style={{ fontSize: '1.4rem', margin: 0 }}>{t('shareModalTitle')}</h3>
+              <button 
+                onClick={() => setIsShareModalOpen(false)} 
+                style={{ background: 'none', border: 'none', fontSize: '1.3rem', fontWeight: 'bold', cursor: 'pointer', padding: '0 6px' }}
+              >
+                ✕
+              </button>
+            </div>
+            
+            <p style={{ fontSize: '0.9rem', margin: 0, opacity: 0.8 }}>
+              {t('shareModalSubtitle')}
+            </p>
+
+            <div style={{ display: 'flex', justifyContent: 'center', margin: '8px 0' }}>
+              <a 
+                href="https://elections.ruppin.dev" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ display: 'block', cursor: 'pointer' }}
+                title={language === 'he' ? 'לחצו למעבר לאתר' : 'Click to visit website'}
+              >
+                <canvas 
+                  ref={canvasRef} 
+                  width="1080" 
+                  height="1920" 
+                  style={{ 
+                    width: '210px', 
+                    height: '373.3px', 
+                    border: '3px solid #121212', 
+                    boxShadow: `${dir === 'rtl' ? '4px' : '-4px'} 4px 0px #121212`,
+                    display: 'block'
+                  }}
+                />
+              </a>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <button 
+                onClick={handleNativeShare} 
+                className="brutalist-button primary" 
+                style={{ width: '100%', fontSize: '0.95rem' }}
+              >
+                ⚡ {t('shareImage')}
+              </button>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button 
+                  onClick={handleDownload} 
+                  className="brutalist-button" 
+                  style={{ flex: 1, fontSize: '0.85rem', padding: '10px', backgroundColor: '#FFFFFF' }}
+                >
+                  📥 {t('downloadImage')}
+                </button>
+                <button 
+                  onClick={handleCopyToClipboard} 
+                  className="brutalist-button" 
+                  style={{ flex: 1, fontSize: '0.85rem', padding: '10px', backgroundColor: '#FFFFFF' }}
+                >
+                  {copied ? '✓' : '📋'} {copied ? (language === 'he' ? 'הועתק!' : 'Copied!') : t('copyImage')}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fallback Simulation Modal Dialog Overlay */}
+      {isFallbackOpen && (
+        <div 
+          className="modal-overlay" 
+          style={{ 
+            position: 'fixed', 
+            top: 0, 
+            left: 0, 
+            right: 0, 
+            bottom: 0, 
+            backgroundColor: 'rgba(18, 18, 18, 0.45)', 
+            backdropFilter: 'blur(6px)', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            zIndex: 1010, 
+            padding: '20px' 
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsFallbackOpen(false);
+          }}
+        >
+          <div 
+            className="brutalist-card" 
+            style={{ 
+              maxWidth: '460px', 
+              backgroundColor: '#FFFFFF', 
+              boxShadow: 'var(--shadow-x-card) var(--shadow-y-card) 0px #121212',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px',
+              padding: '24px',
+              border: '3px solid #121212'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid var(--border-color, #121212)', paddingBottom: '8px' }}>
+              <h3 style={{ fontSize: '1.3rem', margin: 0 }}>{t('fallbackModalTitle')}</h3>
+              <button 
+                onClick={() => setIsFallbackOpen(false)} 
+                style={{ background: 'none', border: 'none', fontSize: '1.3rem', fontWeight: 'bold', cursor: 'pointer', padding: '0 6px' }}
+              >
+                ✕
+              </button>
+            </div>
+            
+            <p style={{ fontSize: '0.9rem', margin: 0, opacity: 0.8, lineHeight: '1.5' }}>
+              {t('fallbackModalDesc')}
+            </p>
+
+            <div style={{ backgroundColor: '#FAF9F6', border: '2px dashed var(--border-color, #121212)', padding: '12px', fontFamily: 'var(--font-mono, monospace)', fontSize: '0.8rem', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div><strong>File:</strong> {fallbackData.filename}</div>
+              <div><strong>Size:</strong> {fallbackData.size}</div>
+              <div><strong>Payload:</strong> <code style={{ wordBreak: 'break-all', background: '#eee', padding: '2px 4px' }}>{fallbackData.payload}</code></div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <button 
+                onClick={() => { handleDownload(); setIsFallbackOpen(false); }} 
+                className="brutalist-button primary" 
+                style={{ width: '100%' }}
+              >
+                📥 {t('downloadImage')}
+              </button>
+              <button 
+                onClick={() => { handleCopyToClipboard(); setIsFallbackOpen(false); }} 
+                className="brutalist-button" 
+                style={{ width: '100%', backgroundColor: '#FFFFFF' }}
+              >
+                📋 {t('copyImage')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Hidden Canvas for Direct Web Share pre-generation */}
+      <canvas 
+        ref={hiddenCanvasRef} 
+        width="1080" 
+        height="1920" 
+        style={{ position: 'absolute', left: '-9999px', top: '-9999px', visibility: 'hidden' }}
+      />
 
     </div>
   );

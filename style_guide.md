@@ -93,6 +93,8 @@ Neo-brutalist offset shadows are typically solid, but dotted halftone shadows ar
         *   **Choices**: A vertical stack of pill/box options. The active/hovered choice button is filled with electric cyan (`#00E5FF`) and offset with a thick solid black shadow (`box-shadow: 4px 4px 0px #121212`).
     *   **Animations**: Fluid transition as cards are answered (sliding/swiping off-screen or fading out to reveal the next card in the stack).
 *   **Result Screen**: Clean top section displaying the closest matched party. Below it, a split screen with a two-column grid showing aligned agendas on one side and misaligned agendas on the other.
+*   **Language Switcher**:
+    *   **Layout Stability**: Language switcher buttons must stay in a fixed, stable location (e.g. absolutely positioned header container or rigid dimensions) and must never shift, resize, or move when the user toggles the language.
 
 ---
 

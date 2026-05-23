@@ -103,7 +103,18 @@ const translations = {
     nameSelectionPlaceholder: "Enter a name...",
     regenerateAlias: "Regenerate Alias ↻",
     proceedWithName: "Start Quiz with this name",
-    skipAnonymous: "Skip & Answer Anonymously"
+    skipAnonymous: "Skip & Answer Anonymously",
+    shareResults: "Share Match Image",
+    shareModalTitle: "Share Your Results",
+    shareModalSubtitle: "Generate an image formatted for Instagram Stories or other platforms.",
+    downloadImage: "Download PNG",
+    copyImage: "Copy Image",
+    shareImage: "Share Image",
+    scanToCompare: "SCAN TO TAKE THE SURVEY",
+    brandingText: "ELECTIONS 2026 // SURVEY",
+    fallbackModalTitle: "Simulated Share Sheet",
+    fallbackModalDesc: "Web sharing is simulated. On mobile devices, this launches the native OS sharing menu.",
+    closeModal: "Close"
   },
   he: {
     appTitle: "בחירות 2026: מפתח עמדות",
@@ -204,7 +215,18 @@ const translations = {
     nameSelectionPlaceholder: "הזינו כינוי...",
     regenerateAlias: "החלף כינוי ↻",
     proceedWithName: "התחילו את הבוחן עם שם זה",
-    skipAnonymous: "דילוג ומענה אנונימי"
+    skipAnonymous: "דילוג ומענה אנונימי",
+    shareResults: "שתפו תמונת התאמה",
+    shareModalTitle: "שיתוף התוצאה שלכם",
+    shareModalSubtitle: "צרו תמונה מותאמת לסטורי באינסטגרם או לפלטפורמות אחרות.",
+    downloadImage: "הורדת תמונה",
+    copyImage: "העתקת תמונה",
+    shareImage: "שיתוף תמונה",
+    scanToCompare: "סרקו לביצוע הבוחן",
+    brandingText: "בחירות 2026 // סקר עמדות",
+    fallbackModalTitle: "חלון שיתוף סימולטיבי",
+    fallbackModalDesc: "השיתוף הוירטואלי מופעל כאן. במכשירים ניידים, כפתור זה יפתח את תפריט השיתוף הרשמי של מערכת ההפעלה.",
+    closeModal: "סגור"
   }
 };
 
