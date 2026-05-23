@@ -91,7 +91,7 @@ export async function onRequestGet(context) {
     `);
 
     const stmtRecent = env.DB.prepare(`
-      SELECT session_id as sessionId, created_at as createdAt, top_party as topParty, top_score as topScore, considered_voting as consideredVoting, language 
+      SELECT session_id as sessionId, created_at as createdAt, top_party as topParty, top_score as topScore, considered_voting as consideredVoting, language, display_name as displayName 
       FROM sessions 
       WHERE top_party IS NOT NULL 
       ORDER BY created_at DESC 

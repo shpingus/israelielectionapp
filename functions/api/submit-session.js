@@ -27,7 +27,7 @@ export async function onRequestPost(context) {
       );
     }
 
-    const { sessionId, clientId, topParty, topScore, language, consideredVoting } = body;
+    const { sessionId, clientId, topParty, topScore, language, consideredVoting, displayName } = body;
 
     // Validate minimum required identifiers
     if (!sessionId || typeof sessionId !== 'string') {
@@ -50,13 +50,14 @@ export async function onRequestPost(context) {
 
     // UPSERT pattern: insert a new session, or update the existing session's values
     const query = `
-      INSERT INTO sessions (session_id, client_id, ip_hash, user_agent, language, top_party, top_score, considered_voting)
-      VALUES (?1, ?2, ?3, ?4, COALESCE(?5, 'he'), ?6, ?7, ?8)
+      INSERT INTO sessions (session_id, client_id, ip_hash, user_agent, language, top_party, top_score, considered_voting, display_name)
+      VALUES (?1, ?2, ?3, ?4, COALESCE(?5, 'he'), ?6, ?7, ?8, ?9)
       ON CONFLICT(session_id) DO UPDATE SET
         language = CASE WHEN ?5 IS NOT NULL THEN ?5 ELSE language END,
         top_party = CASE WHEN ?6 IS NOT NULL THEN ?6 ELSE top_party END,
         top_score = CASE WHEN ?7 IS NOT NULL THEN ?7 ELSE top_score END,
-        considered_voting = CASE WHEN ?8 IS NOT NULL THEN ?8 ELSE considered_voting END
+        considered_voting = CASE WHEN ?8 IS NOT NULL THEN ?8 ELSE considered_voting END,
+        display_name = CASE WHEN ?9 IS NOT NULL THEN ?9 ELSE display_name END
     `;
 
     const result = await env.DB.prepare(query)
@@ -68,7 +69,8 @@ export async function onRequestPost(context) {
         language || null,
         topParty || null,
         topScore !== undefined ? topScore : null,
-        consideredVoting || null
+        consideredVoting || null,
+        displayName || null
       )
       .run();
 

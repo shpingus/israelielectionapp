@@ -97,7 +97,13 @@ const translations = {
     avgScoreLabel: "Average Match Score",
     avgActionsLabel: "Average Actions / Session",
     consideredVotingSummary: "Considered Voting Feedback",
-    closeAdmin: "Exit Admin Mode"
+    closeAdmin: "Exit Admin Mode",
+    nameSelectionTitle: "Identity Setup",
+    nameSelectionLabel: "Enter a display name to track your session results, or proceed anonymously.",
+    nameSelectionPlaceholder: "Enter a name...",
+    regenerateAlias: "Regenerate Alias ↻",
+    proceedWithName: "Start Quiz with this name",
+    skipAnonymous: "Skip & Answer Anonymously"
   },
   he: {
     appTitle: "בחירות 2026: מפתח עמדות",
@@ -192,7 +198,13 @@ const translations = {
     avgScoreLabel: "ממוצע התאמה",
     avgActionsLabel: "ממוצע פעולות לסשן",
     consideredVotingSummary: "משוב התחשבות בהצבעה",
-    closeAdmin: "יציאה ממצב מנהל"
+    closeAdmin: "יציאה ממצב מנהל",
+    nameSelectionTitle: "הגדרת זהות",
+    nameSelectionLabel: "בחרו כינוי כדי לעקוב אחר תוצאות הסשן שלכם, או המשיכו באופן אנונימי.",
+    nameSelectionPlaceholder: "הזינו כינוי...",
+    regenerateAlias: "החלף כינוי ↻",
+    proceedWithName: "התחילו את הבוחן עם שם זה",
+    skipAnonymous: "דילוג ומענה אנונימי"
   }
 };
 

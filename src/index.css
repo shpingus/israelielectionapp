@@ -227,6 +227,11 @@ p {
   transform: none !important;
 }
 
+.brutalist-button.static-shadow:hover {
+  transform: none !important;
+  box-shadow: var(--shadow-x) var(--shadow-y) 0px 0px var(--border-color) !important;
+}
+
 /* Utility Badges & Labels */
 .monospace-label {
   font-family: var(--font-mono);

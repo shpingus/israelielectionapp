@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS sessions (
   language TEXT NOT NULL,            -- Active language ('he', 'en', 'ar')
   top_party TEXT,                    -- Matched party (null if they drop before finishing)
   top_score INTEGER,                 -- Match percentage score (null if drop)
-  considered_voting TEXT             -- Post-quiz survey feedback ('yes', 'no', 'maybe', null)
+  considered_voting TEXT,            -- Post-quiz survey feedback ('yes', 'no', 'maybe', null)
+  display_name TEXT                  -- Optional custom or random user display name
 );
 
 -- Granular user actions (clicks, changes, navigations)

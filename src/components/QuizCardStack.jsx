@@ -1,11 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function QuizCardStack({ questions, currentIndex, onAnswer, onBack, answers }) {
+export default function QuizCardStack({ questions, currentIndex, onAnswer, onBack, answers, onStartQuiz }) {
   const { t, language, dir } = useLanguage();
   const [animationClass, setAnimationClass] = useState('');
   const prevIndexRef = useRef(currentIndex);
   const isAnimating = !!animationClass;
+
+  const [displayName, setDisplayName] = useState(() => sessionStorage.getItem('israeli_elections_display_name') || '');
+
+  useEffect(() => {
+    if (currentIndex === -1) {
+      setDisplayName(sessionStorage.getItem('israeli_elections_display_name') || '');
+    }
+  }, [currentIndex]);
 
   useEffect(() => {
     if (prevIndexRef.current - currentIndex === 1) {
@@ -34,10 +42,10 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" style={{ display: 'inline-block', verticalAlign: 'middle', marginInlineStart: '6px' }}><line x1="4" y1="12" x2="20" y2="12" /><polyline points="13 5 20 12 13 19" /></svg>
   );
  
-  if (!questions || questions.length === 0) return null;
+  if (currentIndex !== -1 && (!questions || questions.length === 0)) return null;
  
-  const currentQuestion = questions[currentIndex];
-  const total = questions.length;
+  const currentQuestion = questions ? questions[currentIndex] : null;
+  const total = questions ? questions.length : 0;
   const likertOptions = [
     { labelKey: 'stronglyAgree', value: 2, className: 'strongly-agree' },
     { labelKey: 'agree', value: 1, className: 'agree' },
@@ -70,17 +78,21 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
     }, 280);
   };
 
-  const categoryName = language === 'he' ? currentQuestion.categoryHe : currentQuestion.categoryEn;
+  const categoryName = currentIndex === -1
+    ? (language === 'he' ? 'הגדרת זהות' : 'IDENTITY SETUP')
+    : (language === 'he' ? currentQuestion.categoryHe : currentQuestion.categoryEn);
   
   // Define prompt text depending on question format
   let questionPrompt;
-  if (currentQuestion.type === 'statement_pair') {
+  if (currentIndex === -1) {
+    questionPrompt = t('nameSelectionLabel');
+  } else if (currentQuestion.type === 'statement_pair') {
     questionPrompt = t('selectStatement');
   } else {
     questionPrompt = language === 'he' ? currentQuestion.textHe : currentQuestion.textEn;
   }
 
-  const nextQuestion = currentIndex + 1 < total ? questions[currentIndex + 1] : null;
+  const nextQuestion = currentIndex === -1 ? questions[0] : (currentIndex + 1 < total ? questions[currentIndex + 1] : null);
   const nextCategoryName = nextQuestion ? (language === 'he' ? nextQuestion.categoryHe : nextQuestion.categoryEn) : '';
   
   let nextQuestionPrompt = '';
@@ -183,14 +195,82 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
   };
 
   // Helper to render choice stack for the primary top question card
+  const handleStartIdentity = (nameVal) => {
+    if (isAnimating) return;
+    const isRtl = dir === 'rtl';
+    const directionClass = isRtl ? 'slide-out-left' : 'slide-out-right';
+    setAnimationClass(directionClass);
+    
+    setTimeout(() => {
+      onStartQuiz(nameVal);
+      setAnimationClass('');
+    }, 280);
+  };
+
   const renderCurrentChoices = () => {
+    if (currentIndex === -1) {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+          <input
+            type="text"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            placeholder={t('nameSelectionPlaceholder')}
+            maxLength={40}
+            className="monospace-label"
+            style={{
+              width: '100%',
+              padding: '14px',
+              fontSize: '1.1rem',
+              border: '3px solid var(--border-color, #121212)',
+              borderRadius: '4px',
+              outline: 'none',
+              backgroundColor: '#FAF9F6',
+              fontFamily: 'var(--font-mono)',
+              textAlign: dir === 'rtl' ? 'right' : 'left'
+            }}
+          />
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
+            <button
+              onClick={() => handleStartIdentity(displayName.trim() || null)}
+              className="brutalist-button primary static-shadow"
+              style={{
+                width: '100%',
+                padding: '14px',
+                fontSize: '1rem',
+                justifyContent: 'center',
+                border: '3px solid #121212'
+              }}
+            >
+              {language === 'he' ? 'התחילו בבוחן' : 'Start Quiz'}
+            </button>
+            
+            <button
+              onClick={() => handleStartIdentity(null)}
+              className="brutalist-button static-shadow"
+              style={{
+                width: '100%',
+                padding: '12px',
+                fontSize: '0.9rem',
+                backgroundColor: 'var(--card-bg-color, #FFFFFF)',
+                justifyContent: 'center',
+                border: '3px solid #121212'
+              }}
+            >
+              {t('skipAnonymous')}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     if (currentQuestion.type === 'statement_pair') {
       const isASelected = answers[currentQuestion.id] === 2;
       const isBSelected = answers[currentQuestion.id] === -2;
 
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
-          {/* Statement A Card */}
           <button
             onClick={() => handleSelect(2)}
             className={`brutalist-button ${isASelected ? 'selected' : 'small-shadow'}`}
@@ -228,7 +308,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             </div>
           </button>
 
-          {/* Statement B Card */}
           <button
             onClick={() => handleSelect(-2)}
             className={`brutalist-button ${isBSelected ? 'selected' : 'small-shadow'}`}
@@ -320,7 +399,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
       );
     }
 
-    // Likert Default
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
         {likertOptions.map((opt) => {
@@ -372,7 +450,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
   return (
     <div style={{ position: 'relative', width: '100%', maxWidth: '540px', margin: '40px auto 0 auto' }}>
       
-      {/* Decorative Stack Cards (Offset underneath) */}
       <div 
         style={{
           position: 'absolute',
@@ -388,7 +465,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
         }}
       />
       
-      {/* Next Question Card (Preloaded Underneath) */}
       {nextQuestion ? (
         <div
           className="brutalist-card"
@@ -409,7 +485,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             transition: transitionStyle
           }}
         >
-          {/* Card Header Info */}
           <div 
             style={{ 
               display: 'flex', 
@@ -428,7 +503,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
                 fontSize: '0.85rem'
               }}
             >
-              {t('questionProgress', { current: currentIndex + 2, total })}
+              {currentIndex === -1 ? (language === 'he' ? 'אתחול סשן' : 'INITIALIZATION') : t('questionProgress', { current: currentIndex + 2, total })}
             </span>
             <span 
               className="category-badge"
@@ -444,7 +519,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             </span>
           </div>
 
-          {/* Question Text */}
           <h2 
             style={{ 
               fontSize: '1.5rem', 
@@ -460,10 +534,8 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
             {nextQuestionPrompt}
           </h2>
 
-          {/* Choice Stack Mock */}
           {renderNextChoices()}
 
-          {/* Footer Spacer */}
           <div className="quiz-card-footer" style={{ opacity: 0.5 }}>
             <span style={{ fontSize: '0.85rem' }}>{backArrow} {t('back')}</span>
             <span style={{ fontSize: '0.85rem' }}>{t('noOpinion')} {nextArrow}</span>
@@ -486,7 +558,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
         />
       )}
 
-      {/* Primary Top Question Card */}
       <div
         className={`brutalist-card ${animationClass}`}
         style={{
@@ -500,7 +571,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           minHeight: '520px'
         }}
       >
-        {/* Card Header Info */}
         <div 
           style={{ 
             display: 'flex', 
@@ -519,7 +589,7 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
               fontSize: '0.85rem'
             }}
           >
-            {t('questionProgress', { current: currentIndex + 1, total })}
+            {currentIndex === -1 ? (language === 'he' ? 'אתחול סשן' : 'INITIALIZATION') : t('questionProgress', { current: currentIndex + 1, total })}
           </span>
           <span 
             className="category-badge"
@@ -535,7 +605,6 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           </span>
         </div>
 
-        {/* Question Text / Prompt */}
         <h2 
           style={{ 
             fontSize: '1.5rem', 
@@ -551,26 +620,11 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
           {questionPrompt}
         </h2>
 
-        {/* Action Choice Stack */}
         {renderCurrentChoices()}
 
-        {/* Back and Skip Footer */}
         <div className="quiz-card-footer">
           <button
             onClick={onBack}
-            disabled={currentIndex === 0 || isAnimating}
-            className="brutalist-button small-shadow"
-            style={{
-              padding: '6px 16px',
-              fontSize: '0.85rem',
-              backgroundColor: 'var(--card-bg-color, #FFFFFF)'
-            }}
-          >
-            {backArrow} {t('back')}
-          </button>
-          
-          <button
-            onClick={handleSkip}
             disabled={isAnimating}
             className="brutalist-button small-shadow"
             style={{
@@ -579,8 +633,23 @@ export default function QuizCardStack({ questions, currentIndex, onAnswer, onBac
               backgroundColor: 'var(--card-bg-color, #FFFFFF)'
             }}
           >
-            {t('noOpinion')} {nextArrow}
+            {backArrow} {currentIndex === -1 ? (language === 'he' ? 'חזרה למסך הבית' : 'Back to Home') : t('back')}
           </button>
+          
+          {currentIndex !== -1 && (
+            <button
+              onClick={handleSkip}
+              disabled={isAnimating}
+              className="brutalist-button small-shadow"
+              style={{
+                padding: '6px 16px',
+                fontSize: '0.85rem',
+                backgroundColor: 'var(--card-bg-color, #FFFFFF)'
+              }}
+            >
+              {t('noOpinion')} {nextArrow}
+            </button>
+          )}
         </div>
       </div>
     </div>

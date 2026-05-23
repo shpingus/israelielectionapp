@@ -19,9 +19,14 @@ export function getOrCreateClientId() {
 }
 
 // Temporary for this tab session (identifies single quiz attempts)
-export function startNewSession() {
+export function startNewSession(displayName = null) {
   const sessionId = generateUUID();
   sessionStorage.setItem('israeli_elections_session_id', sessionId);
+  if (displayName) {
+    sessionStorage.setItem('israeli_elections_display_name', displayName);
+  } else {
+    sessionStorage.removeItem('israeli_elections_display_name');
+  }
   return sessionId;
 }
 
@@ -37,6 +42,7 @@ export function getActiveSessionId() {
 export function trackAction(actionType, targetId = null, value = null, language = 'he') {
   const sessionId = getActiveSessionId();
   const clientId = getOrCreateClientId();
+  const displayName = sessionStorage.getItem('israeli_elections_display_name') || null;
 
   fetch('/api/track', {
     method: 'POST',
@@ -49,7 +55,8 @@ export function trackAction(actionType, targetId = null, value = null, language 
       actionType,
       targetId,
       value: value !== null ? String(value) : null,
-      language
+      language,
+      displayName
     }),
   }).catch(err => {
     console.error('Failed to log tracking action:', err);
@@ -60,6 +67,7 @@ export function trackAction(actionType, targetId = null, value = null, language 
 export function submitSessionResults(topParty, topScore, language) {
   const sessionId = getActiveSessionId();
   const clientId = getOrCreateClientId();
+  const displayName = sessionStorage.getItem('israeli_elections_display_name') || null;
 
   return fetch('/api/submit-session', {
     method: 'POST',
@@ -71,7 +79,8 @@ export function submitSessionResults(topParty, topScore, language) {
       clientId,
       topParty,
       topScore,
-      language
+      language,
+      displayName
     }),
   }).catch(err => {
     console.error('Failed to submit session results:', err);
@@ -82,6 +91,7 @@ export function submitSessionResults(topParty, topScore, language) {
 export function submitConsiderationFeedback(choice) {
   const sessionId = getActiveSessionId();
   const clientId = getOrCreateClientId();
+  const displayName = sessionStorage.getItem('israeli_elections_display_name') || null;
   const lang = localStorage.getItem('israeli_elections_lang') || 'he';
 
   // Log as a tracking action event
@@ -97,7 +107,8 @@ export function submitConsiderationFeedback(choice) {
       sessionId,
       clientId,
       consideredVoting: choice,
-      language: lang
+      language: lang,
+      displayName
     }),
   }).catch(err => {
     console.error('Failed to submit feedback:', err);

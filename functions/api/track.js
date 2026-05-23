@@ -27,7 +27,7 @@ export async function onRequestPost(context) {
       );
     }
 
-    const { sessionId, clientId, actionType, targetId, value, language } = body;
+    const { sessionId, clientId, actionType, targetId, value, language, displayName } = body;
 
     // Validate required fields
     if (!sessionId || typeof sessionId !== 'string') {
@@ -56,10 +56,12 @@ export async function onRequestPost(context) {
 
     const activeLanguage = language || "he";
 
-    // 1. Ensure the session exists in the sessions table (INSERT OR IGNORE)
+    // 1. Ensure the session exists in the sessions table (UPSERT to capture display_name)
     const initSessionQuery = `
-      INSERT OR IGNORE INTO sessions (session_id, client_id, ip_hash, user_agent, language)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO sessions (session_id, client_id, ip_hash, user_agent, language, display_name)
+      VALUES (?1, ?2, ?3, ?4, ?5, ?6)
+      ON CONFLICT(session_id) DO UPDATE SET
+        display_name = CASE WHEN ?6 IS NOT NULL THEN ?6 ELSE display_name END
     `;
 
     // 2. Insert the tracking action
@@ -74,7 +76,8 @@ export async function onRequestPost(context) {
       clientId,
       ipHash,
       userAgent,
-      activeLanguage
+      activeLanguage,
+      displayName || null
     );
 
     const stmtAction = env.DB.prepare(insertActionQuery).bind(

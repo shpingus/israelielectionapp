@@ -39,11 +39,15 @@ function AppContent() {
 
 
   const handleStartQuiz = () => {
-    const newSessionId = startNewSession();
-    trackAction('start_quiz', 'quiz_button', newSessionId, language);
     setAnswers({});
-    setCurrentQuestionIndex(0);
+    setCurrentQuestionIndex(-1); // -1 signifies Name Selection (Slide Option 2)
     setScreen('quiz');
+  };
+
+  const handleNameSubmit = (displayName) => {
+    const newSessionId = startNewSession(displayName);
+    trackAction('start_quiz', 'quiz_button', newSessionId, language);
+    setCurrentQuestionIndex(0); // Proceed to first question card
   };
 
   const handleAnswer = (questionId, stanceValue) => {
@@ -67,6 +71,11 @@ function AppContent() {
       const questionId = questionsData[currentQuestionIndex].id;
       trackAction('navigate_back', questionId, prevIndex, language);
       setCurrentQuestionIndex(prevIndex);
+    } else if (currentQuestionIndex === 0) {
+      setCurrentQuestionIndex(-1); // Go back to identity setup slide
+    } else if (currentQuestionIndex === -1) {
+      trackAction('navigate_home', 'quiz_back_button', null, language);
+      setScreen('welcome');
     }
   };
 
@@ -169,6 +178,7 @@ function AppContent() {
             onAnswer={handleAnswer}
             onBack={handleBack}
             answers={answers}
+            onStartQuiz={handleNameSubmit}
           />
         )}
 
