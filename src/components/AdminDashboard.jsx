@@ -175,6 +175,20 @@ export default function AdminDashboard({ onClose }) {
                 {authError}
               </div>
             )}
+            {statsError && (
+              <div 
+                style={{ 
+                  color: 'var(--accent-coral, #FF5252)', 
+                  fontWeight: 700, 
+                  fontSize: '0.9rem',
+                  border: '2px solid var(--accent-coral, #FF5252)',
+                  padding: '8px',
+                  backgroundColor: 'rgba(255, 82, 82, 0.1)'
+                }}
+              >
+                {statsError}
+              </div>
+            )}
             
             <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
               <button 
