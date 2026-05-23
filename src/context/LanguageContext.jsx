@@ -131,7 +131,7 @@ const translations = {
     back: "חזור",
     calculateResults: "חשב תוצאות",
     yourBestMatch: "ההתאמה הטובה ביותר עבורכם",
-    stanceAlignment: "התאמה רעיונית",
+    stanceAlignment: "התאמה בעמדות",
     detailedBreakdown: "השוואת עמדות מפורטת",
     selectPartyCompare: "השווה עמדות עם:",
     issue: "נושא",
