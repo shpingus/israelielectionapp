@@ -80,37 +80,68 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
     }
   }, [isShareModalOpen, matchedPartyName, matchedPartyLeader, bestMatch, matchedPartyDesc, matchedParty, language, t]);
 
+  const executeNativeShare = async (canvas) => {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(async (blob) => {
+        if (!blob) return reject(new Error("Failed to create blob"));
+        const file = new File([blob], 'elections_match.png', { type: 'image/png' });
+        const title = language === 'he' ? 'תוצאות התאמת הבחירות שלי' : 'My Election Match Result';
+        const text = language === 'he' 
+          ? `קיבלתי התאמה של ${bestMatch.score}% עם ${matchedPartyName}! גלו את המפלגה שלכם:`
+          : `I matched ${bestMatch.score}% with ${matchedPartyName}! Find your match:`;
+        const url = 'https://elections.ruppin.dev';
+
+        const shareDataWithText = { files: [file], title, text, url };
+        const shareDataFileOnly = { files: [file] };
+
+        try {
+          if (navigator.canShare && navigator.canShare(shareDataWithText)) {
+            await navigator.share(shareDataWithText);
+            resolve(true);
+          } else if (navigator.canShare && navigator.canShare(shareDataFileOnly)) {
+            await navigator.share(shareDataFileOnly);
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        } catch (err) {
+          if (err.name === 'AbortError') {
+            // User cancelled the share sheet, do not open modal
+            resolve(true);
+          } else {
+            reject(err);
+          }
+        }
+      }, 'image/png');
+    });
+  };
+
   const handleShareClick = async () => {
     trackAction('share_button_click', matchedParty.id, bestMatch.score, language);
     const canvas = hiddenCanvasRef.current;
     if (canvas) {
       try {
-        canvas.toBlob(async (blob) => {
-          if (!blob) {
-            setIsShareModalOpen(true);
-            return;
-          }
-          const file = new File([blob], 'elections_match.png', { type: 'image/png' });
-          const title = language === 'he' ? 'תוצאות התאמת הבחירות שלי' : 'My Election Match Result';
-          const text = language === 'he' 
-            ? `קיבלתי התאמה של ${bestMatch.score}% עם ${matchedPartyName}! גלו את המפלגה שלכם:`
-            : `I matched ${bestMatch.score}% with ${matchedPartyName}! Find your match:`;
-          const url = 'https://elections.ruppin.dev';
-
-          if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({
-              files: [file]
-            });
-          } else {
-            setIsShareModalOpen(true);
-          }
-        }, 'image/png');
+        const success = await executeNativeShare(canvas);
+        if (!success) {
+          setIsShareModalOpen(true);
+        }
       } catch (err) {
         console.error("Direct native share failed, opening modal:", err);
         setIsShareModalOpen(true);
       }
     } else {
       setIsShareModalOpen(true);
+    }
+  };
+
+  const handleNativeShare = async () => {
+    const canvas = canvasRef.current || hiddenCanvasRef.current;
+    if (canvas) {
+      try {
+        await executeNativeShare(canvas);
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
