@@ -89,12 +89,12 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   ctx.fillText(brandingText.toUpperCase(), 540, 50);
 
   // 3. Measure party and leader names dynamically to adjust card height
-  ctx.font = isRtl ? '800 70px "Heebo", sans-serif' : '800 66px "Outfit", sans-serif';
+  ctx.font = isRtl ? '400 70px "Suez One", Georgia, serif' : '800 66px "Fraunces", Georgia, serif';
   const partyLines = getWrappedLines(ctx, partyName, 680);
   const partyLineHeight = isRtl ? 74 : 70;
   const partyTextHeight = partyLines.length * partyLineHeight;
 
-  ctx.font = isRtl ? '500 36px "Heebo", sans-serif' : '500 36px "Outfit", sans-serif';
+  ctx.font = '700 36px "Space Mono", monospace';
   const leaderLabelStr = `${t('leader')}: ${leaderName}`;
   const leaderLines = getWrappedLines(ctx, leaderLabelStr, 680);
   const leaderLineHeight = 42;
@@ -117,13 +117,13 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   ctx.strokeRect(140, 240, 760, totalCardHeight);
 
   // 4. Stance percentage Badge in accent block
-  ctx.fillStyle = accentColor || '#00E5FF';
+  ctx.fillStyle = '#00E5FF';
   ctx.fillRect(140, 240, 760, 160);
   ctx.strokeRect(140, 240, 760, 160);
 
   // Draw score text (rendered entirely in the chosen display font, made slightly smaller)
   ctx.fillStyle = '#121212';
-  ctx.font = `700 110px "${numberFont}", "Cinzel", serif`;
+  ctx.font = isRtl ? '800 110px "Heebo", sans-serif' : '800 110px "Outfit", sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(`${score}%`, 520, 315);
@@ -135,7 +135,7 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
 
   // 5. Party Name & Leader in white section
   ctx.fillStyle = '#121212';
-  ctx.font = isRtl ? '800 70px "Heebo", sans-serif' : '800 66px "Outfit", sans-serif';
+  ctx.font = isRtl ? '400 70px "Suez One", Georgia, serif' : '800 66px "Fraunces", Georgia, serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
 
@@ -146,12 +146,14 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   currentTextY += partyTextHeight + 12; // gap is 12px
 
   // Leader
-  ctx.font = isRtl ? '500 36px "Heebo", sans-serif' : '500 36px "Outfit", sans-serif';
-  ctx.fillStyle = '#666666';
+  ctx.font = '700 36px "Space Mono", monospace';
+  ctx.fillStyle = '#121212';
+  ctx.globalAlpha = 0.7;
   ctx.textBaseline = 'top';
   for (let i = 0; i < leaderLines.length; i++) {
     ctx.fillText(leaderLines[i], 520, currentTextY + (i * leaderLineHeight));
   }
+  ctx.globalAlpha = 1.0;
 
   // 6. Platform Description Card
   // Measure platform description height dynamically
@@ -176,8 +178,9 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   ctx.strokeRect(140, cardY, 760, cardHeight);
 
   // Draw category title label banner
-  ctx.fillStyle = '#121212';
+  ctx.fillStyle = accentColor || '#121212';
   ctx.fillRect(140, cardY, 760, 80);
+  ctx.strokeStyle = '#121212';
   ctx.strokeRect(140, cardY, 760, 80);
 
   ctx.fillStyle = '#FFFFFF';
