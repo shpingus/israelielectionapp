@@ -124,9 +124,9 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   ctx.fillRect(140, 240, 760, 160);
   ctx.strokeRect(140, 240, 760, 160);
 
-  // Draw score text (rendered entirely in the chosen display font, made slightly smaller)
+  // Draw score text
   ctx.fillStyle = '#121212';
-  ctx.font = isRtl ? '800 110px "Heebo", sans-serif' : '800 110px "Outfit", sans-serif';
+  ctx.font = '800 110px "Outfit", sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(`${score}%`, 520, 315);
@@ -223,8 +223,9 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
     });
 
     // Draw Neo-Brutalist offset shadow for the QR code
+    const qrShadowOffsetX = isRtl ? 16 : -16;
     ctx.fillStyle = '#121212';
-    ctx.fillRect(qrX + 16, qrY + 16, qrSize, qrSize);
+    ctx.fillRect(qrX + qrShadowOffsetX, qrY + 16, qrSize, qrSize);
 
     // Draw the QR container box
     ctx.fillStyle = '#FFFFFF';
@@ -238,8 +239,9 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   } catch (err) {
     console.error("Failed to generate QR Code", err);
     // Draw visual mockup of a QR code as fallback with Neo-Brutalist shadow
+    const qrShadowOffsetX = isRtl ? 16 : -16;
     ctx.fillStyle = '#121212';
-    ctx.fillRect(qrX + 16, qrY + 16, qrSize, qrSize);
+    ctx.fillRect(qrX + qrShadowOffsetX, qrY + 16, qrSize, qrSize);
 
     ctx.fillStyle = '#FFFFFF';
     ctx.strokeStyle = '#121212';

@@ -37,6 +37,8 @@ To accommodate bilingual layouts (Hebrew & English) and match the artsy, neo-bru
     *   *Character*: Highly readable, modern, friendly geometric sans-serif that balances the heavy header fonts.
 *   **UI Metadata & Labels**: `Space Mono` (Monospace)
     *   *Character*: Clean monospace used for button text, numbers, metrics, and metadata labels.
+*   **Numbers & Percentages**: 
+    *   *Rule*: ALWAYS use the English font (`Outfit` or `Space Mono`) for numbers and percentages, even in the Hebrew version of the app.
 
 ---
 
