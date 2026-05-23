@@ -28,3 +28,6 @@ Follow these guidelines like the bible:
 
 ## 5. Meta-Rule: Self-Update
 * **Resolvable Problems:** If you encounter a resolvable tool, system, or configuration error that could repeat, update this `AGENTS.md` file to document the solution/prevention rule. Keep it clean and spam-free.
+
+## 6. Feature Building Instructions
+* **Analytics/DB Tracking:** When creating new branches or testing features, ensure there is a `DEBUG` flag (e.g., `DEBUG_MODE = true` in `tracker.js`) to prevent sending test actions and analytics to the main database. This ensures production data is not polluted during feature development.

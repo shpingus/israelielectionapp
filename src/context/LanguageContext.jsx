@@ -19,7 +19,7 @@ const translations = {
     back: "Back",
     calculateResults: "Calculate Results",
     yourBestMatch: "YOUR BEST MATCH",
-    stanceAlignment: "Stance-Alignment",
+    stanceAlignment: "STANCE ALIGNMENT",
     detailedBreakdown: "Detailed Stance Comparison",
     selectPartyCompare: "Compare Stances With:",
     issue: "Issue",

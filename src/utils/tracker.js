@@ -38,8 +38,16 @@ export function getActiveSessionId() {
   return sessionId;
 }
 
+// DEBUG flag to prevent sending actions to the main DB during testing
+const DEBUG_MODE = true;
+
 // Track modular action clicks, changes, navigation
 export function trackAction(actionType, targetId = null, value = null, language = 'he') {
+  if (DEBUG_MODE) {
+    console.log(`[DEBUG] trackAction prevented DB write:`, { actionType, targetId, value, language });
+    return;
+  }
+
   const sessionId = getActiveSessionId();
   const clientId = getOrCreateClientId();
   const displayName = sessionStorage.getItem('israeli_elections_display_name') || null;
@@ -65,6 +73,11 @@ export function trackAction(actionType, targetId = null, value = null, language 
 
 // Finalize session results
 export function submitSessionResults(topParty, topScore, language) {
+  if (DEBUG_MODE) {
+    console.log(`[DEBUG] submitSessionResults prevented DB write:`, { topParty, topScore, language });
+    return Promise.resolve();
+  }
+
   const sessionId = getActiveSessionId();
   const clientId = getOrCreateClientId();
   const displayName = sessionStorage.getItem('israeli_elections_display_name') || null;
@@ -96,6 +109,11 @@ export function submitConsiderationFeedback(choice) {
 
   // Log as a tracking action event
   trackAction('submit_feedback', 'considered_voting', choice, lang);
+
+  if (DEBUG_MODE) {
+    console.log(`[DEBUG] submitConsiderationFeedback prevented DB write:`, { choice, lang });
+    return Promise.resolve();
+  }
 
   // Update session row with considered_voting feedback
   return fetch('/api/submit-session', {

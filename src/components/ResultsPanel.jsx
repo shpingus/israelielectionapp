@@ -99,10 +99,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
 
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
             await navigator.share({
-              files: [file],
-              title: title,
-              text: text,
-              url: url
+              files: [file]
             });
           } else {
             setIsShareModalOpen(true);
@@ -352,7 +349,6 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
               cursor: 'pointer'
             }}
           >
-            <span>⚡</span>
             <span>{language === 'he' ? 'שתפו עכשיו' : 'SHARE NOW'}</span>
           </button>
         </div>
@@ -448,7 +444,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
           className="brutalist-button" 
           style={{ fontSize: '1.05rem', padding: '14px 28px', backgroundColor: 'var(--accent-cyan)' }}
         >
-          ⚡ {t('shareResults')}
+          {t('shareResults')}
         </button>
         <button 
           onClick={onViewParties} 
@@ -780,7 +776,7 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
                 className="brutalist-button primary" 
                 style={{ width: '100%', fontSize: '0.95rem' }}
               >
-                ⚡ {t('shareImage')}
+                {t('shareImage')}
               </button>
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button 
@@ -788,14 +784,14 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
                   className="brutalist-button" 
                   style={{ flex: 1, fontSize: '0.85rem', padding: '10px', backgroundColor: '#FFFFFF' }}
                 >
-                  📥 {t('downloadImage')}
+                  {t('downloadImage')}
                 </button>
                 <button 
                   onClick={handleCopyToClipboard} 
                   className="brutalist-button" 
                   style={{ flex: 1, fontSize: '0.85rem', padding: '10px', backgroundColor: '#FFFFFF' }}
                 >
-                  {copied ? '✓' : '📋'} {copied ? (language === 'he' ? 'הועתק!' : 'Copied!') : t('copyImage')}
+                  {copied ? (language === 'he' ? 'הועתק!' : 'Copied!') : t('copyImage')}
                 </button>
               </div>
             </div>

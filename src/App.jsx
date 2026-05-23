@@ -13,35 +13,74 @@ import { trackAction, startNewSession, submitSessionResults } from './utils/trac
 
 function AppContent() {
   const { t, language } = useLanguage();
-  const [screen, setScreen] = useState('welcome'); // 'welcome', 'quiz', 'results', 'database', 'admin'
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState({}); // { [questionId]: stanceValue }
-  const [scores, setScores] = useState([]); // Array of sorted { partyId, score }
+  const [screen, setScreen] = useState(() => {
+    const savedScreen = localStorage.getItem('quiz_screen');
+    const hash = window.location.hash.replace('#', '');
+    if (['welcome', 'quiz', 'results', 'database', 'admin'].includes(hash)) return hash;
+    return savedScreen || 'welcome';
+  }); 
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => {
+    const saved = localStorage.getItem('quiz_currentQuestionIndex');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+  const [answers, setAnswers] = useState(() => {
+    const saved = localStorage.getItem('quiz_answers');
+    return saved ? JSON.parse(saved) : {};
+  }); 
+  const [scores, setScores] = useState(() => {
+    const saved = localStorage.getItem('quiz_scores');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const changeScreen = (newScreen) => {
+    setScreen(newScreen);
+    window.history.pushState(null, '', `#${newScreen}`);
+  };
 
   useEffect(() => {
     const handleHashChange = () => {
-      if (window.location.hash === '#admin') {
-        setScreen('admin');
+      const hash = window.location.hash.replace('#', '');
+      if (['welcome', 'quiz', 'results', 'database', 'admin'].includes(hash)) {
+        setScreen(hash);
       } else {
-        setScreen(prev => prev === 'admin' ? 'welcome' : prev);
+        setScreen('welcome');
       }
     };
 
     window.addEventListener('hashchange', handleHashChange);
-    if (window.location.hash === '#admin') {
-      setScreen('admin');
+    
+    // Set initial hash if not present
+    if (!window.location.hash) {
+      window.history.replaceState(null, '', `#${screen}`);
     }
 
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
-  }, []);
+  }, [screen]);
+
+  // Persist state to localStorage
+  useEffect(() => {
+    localStorage.setItem('quiz_screen', screen);
+  }, [screen]);
+
+  useEffect(() => {
+    localStorage.setItem('quiz_currentQuestionIndex', currentQuestionIndex.toString());
+  }, [currentQuestionIndex]);
+
+  useEffect(() => {
+    localStorage.setItem('quiz_answers', JSON.stringify(answers));
+  }, [answers]);
+
+  useEffect(() => {
+    localStorage.setItem('quiz_scores', JSON.stringify(scores));
+  }, [scores]);
 
 
   const handleStartQuiz = () => {
     setAnswers({});
     setCurrentQuestionIndex(-1); // -1 signifies Name Selection (Slide Option 2)
-    setScreen('quiz');
+    changeScreen('quiz');
   };
 
   const handleNameSubmit = (displayName) => {
@@ -75,7 +114,7 @@ function AppContent() {
       setCurrentQuestionIndex(-1); // Go back to identity setup slide
     } else if (currentQuestionIndex === -1) {
       trackAction('navigate_home', 'quiz_back_button', null, language);
-      setScreen('welcome');
+      changeScreen('welcome');
     }
   };
 
@@ -128,7 +167,7 @@ function AppContent() {
     // Sort descending by compatibility score
     calculatedScores.sort((a, b) => b.score - a.score);
     setScores(calculatedScores);
-    setScreen('results');
+    changeScreen('results');
 
     // Finalize the quiz attempt session and submit results
     const topMatch = calculatedScores[0];
@@ -142,7 +181,7 @@ function AppContent() {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Header */}
       <header className="brutalist-header">
-        <h1 style={{ cursor: 'pointer' }} onClick={() => { trackAction('navigate_home', 'header_logo', null, language); setScreen('welcome'); }}>
+        <h1 style={{ cursor: 'pointer' }} onClick={() => { trackAction('navigate_home', 'header_logo', null, language); changeScreen('welcome'); }}>
           {t('appTitle')}
         </h1>
         <div className="header-switcher-container">
@@ -164,7 +203,7 @@ function AppContent() {
               <button onClick={handleStartQuiz} className="brutalist-button primary" style={{ fontSize: '1.1rem', padding: '14px' }}>
                 {t('startQuiz')}
               </button>
-              <button onClick={() => { trackAction('explore_parties', 'welcome_database_button', null, language); setScreen('database'); }} className="brutalist-button" style={{ fontSize: '1.1rem', padding: '14px', backgroundColor: 'var(--card-bg-color, #FFFFFF)' }}>
+              <button onClick={() => { trackAction('explore_parties', 'welcome_database_button', null, language); changeScreen('database'); }} className="brutalist-button" style={{ fontSize: '1.1rem', padding: '14px', backgroundColor: 'var(--card-bg-color, #FFFFFF)' }}>
                 {t('exploreParties')}
               </button>
             </div>
@@ -190,7 +229,7 @@ function AppContent() {
             parties={partiesData}
             partyStances={partyStances}
             onRetake={handleStartQuiz}
-            onViewParties={() => { trackAction('explore_parties', 'results_database_button', null, language); setScreen('database'); }}
+            onViewParties={() => { trackAction('explore_parties', 'results_database_button', null, language); changeScreen('database'); }}
           />
         )}
 
@@ -199,7 +238,7 @@ function AppContent() {
             parties={partiesData}
             questions={questionsData}
             partyStances={partyStances}
-            onBack={() => { trackAction('navigate_home', 'database_back_button', null, language); setScreen('welcome'); }}
+            onBack={() => { trackAction('navigate_home', 'database_back_button', null, language); changeScreen('welcome'); }}
           />
         )}
 
@@ -207,7 +246,7 @@ function AppContent() {
           <AdminDashboard
             onClose={() => {
               window.location.hash = '';
-              setScreen('welcome');
+              changeScreen('welcome');
             }}
           />
         )}
