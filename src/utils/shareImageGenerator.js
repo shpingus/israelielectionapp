@@ -126,12 +126,12 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   ctx.font = `700 110px "${numberFont}", "Cinzel", serif`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(`${score}%`, 520, 325);
+  ctx.fillText(`${score}%`, 520, 315);
 
   // Draw Best Match label (under score)
   ctx.font = '700 24px "Space Mono", monospace';
   ctx.textAlign = 'center';
-  ctx.fillText(t('stanceAlignment').toUpperCase(), 520, 390);
+  ctx.fillText(t('stanceAlignment').toUpperCase(), 520, 375);
 
   // 5. Party Name & Leader in white section
   ctx.fillStyle = '#121212';
@@ -162,7 +162,7 @@ export async function generateShareCanvas(canvas, { partyName, leaderName, score
   
   // Padding: 80px (title banner) + 40px top gap + textHeight + 40px bottom gap
   const cardHeight = 80 + 40 + textHeight + 40; 
-  const cardY = alignmentCardBottom + 60;
+  const cardY = alignmentCardBottom + 120;
 
   // Draw shadow for description card
   ctx.fillStyle = '#121212';
