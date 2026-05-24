@@ -5,8 +5,8 @@
     "category": "security",
     "categoryEn": "SECURITY & DRAFT",
     "categoryHe": "ביטחון וגיוס",
-    "textEn": "Should military or civilian service exemptions for yeshiva students be fully repealed?",
-    "textHe": "האם יש לבטל לחלוטין את הפטור מגיוס או שירות אזרחי לתלמידי ישיבות?"
+    "textEn": "Should the state mandate equal IDF enlistment for all, including Haredi yeshiva students, during wartime?",
+    "textHe": "האם על המדינה לחייב גיוס שוויוני לצה\"ל לכולם, כולל תלמידי ישיבות חרדיות, בזמן מלחמה?"
   },
   {
     "id": "gaza_control",
@@ -36,15 +36,13 @@
     "textHe": "האם יש לתעדף תקציבי דיור ותשתיות להרחבת ההתיישבות ביהודה ושומרון?"
   },
   {
-    "id": "diplomatic_approach",
-    "type": "statement_pair",
+    "id": "temple_mount_status",
+    "type": "likert",
     "category": "security",
     "categoryEn": "SECURITY & DRAFT",
     "categoryHe": "ביטחון וגיוס",
-    "statementAEn": "Israel must prioritize diplomatic agreements and international alliances to achieve long-term security.",
-    "statementAHe": "על ישראל לתעדף הסכמים דיפלומטיים ובריתות בינלאומיות כדי להשיג ביטחון לטווח ארוך.",
-    "statementBEn": "Israel must rely on military dominance and unilateral security actions to ensure its survival.",
-    "statementBHe": "על ישראל להסתמך על עוצמה צבאית ופעולות ביטחוניות חד-צדדיות כדי להבטיח את שרידותה."
+    "textEn": "Should Jewish prayer be officially permitted on the Temple Mount / Al-Aqsa, despite the historical status quo and security warnings?",
+    "textHe": "האם יש לאפשר רשמית תפילת יהודים בהר הבית / אל-אקצא, למרות הסטטוס קוו ההיסטורי ואזהרות ביטחוניות?"
   },
   {
     "id": "shabbat_transport",
@@ -79,10 +77,19 @@
     "category": "religion_state",
     "categoryEn": "RELIGION & STATE",
     "categoryHe": "דת ומדינה",
-    "statementAEn": "State and religious institutions must be fully separated, ensuring complete freedom of and from religion.",
-    "statementAHe": "יש להפריד לחלוטין בין מוסדות המדינה לדת, ולהבטיח חופש דת וחופש מדת באופן מלא.",
-    "statementBEn": "The state must actively promote and enforce Jewish religious values in public space and national life.",
-    "statementBHe": "על המדינה לקדם ולכפות באופן פעיל ערכים דתיים-יהודיים במרחב הציבורי ובחיים הלאומיים."
+    "statementAEn": "The state must ensure complete freedom from religious coercion in public spaces, prioritizing individual civil rights.",
+    "statementAHe": "על המדינה להבטיח חופש מוחלט מכפייה דתית במרחב הציבורי, תוך מתן עדיפות לזכויות אזרח של הפרט.",
+    "statementBEn": "The state must maintain its Jewish character in public spaces, even if it limits some individual secular freedoms.",
+    "statementBHe": "על המדינה לשמור על צביונה היהודי במרחב הציבורי, גם אם הדבר מגביל חלק מהחירויות החילוניות של הפרט."
+  },
+  {
+    "id": "religion_public_space",
+    "type": "likert",
+    "category": "religion_state",
+    "categoryEn": "RELIGION & STATE",
+    "categoryHe": "דת ומדינה",
+    "textEn": "Should the state guarantee an egalitarian, non-Orthodox prayer space at the Western Wall, regardless of the Chief Rabbinate's objections?",
+    "textHe": "האם על המדינה להבטיח רחבת תפילה שוויונית ולא-אורתודוקסית בכותל המערבי, ללא קשר להתנגדות הרבנות הראשית?"
   },
   {
     "id": "judicial_committee",
@@ -90,8 +97,8 @@
     "category": "judicial",
     "categoryEn": "JUDICIAL SYSTEM",
     "categoryHe": "מערכת המשפט",
-    "textEn": "Should the government hold a majority in the Judicial Selection Committee to control Supreme Court appointments?",
-    "textHe": "האם יש להעניק לקואליציה/ממשלה רוב בוועדה לבחירת שופטים למינוי שופטי בית המשפט העליון?"
+    "textEn": "Should politicians (coalition and opposition) hold a majority on the Judicial Selection Committee, removing the veto power of professional judges?",
+    "textHe": "האם פוליטיקאים (קואליציה ואופוזיציה) צריכים להחזיק ברוב בוועדה לבחירת שופטים, תוך ביטול זכות הווטו של השופטים המקצועיים?"
   },
   {
     "id": "override_clause",
@@ -103,35 +110,13 @@
     "textHe": "האם יש להעניק לכנסת את הכוח להתגבר על פסילת חוקים של בג\"ץ באמצעות רוב רגיל (61 ח\"כים)?"
   },
   {
-    "id": "judicial_override_majority",
-    "type": "multiple_choice",
+    "id": "legal_advisors",
+    "type": "likert",
     "category": "judicial",
     "categoryEn": "JUDICIAL SYSTEM",
     "categoryHe": "מערכת המשפט",
-    "textEn": "What should be the required Knesset majority to override a Supreme Court decision?",
-    "textHe": "מה צריך להיות הרוב הנדרש בכנסת כדי להתגבר על החלטת בג\"ץ לפסילת חוק?",
-    "options": [
-      {
-        "value": 1,
-        "textEn": "A simple majority of 61 Knesset members.",
-        "textHe": "רוב רגיל של 61 חברי כנסת."
-      },
-      {
-        "value": 2,
-        "textEn": "A special majority of 70 or more Knesset members.",
-        "textHe": "רוב מיוחד של 70 חברי כנסת או יותר."
-      },
-      {
-        "value": 3,
-        "textEn": "A supermajority of 80 Knesset members including opposition support.",
-        "textHe": "רוב מיוחס של 80 חברי כנסת הכולל תמיכה מהאופוזיציה."
-      },
-      {
-        "value": 4,
-        "textEn": "The Knesset should not have the authority to override Supreme Court rulings at all.",
-        "textHe": "אין להעניק לכנסת סמכות להתגבר על החלטות בג\"ץ כלל."
-      }
-    ]
+    "textEn": "Should government ministers be allowed to appoint their own legal advisors directly, rather than being bound by the Attorney General's independent advisors?",
+    "textHe": "האם יש לאפשר לשרים בממשלה למנות את היועצים המשפטיים שלהם ישירות, במקום להיות כפופים ליועצים העצמאיים של היועצת המשפטית לממשלה?"
   },
   {
     "id": "food_imports",
@@ -143,52 +128,30 @@
     "textHe": "האם על ישראל לפתוח את שוק המזון והחקלאות לייבוא ללא מכסים, גם במחיר פגיעה בחקלאים המקומיים?"
   },
   {
-    "id": "privatization",
+    "id": "yeshiva_subsidies",
     "type": "likert",
     "category": "economy",
     "categoryEn": "ECONOMY & WELFARE",
     "categoryHe": "כלכלה וחברה",
-    "textEn": "Should the government privatize major state-owned utilities and companies (like the electric company or sea ports) to foster competition?",
-    "textHe": "האם על המדינה להפריט חברות ומונופולים ממשלתיים גדולים (כגון חברת החשמל או נמלים) כדי לעודד תחרות?"
+    "textEn": "Should state subsidies, such as daycare discounts, be granted to families where parents choose full-time yeshiva study over employment and military service?",
+    "textHe": "האם יש להעניק סובסידיות מהמדינה, כמו הנחות במעונות יום, למשפחות בהן ההורים בוחרים בלימוד תורה במשרה מלאה על פני תעסוקה ושירות צבאי?"
   },
   {
-    "id": "welfare_tax",
+    "id": "arab_development",
     "type": "likert",
     "category": "economy",
     "categoryEn": "ECONOMY & WELFARE",
     "categoryHe": "כלכלה וחברה",
-    "textEn": "Should tax rates on high-income earners and corporations be increased to fund expanded social welfare and healthcare services?",
-    "textHe": "האם יש להעלות את מס הכנסה לבעלי שכר גבוה ולתאגידים כדי לממן הרחבה של תקציבי הרווחה והבריאות?"
+    "textEn": "Should the government freeze or reduce socio-economic development funds for Arab municipalities due to concerns over organized crime, despite warnings of increasing inequality?",
+    "textHe": "האם על הממשלה להקפיא או לקצץ כספי פיתוח חברתי-כלכלי לרשויות ערביות בשל חששות מפשע מאורגן, למרות אזהרות מפני אי-שוויון גובר?"
   },
   {
-    "id": "gas_revenues",
-    "type": "multiple_choice",
+    "id": "coalition_funds",
+    "type": "likert",
     "category": "economy",
     "categoryEn": "ECONOMY & WELFARE",
     "categoryHe": "כלכלה וחברה",
-    "textEn": "How should the state utilize its natural gas tax revenues and sovereign wealth fund?",
-    "textHe": "כיצד על המדינה להשתמש בהכנסות ממסי הגז הטבעי ובקרן העושר הלאומית?",
-    "options": [
-      {
-        "value": 1,
-        "textEn": "Directly distribute cash dividends or tax cuts to all Israeli citizens.",
-        "textHe": "חלוקה ישירה של דיבידנדים במזומן או הפחתת מסים לכלל אזרחי ישראל."
-      },
-      {
-        "value": 2,
-        "textEn": "Invest exclusively in long-term infrastructure, green energy, and education.",
-        "textHe": "השקעה בלעדית בתשתיות לטווח ארוך, אנרגיה ירוקה וחינוך."
-      },
-      {
-        "value": 3,
-        "textEn": "Subsidize local industries and lower the prices of basic goods.",
-        "textHe": "סבסוד תעשיות מקומיות והורדת מחירי מוצרי יסוד."
-      },
-      {
-        "value": 4,
-        "textEn": "Use them to pay down the national debt and maintain fiscal stability.",
-        "textHe": "שימוש בהם להורדת החוב הלאומי ושמירה על יציבות פיסקלית."
-      }
-    ]
+    "textEn": "During budget cuts, should the government prioritize funding for independent religious educational institutions over general welfare services?",
+    "textHe": "בזמן קיצוצים בתקציב, האם על הממשלה לתעדף מימון למוסדות חינוך דתיים עצמאיים על פני שירותי רווחה כלליים?"
   }
 ]
