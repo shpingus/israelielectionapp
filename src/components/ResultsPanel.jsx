@@ -441,7 +441,8 @@ export default function ResultsPanel({ scores, answers, questions, parties, part
                 color: 'var(--accent-cobalt, #0D47A1)', 
                 display: 'flex', 
                 alignItems: 'center', 
-                gap: '8px' 
+                gap: '8px',
+                fontFamily: 'var(--font-mono)'
               }}
             >
               <span>✓ {t('feedbackReceived')}</span>
