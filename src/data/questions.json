@@ -1,157 +1,203 @@
 [
   {
-    "id": "haredi_draft",
+    "id": "q1_draft_crisis",
     "type": "likert",
-    "category": "security",
-    "categoryEn": "SECURITY & DRAFT",
-    "categoryHe": "ביטחון וגיוס",
-    "textEn": "Should the state mandate equal IDF enlistment for all, including Haredi yeshiva students, during wartime?",
-    "textHe": "האם על המדינה לחייב גיוס שוויוני לצה\"ל לכולם, כולל תלמידי ישיבות חרדיות, בזמן מלחמה?"
+    "categoryEn": "SECURITY & IDENTITY",
+    "categoryHe": "ביטחון וזהות",
+    "textEn": "The state must enact a universal conscription law immediately, applying criminal and severe financial sanctions against any draft-evading sector, without exception for yeshiva students.",
+    "textHe": "על המדינה לחוקק מיידית חוק גיוס לכולם, תוך הפעלת סנקציות פליליות וכלכליות חריפות נגד כל מגזר משתמט, ללא חריגים לתלמידי ישיבות."
   },
   {
-    "id": "gaza_control",
-    "type": "likert",
-    "category": "security",
-    "categoryEn": "SECURITY & DRAFT",
-    "categoryHe": "ביטחון וגיוס",
-    "textEn": "Should Israel maintain long-term security control and military presence inside the Gaza Strip?",
-    "textHe": "האם על ישראל לשמור על שליטה ביטחונית ונוכחות צבאית ארוכת טווח ברצועת עזה?"
-  },
-  {
-    "id": "two_state",
-    "type": "likert",
-    "category": "security",
-    "categoryEn": "SECURITY & DRAFT",
-    "categoryHe": "ביטחון וגיוס",
-    "textEn": "Should Israel support the establishment of a demilitarized Palestinian state as part of a regional peace agreement?",
-    "textHe": "האם על ישראל לתמוך בהקמת מדינה פלסטינית מפורזת כחלק מהסכם שלום אזורי?"
-  },
-  {
-    "id": "west_bank_settlements",
-    "type": "likert",
-    "category": "security",
-    "categoryEn": "SECURITY & DRAFT",
-    "categoryHe": "ביטחון וגיוס",
-    "textEn": "Should government housing and infrastructure resources be prioritized for expanding settlements in Judea and Samaria?",
-    "textHe": "האם יש לתעדף תקציבי דיור ותשתיות להרחבת ההתיישבות ביהודה ושומרון?"
-  },
-  {
-    "id": "temple_mount_status",
-    "type": "likert",
-    "category": "security",
-    "categoryEn": "SECURITY & DRAFT",
-    "categoryHe": "ביטחון וגיוס",
-    "textEn": "Should Jewish prayer be officially permitted on the Temple Mount / Al-Aqsa, despite the historical status quo and security warnings?",
-    "textHe": "האם יש לאפשר רשמית תפילת יהודים בהר הבית / אל-אקצא, למרות הסטטוס קוו ההיסטורי ואזהרות ביטחוניות?"
-  },
-  {
-    "id": "shabbat_transport",
-    "type": "likert",
-    "category": "religion_state",
-    "categoryEn": "RELIGION & STATE",
-    "categoryHe": "דת ומדינה",
-    "textEn": "Should local municipalities be permitted to operate public transportation on Saturdays?",
-    "textHe": "האם יש לאפשר לעיריות ורשויות מקומיות להפעיל תחבורה ציבורית בשבתות?"
-  },
-  {
-    "id": "civil_marriage",
-    "type": "likert",
-    "category": "religion_state",
-    "categoryEn": "RELIGION & STATE",
-    "categoryHe": "דת ומדינה",
-    "textEn": "Should Israel introduce civil marriage and divorce options, bypassing the Chief Rabbinate?",
-    "textHe": "האם על ישראל להנהיג נישואין וגירושין אזרחיים, ללא תלות ברבנות הראשית?"
-  },
-  {
-    "id": "haredi_curriculum",
-    "type": "likert",
-    "category": "religion_state",
-    "categoryEn": "RELIGION & STATE",
-    "categoryHe": "דת ומדינה",
-    "textEn": "Should Haredi schools receive government funding only if they teach core academic subjects (math, English, science)?",
-    "textHe": "האם יש להתנות תקציבים למוסדות חינוך חרדיים בלימוד מקצועות ליבה (מתמטיקה, אנגלית ומדעים)?"
-  },
-  {
-    "id": "religion_influence",
+    "id": "q2_gaza_future",
     "type": "statement_pair",
-    "category": "religion_state",
+    "categoryEn": "SECURITY",
+    "categoryHe": "ביטחון",
+    "statementAEn": "Israel must re-establish civilian settlements in the Gaza Strip and maintain permanent, direct military control over the entire territory to ensure security.",
+    "statementAHe": "ישראל חייבת לחדש את ההתיישבות האזרחית ברצועת עזה ולשמור על שליטה צבאית ישירה וקבועה בכל השטח כדי להבטיח ביטחון.",
+    "statementBEn": "Israel should maintain security freedom of operation in Gaza, but hand civilian administration to a regional or international coalition, definitively ruling out Israeli resettlement.",
+    "statementBHe": "ישראל צריכה לשמור על חופש פעולה ביטחוני בעזה, אך להעביר את הניהול האזרחי לקואליציה אזורית או בינלאומית, ולשלול לחלוטין התיישבות ישראלית מחודשת."
+  },
+  {
+    "id": "q3_judicial_override",
+    "type": "multiple_choice",
+    "categoryEn": "GOVERNANCE",
+    "categoryHe": "משילות",
+    "textEn": "Regarding the Knesset's power to override Supreme Court rulings:",
+    "textHe": "בנוגע לסמכות הכנסת להתגבר על פסיקות בג\"ץ:",
+    "options": [
+      {
+        "value": 2,
+        "textEn": "The Knesset should have the power to override Supreme Court rulings with a simple majority of 61 MKs.",
+        "textHe": "לכנסת צריכה להיות סמכות להתגבר על פסיקות בג\"ץ ברוב רגיל של 61 ח\"כים."
+      },
+      {
+        "value": 1,
+        "textEn": "The Knesset should have the power to override Supreme Court rulings, but only with a special, broad majority (e.g., 70-80 MKs).",
+        "textHe": "לכנסת צריכה להיות סמכות להתגבר על פסיקות בג\"ץ, אך רק ברוב מיוחד ורחב (למשל 70-80 ח\"כים)."
+      },
+      {
+        "value": -1,
+        "textEn": "The Knesset should not have any mechanism to override Supreme Court rulings on basic rights and constitutional matters.",
+        "textHe": "לכנסת לא אמור להיות כל מנגנון התגברות על פסיקות בג\"ץ בענייני זכויות יסוד ונושאים חוקתיים."
+      },
+      {
+        "value": -2,
+        "textEn": "The Supreme Court’s power of judicial review should be completely abolished.",
+        "textHe": "יש לבטל לחלוטין את סמכות הביקורת השיפוטית של בג\"ץ."
+      }
+    ]
+  },
+  {
+    "id": "q4_pm_term_indictment",
+    "type": "likert",
+    "categoryEn": "GOVERNANCE",
+    "categoryHe": "משילות",
+    "textEn": "A Prime Minister should be legally limited to two terms in office, and an individual under active criminal indictment for severe offenses must be barred from forming a government.",
+    "textHe": "יש להגביל בחוק כהונת ראש ממשלה לשתי קדנציות, וחל איסור על אדם תחת כתב אישום פעיל בעבירות חמורות להרכיב ממשלה."
+  },
+  {
+    "id": "q5_palestinian_state_normalization",
+    "type": "likert",
+    "categoryEn": "DIPLOMACY",
+    "categoryHe": "מדיניות חוץ",
+    "textEn": "Israel should accept the creation of a demilitarized Palestinian state as part of a comprehensive regional normalization agreement with Saudi Arabia and other moderate Arab states.",
+    "textHe": "על ישראל להסכים להקמת מדינה פלסטינית מפורזת כחלק מהסכם נורמליזציה אזורי כולל עם סעודיה ומדינות ערב מתונות נוספות."
+  },
+  {
+    "id": "q6_shabbat_transport",
+    "type": "statement_pair",
     "categoryEn": "RELIGION & STATE",
     "categoryHe": "דת ומדינה",
-    "statementAEn": "The state must ensure complete freedom from religious coercion in public spaces, prioritizing individual civil rights.",
-    "statementAHe": "על המדינה להבטיח חופש מוחלט מכפייה דתית במרחב הציבורי, תוך מתן עדיפות לזכויות אזרח של הפרט.",
-    "statementBEn": "The state must maintain its Jewish character in public spaces, even if it limits some individual secular freedoms.",
-    "statementBHe": "על המדינה לשמור על צביונה היהודי במרחב הציבורי, גם אם הדבר מגביל חלק מהחירויות החילוניות של הפרט."
+    "statementAEn": "Local municipalities should have the authority to operate public transportation on Shabbat based on the needs and character of their residents.",
+    "statementAHe": "לרשויות המקומיות צריכה להיות סמכות להפעיל תחבורה ציבורית בשבת בהתאם לצרכים ולאופי של תושביהן.",
+    "statementBEn": "The state must strictly preserve the status quo by prohibiting the operation of national and municipal public transportation on Shabbat.",
+    "statementBHe": "על המדינה לשמור בקפדנות על הסטטוס קוו ולמנוע הפעלת תחבורה ציבורית ארצית ועירונית בשבת."
   },
   {
-    "id": "religion_public_space",
+    "id": "q7_haredi_education",
+    "type": "multiple_choice",
+    "categoryEn": "ECONOMY & STATE",
+    "categoryHe": "כלכלה ומדינה",
+    "textEn": "Regarding state funding for Haredi educational institutions:",
+    "textHe": "בנוגע למימון מדינה למוסדות חינוך חרדיים:",
+    "options": [
+      {
+        "value": 2,
+        "textEn": "The state should fully fund Haredi educational institutions regardless of whether they teach core subjects like math and English.",
+        "textHe": "על המדינה לתקצב באופן מלא מוסדות חינוך חרדיים, ללא קשר לשאלה האם הם מלמדים מקצועות ליבה כמו מתמטיקה ואנגלית."
+      },
+      {
+        "value": 1,
+        "textEn": "The state should provide partial funding to schools without a core curriculum to preserve religious autonomy, but heavily incentivize core subjects.",
+        "textHe": "המדינה צריכה לספק תקצוב חלקי לבתי ספר ללא לימודי ליבה כדי לשמר אוטונומיה דתית, אך לתמרץ משמעותית לימודי ליבה."
+      },
+      {
+        "value": -2,
+        "textEn": "The state must completely defund any educational institution that refuses to teach the full core curriculum.",
+        "textHe": "המדינה חייבת לשלול תקצוב לחלוטין מכל מוסד חינוכי שמסרב ללמד תוכנית ליבה מלאה."
+      }
+    ]
+  },
+  {
+    "id": "q8_civil_marriage",
     "type": "likert",
-    "category": "religion_state",
     "categoryEn": "RELIGION & STATE",
     "categoryHe": "דת ומדינה",
-    "textEn": "Should the state guarantee an egalitarian, non-Orthodox prayer space at the Western Wall, regardless of the Chief Rabbinate's objections?",
-    "textHe": "האם על המדינה להבטיח רחבת תפילה שוויונית ולא-אורתודוקסית בכותל המערבי, ללא קשר להתנגדות הרבנות הראשית?"
+    "textEn": "Israel must institute full civil marriage options for all citizens, completely independent of the Chief Rabbinate.",
+    "textHe": "על ישראל להנהיג אפשרויות של נישואים אזרחיים מלאים לכלל האזרחים, באופן בלתי תלוי לחלוטין ברבנות הראשית."
   },
   {
-    "id": "judicial_committee",
+    "id": "q9_judea_samaria_settlements",
     "type": "likert",
-    "category": "judicial",
-    "categoryEn": "JUDICIAL SYSTEM",
-    "categoryHe": "מערכת המשפט",
-    "textEn": "Should politicians (coalition and opposition) hold a majority on the Judicial Selection Committee, removing the veto power of professional judges?",
-    "textHe": "האם פוליטיקאים (קואליציה ואופוזיציה) צריכים להחזיק ברוב בוועדה לבחירת שופטים, תוך ביטול זכות הווטו של השופטים המקצועיים?"
+    "categoryEn": "SECURITY & ECONOMY",
+    "categoryHe": "ביטחון וכלכלה",
+    "textEn": "The government should aggressively expand settlements and formalize outposts in Judea and Samaria, recognizing it as a strategic and historical priority.",
+    "textHe": "הממשלה צריכה להרחיב באגרסיביות את ההתנחלויות ולהכשיר מאחזים ביהודה ושומרון, מתוך הכרה בכך כעדיפות אסטרטגית והיסטורית."
   },
   {
-    "id": "override_clause",
+    "id": "q10_temple_mount",
     "type": "likert",
-    "category": "judicial",
-    "categoryEn": "JUDICIAL SYSTEM",
-    "categoryHe": "מערכת המשפט",
-    "textEn": "Should the Knesset have the power to override Supreme Court rulings invalidating laws by a simple majority (61 MKs)?",
-    "textHe": "האם יש להעניק לכנסת את הכוח להתגבר על פסילת חוקים של בג\"ץ באמצעות רוב רגיל (61 ח\"כים)?"
+    "categoryEn": "SECURITY & RELIGION",
+    "categoryHe": "ביטחון ודת",
+    "textEn": "Israel should actively enforce the right of Jews to pray openly on the Temple Mount, even at the risk of escalating tensions with the Arab world.",
+    "textHe": "על ישראל לאכוף באופן פעיל את זכותם של יהודים להתפלל בגלוי בהר הבית, גם במחיר של הסלמת המתיחות מול העולם הערבי."
   },
   {
-    "id": "legal_advisors",
-    "type": "likert",
-    "category": "judicial",
-    "categoryEn": "JUDICIAL SYSTEM",
-    "categoryHe": "מערכת המשפט",
-    "textEn": "Should government ministers be allowed to appoint their own legal advisors directly, rather than being bound by the Attorney General's independent advisors?",
-    "textHe": "האם יש לאפשר לשרים בממשלה למנות את היועצים המשפטיים שלהם ישירות, במקום להיות כפופים ליועצים העצמאיים של היועצת המשפטית לממשלה?"
+    "id": "q11_police_independence",
+    "type": "statement_pair",
+    "categoryEn": "GOVERNANCE",
+    "categoryHe": "משילות",
+    "statementAEn": "The Minister of National Security must have direct authority to set policy and dictate priorities for police investigations to ensure governance and accountability.",
+    "statementAHe": "לשר לביטחון לאומי חייבת להיות סמכות ישירה לקבוע מדיניות ולהכתיב סדרי עדיפויות לחקירות המשטרה כדי להבטיח משילות ואחריותיות.",
+    "statementBEn": "The police force must remain strictly independent and professional; politicians should not have the power to intervene in specific operational or investigative priorities.",
+    "statementBHe": "משטרת ישראל חייבת להישאר עצמאית ומקצועית לחלוטין; לפוליטיקאים אסור שתהיה סמכות להתערב בסדרי עדיפויות מבצעיים או חקירתיים ספציפיים."
   },
   {
-    "id": "food_imports",
+    "id": "q12_state_budget_priorities",
     "type": "likert",
-    "category": "economy",
-    "categoryEn": "ECONOMY & WELFARE",
-    "categoryHe": "כלכלה וחברה",
-    "textEn": "Should Israel open the agricultural and food markets to duty-free imports, even if it harms local farming?",
-    "textHe": "האם על ישראל לפתוח את שוק המזון והחקלאות לייבוא ללא מכסים, גם במחיר פגיעה בחקלאים המקומיים?"
+    "categoryEn": "ECONOMY",
+    "categoryHe": "כלכלה",
+    "textEn": "During times of severe economic strain, all designated sectoral 'coalition funds' (for religious institutions and settlements) must be frozen and redirected to national economic recovery and defense.",
+    "textHe": "בעתות של משבר כלכלי חמור, יש להקפיא את כל 'הכספים הקואליציוניים' המגזריים המיועדים (למוסדות דת והתנחלויות) ולהפנותם לשיקום כלכלי לאומי וביטחון."
   },
   {
-    "id": "yeshiva_subsidies",
+    "id": "q13_arab_sector_budgets",
     "type": "likert",
-    "category": "economy",
-    "categoryEn": "ECONOMY & WELFARE",
-    "categoryHe": "כלכלה וחברה",
-    "textEn": "Should state subsidies, such as daycare discounts, be granted to families where parents choose full-time yeshiva study over employment and military service?",
-    "textHe": "האם יש להעניק סובסידיות מהמדינה, כמו הנחות במעונות יום, למשפחות בהן ההורים בוחרים בלימוד תורה במשרה מלאה על פני תעסוקה ושירות צבאי?"
+    "categoryEn": "GOVERNANCE & ECONOMY",
+    "categoryHe": "משילות וכלכלה",
+    "textEn": "The state must fully restore and expand dedicated five-year budgets for the economic development and policing of Arab municipalities to ensure civil equality and eradicate organized crime.",
+    "textHe": "המדינה חייבת להשיב במלואם ולהרחיב את תקציבי החומש הייעודיים לפיתוח כלכלי ושיטור בחברה הערבית כדי להבטיח שוויון אזרחי ולמגר את הפשיעה המאורגנת."
   },
   {
-    "id": "arab_development",
+    "id": "q14_free_market_protectionism",
     "type": "likert",
-    "category": "economy",
-    "categoryEn": "ECONOMY & WELFARE",
-    "categoryHe": "כלכלה וחברה",
-    "textEn": "Should the government freeze or reduce socio-economic development funds for Arab municipalities due to concerns over organized crime, despite warnings of increasing inequality?",
-    "textHe": "האם על הממשלה להקפיא או לקצץ כספי פיתוח חברתי-כלכלי לרשויות ערביות בשל חששות מפשע מאורגן, למרות אזהרות מפני אי-שוויון גובר?"
+    "categoryEn": "ECONOMY",
+    "categoryHe": "כלכלה",
+    "textEn": "To lower the cost of living, Israel must aggressively remove import tariffs and regulations, even if it leads to the collapse of local agriculture and traditional industries.",
+    "textHe": "כדי להוריד את יוקר המחיה, ישראל חייבת לבטל באגרסיביות מכסי ייבוא ורגולציה, גם אם הדבר יוביל לקריסת החקלאות המקומית והתעשייה המסורתית."
   },
   {
-    "id": "coalition_funds",
+    "id": "q15_attorney_general_status",
+    "type": "statement_pair",
+    "categoryEn": "GOVERNANCE",
+    "categoryHe": "משילות",
+    "statementAEn": "The Attorney General’s position is merely advisory; the government should be free to implement its policies and hire private representation if she disagrees.",
+    "statementAHe": "תפקיד היועצת המשפטית לממשלה הוא מייעץ בלבד; על הממשלה להיות חופשית ליישם את מדיניותה ולשכור ייצוג פרטי במקרה של חוסר הסכמה.",
+    "statementBEn": "The Attorney General is the definitive interpreter of the law for the executive branch, and her legal directives must remain binding on the government.",
+    "statementBHe": "היועצת המשפטית לממשלה היא הפרשנית המוסמכת של הדין עבור הרשות המבצעת, והנחיותיה המשפטיות חייבות להישאר מחייבות כלפי הממשלה."
+  },
+  {
+    "id": "q16_public_sphere_religion",
     "type": "likert",
-    "category": "economy",
-    "categoryEn": "ECONOMY & WELFARE",
-    "categoryHe": "כלכלה וחברה",
-    "textEn": "During budget cuts, should the government prioritize funding for independent religious educational institutions over general welfare services?",
-    "textHe": "בזמן קיצוצים בתקציב, האם על הממשלה לתעדף מימון למוסדות חינוך דתיים עצמאיים על פני שירותי רווחה כלליים?"
+    "categoryEn": "RELIGION & IDENTITY",
+    "categoryHe": "דת וזהות",
+    "textEn": "The state should permit public authorities to host gender-segregated events and enforce strict religious standards in public institutions in order to accommodate the Haredi and religious publics.",
+    "textHe": "על המדינה לאפשר לרשויות ציבוריות לקיים אירועים בהפרדה מגדרית ולאכוף סטנדרטים דתיים מחמירים במוסדות ציבור כדי להתחשב בציבור החרדי והדתי."
+  },
+  {
+    "id": "q18_death_penalty_terrorists",
+    "type": "likert",
+    "categoryEn": "SECURITY & GOVERNANCE",
+    "categoryHe": "ביטחון ומשילות",
+    "textEn": "Israel must enact and actively enforce the death penalty for convicted terrorists.",
+    "textHe": "על ישראל לחוקק ולאכוף באופן פעיל עונש מוות למחבלים מורשעים."
+  },
+  {
+    "id": "q19_arab_parties_coalition",
+    "type": "statement_pair",
+    "categoryEn": "IDENTITY & GOVERNANCE",
+    "categoryHe": "זהות ומשילות",
+    "statementAEn": "Zionist parties must categorically refuse to form a governing coalition that relies on the support of Arab political parties.",
+    "statementAHe": "מפלגות ציוניות חייבות לסרב באופן קטגורי להקים קואליציה ממשלתית שנשענת על תמיכתן של מפלגות פוליטיות ערביות.",
+    "statementBEn": "It is legitimate and beneficial for Israel's democracy to include pragmatic Arab political parties in the governing coalition.",
+    "statementBHe": "זה לגיטימי ומועיל לדמוקרטיה הישראלית לשתף מפלגות פוליטיות ערביות פרגמטיות בקואליציה הממשלתית."
+  },
+  {
+    "id": "q20_day_after_leadership",
+    "type": "likert",
+    "categoryEn": "IDENTITY",
+    "categoryHe": "זהות",
+    "textEn": "Every senior political and military leader who was in power on October 7, 2023, must permanently resign from public life to allow a new generation to lead.",
+    "textHe": "כל מנהיג פוליטי וצבאי בכיר שהיה בשלטון ב-7 באוקטובר 2023, חייב להתפטר לצמיתות מהחיים הציבוריים כדי לאפשר לדור חדש להנהיג."
   }
 ]
