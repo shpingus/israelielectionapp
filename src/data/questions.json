@@ -133,14 +133,6 @@
     "statementBHe": "משטרת ישראל חייבת להישאר עצמאית ומקצועית לחלוטין; לפוליטיקאים אסור שתהיה סמכות להתערב בסדרי עדיפויות מבצעיים או חקירתיים ספציפיים."
   },
   {
-    "id": "q12_state_budget_priorities",
-    "type": "likert",
-    "categoryEn": "ECONOMY",
-    "categoryHe": "כלכלה",
-    "textEn": "During times of severe economic strain, all designated sectoral 'coalition funds' (for religious institutions and settlements) must be frozen and redirected to national economic recovery and defense.",
-    "textHe": "בעתות של משבר כלכלי חמור, יש להקפיא את כל 'הכספים הקואליציוניים' המגזריים המיועדים (למוסדות דת והתנחלויות) ולהפנותם לשיקום כלכלי לאומי וביטחון."
-  },
-  {
     "id": "q13_arab_sector_budgets",
     "type": "likert",
     "categoryEn": "GOVERNANCE & ECONOMY",
