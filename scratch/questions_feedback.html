@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Questions Feedback & Revisions Portal</title>
+  <!-- Google Fonts for Vintage Serif / Suez One display & Outfit / Heebo body / Space Mono labels -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;700;900&family=Suez+One&family=Heebo:wght@400;700&family=Outfit:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #F8F7F3;
+      --text-color: #121212;
+      --accent-cyan: #00E5FF;
+      --accent-cobalt: #2979FF;
+      --accent-coral: #FF5252;
+      --border-color: #121212;
+      --border-width: 3px;
+      
+      --font-heading-en: 'Fraunces', Georgia, serif;
+      --font-heading-he: 'Suez One', 'Fraunces', Georgia, serif;
+      --font-body-en: 'Outfit', system-ui, sans-serif;
+      --font-body-he: 'Heebo', system-ui, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+
+      --shadow-offset: 6px;
+      --shadow-offset-hover: 9px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      background-image: radial-gradient(var(--text-color) 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+      color: var(--text-color);
+      font-family: var(--font-body-en);
+      padding: 40px 20px 120px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    header {
+      background: #FFFFFF;
+      border: var(--border-width) solid var(--border-color);
+      padding: 32px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
+    }
+
+    header h1 {
+      font-family: var(--font-heading-en);
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin-bottom: 16px;
+    }
+
+    .instructions-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--accent-cobalt);
+      color: white;
+      padding: 4px 10px;
+      border: 2px solid var(--border-color);
+      margin-bottom: 12px;
+    }
+
+    .actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .counter-badge {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      background: #FFFFFF;
+      border: 2px solid var(--border-color);
+      padding: 8px 16px;
+      box-shadow: 3px 3px 0px var(--border-color);
+    }
+
+    .brutalist-button {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      background-color: #FFFFFF;
+      color: var(--text-color);
+      border: var(--border-width) solid var(--border-color);
+      padding: 12px 24px;
+      cursor: pointer;
+      outline: none;
+      box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brutalist-button:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: var(--shadow-offset-hover) var(--shadow-offset-hover) 0px var(--border-color);
+    }
+
+    .brutalist-button:active {
+      transform: translate(0px, 0px);
+      box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
+    }
+
+    .brutalist-button.primary {
+      background-color: var(--accent-cyan);
+    }
+
+    .brutalist-button.danger {
+      background-color: var(--accent-coral);
+    }
+
+    .questions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .question-card {
+      background: #FFFFFF;
+      border: var(--border-width) solid var(--border-color);
+      box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .question-card.marked-delete {
+      border-color: var(--accent-coral);
+      box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--accent-coral);
+    }
+
+    .card-header {
+      background: var(--text-color);
+      color: #FFFFFF;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .question-meta {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .badge {
+      background: var(--accent-cyan);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .type-badge {
+      background: #FFFFFF;
+      color: var(--text-color);
+    }
+
+    .bilingual-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    @media (max-width: 768px) {
+      .bilingual-columns {
+        grid-template-columns: 1fr;
+      }
+      .col-he {
+        border-top: 2px solid var(--border-color);
+      }
+    }
+
+    .column {
+      padding: 24px;
+    }
+
+    .col-en {
+      border-right: 2px solid var(--border-color);
+    }
+
+    .col-he {
+      direction: rtl;
+      font-family: var(--font-body-he);
+      text-align: right;
+    }
+
+    .column-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      opacity: 0.5;
+      margin-bottom: 12px;
+      display: block;
+      letter-spacing: 0.5px;
+    }
+
+    .question-text-display {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .col-en .question-text-display {
+      font-family: var(--font-body-en);
+    }
+    
+    .col-he .question-text-display {
+      font-family: var(--font-body-he);
+      font-size: 1.35rem;
+    }
+
+    .statement-box {
+      border: 2px solid var(--border-color);
+      padding: 14px;
+      background: #FAF9F6;
+      margin-bottom: 12px;
+    }
+
+    .statement-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent-cobalt);
+    }
+
+    .option-item {
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      background: #FAF9F6;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .option-value {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      background: var(--text-color);
+      color: #FFFFFF;
+      padding: 0px 6px;
+      font-size: 0.8rem;
+    }
+
+    .feedback-section {
+      padding: 24px;
+      background: #FAF9F6;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feedback-textarea {
+      width: 100%;
+      height: 80px;
+      border: 2px solid var(--border-color);
+      padding: 12px;
+      font-family: var(--font-body-en);
+      font-size: 0.95rem;
+      resize: vertical;
+      outline: none;
+      background: #FFFFFF;
+    }
+
+    .feedback-textarea:focus {
+      border-color: var(--accent-cobalt);
+      background: #FFFFFF;
+    }
+
+    .delete-toggle-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .delete-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent-coral);
+      cursor: pointer;
+    }
+
+    /* Add New Question Section */
+    .add-question-section {
+      background: #FFFFFF;
+      border: var(--border-width) dashed var(--border-color);
+      padding: 32px;
+      margin-bottom: 48px;
+      box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
+    }
+
+    .add-question-section h2 {
+      font-family: var(--font-heading-en);
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 768px) {
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+    }
+
+    .form-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .brutalist-input, .brutalist-select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--border-color);
+      font-family: var(--font-body-en);
+      font-size: 0.95rem;
+      outline: none;
+      background: #FAF9F6;
+    }
+
+    .brutalist-input:focus, .brutalist-select:focus {
+      border-color: var(--accent-cyan);
+      background: #FFFFFF;
+    }
+
+    .options-builder {
+      border: 2px solid var(--border-color);
+      padding: 16px;
+      background: #FAF9F6;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-row-inputs {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    /* Fixed bottom submit bar */
+    .submit-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #FFFFFF;
+      border-top: var(--border-width) solid var(--border-color);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+      box-shadow: 0px -4px 10px rgba(0,0,0,0.05);
+    }
+
+    .submit-bar-inner {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(18, 18, 18, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #FFFFFF;
+      border: var(--border-width) solid var(--border-color);
+      box-shadow: 12px 12px 0px var(--border-color);
+      width: 100%;
+      max-width: 800px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.95) translateY(30px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      background: var(--text-color);
+      color: #FFFFFF;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-family: var(--font-heading-en);
+      font-size: 1.8rem;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0 8px;
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .modal-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 12px;
+    }
+
+    .modal-tab {
+      padding: 10px 20px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      background: none;
+      border: none;
+      border-bottom: 4px solid transparent;
+      cursor: pointer;
+    }
+
+    .modal-tab.active {
+      border-bottom-color: var(--accent-cyan);
+    }
+
+    .output-textarea {
+      width: 100%;
+      height: 250px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      border: 2px solid var(--border-color);
+      padding: 12px;
+      outline: none;
+      background: #FAF9F6;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+      border-top: 2px solid var(--border-color);
+      padding: 20px 24px;
+    }
+
+    /* Helper styles */
+    .draft-badge {
+      background: var(--accent-cobalt);
+      color: white;
+    }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      background: var(--accent-cyan);
+      border: 2px solid var(--border-color);
+      color: var(--text-color);
+      padding: 12px 24px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      box-shadow: 4px 4px 0px var(--border-color);
+      z-index: 2000;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="toast" class="toast">Feedback saved to local storage!</div>
+
+  <div class="container">
+    
+    <header>
+      <div class="instructions-badge">Elections 2026 // Developer Mode</div>
+      <h1>Quiz Questions Revision Portal</h1>
+      <p>
+        Review all election survey questions in English and Hebrew. Provide feedback, corrections, or suggest rewording per question. You can also add new questions at the bottom or mark existing questions for deletion. Your drafts are automatically saved to browser storage. When done, click the submit button to compile.
+      </p>
+      <div style="font-family: var(--font-mono); font-size: 0.85rem; opacity: 0.7;">
+        Branch: <strong style="color: var(--accent-cobalt);">feature/question-feedback</strong>
+      </div>
+    </header>
+
+    <div class="actions-bar">
+      <div class="counter-badge" id="loaded-counter">
+        Loaded: 0 questions
+      </div>
+      <div>
+        <button class="brutalist-button danger" onclick="clearAllDrafts()" style="margin-right: 12px;">
+          Clear All Drafts
+        </button>
+        <a href="#new-question-section" class="brutalist-button primary">
+          + Add New Question
+        </a>
+      </div>
+    </div>
+
+    <!-- Questions list container -->
+    <div class="questions-list" id="questions-container">
+      <!-- Generated dynamically -->
+    </div>
+
+    <!-- Add New Question Container -->
+    <div class="add-question-section" id="new-question-section">
+      <h2>Add New Question Draft</h2>
+      <form id="new-question-form" onsubmit="handleAddNewQuestion(event)">
+        <div class="form-grid">
+          
+          <div class="form-group">
+            <label class="form-label" for="new-qid">Question ID (Unique key, e.g. q21_housing_crisis)</label>
+            <input type="text" id="new-qid" class="brutalist-input" placeholder="e.g. q21_housing_crisis" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="new-qtype">Question Type</label>
+            <select id="new-qtype" class="brutalist-select" onchange="toggleFormTypeInputs()" required>
+              <option value="likert">Likert (Strongly Agree - Strongly Disagree)</option>
+              <option value="statement_pair">Statement Pair (Compare Statement A & B)</option>
+              <option value="multiple_choice">Multiple Choice (Custom answers with stance values)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="new-cat-en">Category English</label>
+            <input type="text" id="new-cat-en" class="brutalist-input" placeholder="e.g. ECONOMY" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="new-cat-he">Category Hebrew</label>
+            <input type="text" id="new-cat-he" class="brutalist-input" placeholder="למשל: כלכלה" required style="direction: rtl; text-align: right;">
+          </div>
+
+          <!-- Likert / Multiple Choice Text -->
+          <div class="form-group full-width" id="form-group-text">
+            <label class="form-label" for="new-text-en">Question Text (English)</label>
+            <input type="text" id="new-text-en" class="brutalist-input" placeholder="Write the question prompt in English..." required>
+          </div>
+
+          <div class="form-group full-width" id="form-group-text-he">
+            <label class="form-label" for="new-text-he">Question Text (Hebrew)</label>
+            <input type="text" id="new-text-he" class="brutalist-input" placeholder="הזינו את השאלה בעברית..." required style="direction: rtl; text-align: right;">
+          </div>
+
+          <!-- Statement Pair Inputs -->
+          <div class="form-group" id="form-group-stmt-a-en" style="display: none;">
+            <label class="form-label" for="new-stmt-a-en">Statement A (English)</label>
+            <textarea id="new-stmt-a-en" class="brutalist-input" style="height: 80px;" placeholder="Statement A English"></textarea>
+          </div>
+
+          <div class="form-group" id="form-group-stmt-a-he" style="display: none;">
+            <label class="form-label" for="new-stmt-a-he">Statement A (Hebrew)</label>
+            <textarea id="new-stmt-a-he" class="brutalist-input" style="height: 80px; direction: rtl; text-align: right;" placeholder="הצהרה א' בעברית"></textarea>
+          </div>
+
+          <div class="form-group" id="form-group-stmt-b-en" style="display: none;">
+            <label class="form-label" for="new-stmt-b-en">Statement B (English)</label>
+            <textarea id="new-stmt-b-en" class="brutalist-input" style="height: 80px;" placeholder="Statement B English"></textarea>
+          </div>
+
+          <div class="form-group" id="form-group-stmt-b-he" style="display: none;">
+            <label class="form-label" for="new-stmt-b-he">Statement B (Hebrew)</label>
+            <textarea id="new-stmt-b-he" class="brutalist-input" style="height: 80px; direction: rtl; text-align: right;" placeholder="הצהרה ב' בעברית"></textarea>
+          </div>
+
+          <!-- Multiple Choice Options Builder -->
+          <div class="form-group full-width" id="form-group-options" style="display: none;">
+            <label class="form-label">Multiple Choice Options (At least 2)</label>
+            <div class="options-builder">
+              <div id="options-rows-container">
+                <!-- Rows added dynamically -->
+              </div>
+              <button type="button" class="brutalist-button" onclick="addOptionRow()" style="padding: 6px 12px; font-size: 0.8rem; width: auto; align-self: flex-start;">
+                + Add Option Choice
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <button type="submit" class="brutalist-button primary">
+          Add Draft Question
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- Bottom Submit Bar -->
+  <div class="submit-bar">
+    <div class="submit-bar-inner">
+      <div style="font-family: var(--font-mono); font-size: 0.9rem;">
+        Revisions written: <span id="revision-count" style="font-weight: 700;">0</span> /
+        Deletions: <span id="deletion-count" style="font-weight: 700;">0</span> /
+        New Drafts: <span id="new-drafts-count" style="font-weight: 700;">0</span>
+      </div>
+      <button class="brutalist-button primary" onclick="compileAndSubmit()">
+        Compile & Submit Feedback
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div class="modal-overlay" id="result-modal" onclick="if(event.target === this) closeModal()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Compiled Feedback</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      
+      <div class="modal-body">
+        <p style="font-size: 0.95rem;">
+          Here is your gathered feedback. You can copy the Markdown or JSON directly and paste it to the AI agent in the chat, or download the `feedback.json` file.
+        </p>
+
+        <div class="modal-tabs">
+          <button class="modal-tab active" id="tab-md" onclick="switchTab('md')">Markdown Format</button>
+          <button class="modal-tab" id="tab-json" onclick="switchTab('json')">JSON Format</button>
+        </div>
+
+        <div id="content-md">
+          <textarea class="output-textarea" id="output-md" readonly></textarea>
+        </div>
+        <div id="content-json" style="display: none;">
+          <textarea class="output-textarea" id="output-json" readonly></textarea>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="brutalist-button" onclick="copyCompiledText()" id="copy-btn">
+          Copy Content
+        </button>
+        <button class="brutalist-button primary" onclick="downloadJSONFile()">
+          Download feedback.json
+        </button>
+        <button class="brutalist-button" onclick="closeModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // Embedded questions.json contents directly
+    const initialQuestions = [
+      {
+        "id": "q1_draft_crisis",
+        "type": "likert",
+        "categoryEn": "SECURITY & IDENTITY",
+        "categoryHe": "ביטחון וזהות",
+        "textEn": "The state must enact a universal conscription law immediately, applying criminal and severe financial sanctions against any draft-evading sector, without exception for yeshiva students.",
+        "textHe": "על המדינה לחוקק מיידית חוק גיוס לכולם, תוך הפעלת סנקציות פליליות וכלכליות חריפות נגד כל מגזר משתמט, ללא חריגים לתלמידי ישיבות."
+      },
+      {
+        "id": "q2_gaza_future",
+        "type": "statement_pair",
+        "categoryEn": "SECURITY",
+        "categoryHe": "ביטחון",
+        "statementAEn": "Israel must re-establish civilian settlements in the Gaza Strip and maintain permanent, direct military control over the entire territory to ensure security.",
+        "statementAHe": "ישראל חייבת לחדש את ההתיישבות האזרחית ברצועת עזה ולשמור על שליטה צבאית ישירה וקבועה בכל השטח כדי להבטיח ביטחון.",
+        "statementBEn": "Israel should maintain security freedom of operation in Gaza, but hand civilian administration to a regional or international coalition, definitively ruling out Israeli resettlement.",
+        "statementBHe": "ישראל צריכה לשמור על חופש פעולה ביטחוני בעזה, אך להעביר את הניהול האזרחי לקואליציה אזורית או בינלאומית, ולשלול לחלוטין התיישבות ישראלית מחודשת."
+      },
+      {
+        "id": "q3_judicial_override",
+        "type": "multiple_choice",
+        "categoryEn": "GOVERNANCE",
+        "categoryHe": "משילות",
+        "textEn": "Regarding the Knesset's power to override Supreme Court rulings:",
+        "textHe": "בנוגע לסמכות הכנסת להתגבר על פסיקות בג\"ץ:",
+        "options": [
+          {
+            "value": 2,
+            "textEn": "The Knesset should have the power to override Supreme Court rulings with a simple majority of 61 MKs.",
+            "textHe": "לכנסת צריכה להיות סמכות להתגבר על פסיקות בג\"ץ ברוב רגיל של 61 ח\"כים."
+          },
+          {
+            "value": 1,
+            "textEn": "The Knesset should have the power to override Supreme Court rulings, but only with a special, broad majority (e.g., 70-80 MKs).",
+            "textHe": "לכנסת צריכה להיות סמכות להתגבר על פסיקות בג\"ץ, אך רק ברוב מיוחד ורחב (למשל 70-80 ח\"כים)."
+          },
+          {
+            "value": -1,
+            "textEn": "The Knesset should not have any mechanism to override Supreme Court rulings on basic rights and constitutional matters.",
+            "textHe": "לכנסת לא אמור להיות כל מנגנון התגברות על פסיקות בג\"ץ בענייני זכויות יסוד ונושאים חוקתיים."
+          },
+          {
+            "value": -2,
+            "textEn": "The Supreme Court’s power of judicial review should be completely abolished.",
+            "textHe": "יש לבטל לחלוטין את סמכות הביקורת השיפוטית של בג\"ץ."
+          }
+        ]
+      },
+      {
+        "id": "q4_pm_term_indictment",
+        "type": "likert",
+        "categoryEn": "GOVERNANCE",
+        "categoryHe": "משילות",
+        "textEn": "A Prime Minister should be legally limited to two terms in office, and an individual under active criminal indictment for severe offenses must be barred from forming a government.",
+        "textHe": "יש להגביל בחוק כהונת ראש ממשלה לשתי קדנציות, וחל איסור על אדם תחת כתב אישום פעיל בעבירות חמורות להרכיב ממשלה."
+      },
+      {
+        "id": "q5_palestinian_state_normalization",
+        "type": "likert",
+        "categoryEn": "DIPLOMACY",
+        "categoryHe": "מדיניות חוץ",
+        "textEn": "Israel should accept the creation of a demilitarized Palestinian state as part of a comprehensive regional normalization agreement with Saudi Arabia and other moderate Arab states.",
+        "textHe": "על ישראל להסכים להקמת מדינה פלסטינית מפורזת כחלק מהסכם נורמליזציה אזורי כולל עם סעודיה ומדינות ערב מתונות נוספות."
+      },
+      {
+        "id": "q6_shabbat_transport",
+        "type": "statement_pair",
+        "categoryEn": "RELIGION & STATE",
+        "categoryHe": "דת ומדינה",
+        "statementAEn": "Local municipalities should have the authority to operate public transportation on Shabbat based on the needs and character of their residents.",
+        "statementAHe": "לרשויות המקומיות צריכה להיות סמכות להפעיל תחבורה ציבורית בשבת בהתאם לצרכים ולאופי של תושביהן.",
+        "statementBEn": "The state must strictly preserve the status quo by prohibiting the operation of national and municipal public transportation on Shabbat.",
+        "statementBHe": "על המדינה לשמור בקפדנות על הסטטוס קוו ולמנוע הפעלת תחבורה ציבורית ארצית ועירונית בשבת."
+      },
+      {
+        "id": "q7_haredi_education",
+        "type": "multiple_choice",
+        "categoryEn": "ECONOMY & STATE",
+        "categoryHe": "כלכלה ומדינה",
+        "textEn": "Regarding state funding for Haredi educational institutions:",
+        "textHe": "בנוגע למימון מדינה למוסדות חינוך חרדיים:",
+        "options": [
+          {
+            "value": 2,
+            "textEn": "The state should fully fund Haredi educational institutions regardless of whether they teach core subjects like math and English.",
+            "textHe": "על המדינה לתקצב באופן מלא מוסדות חינוך חרדיים, ללא קשר לשאלה האם הם מלמדים מקצועות ליבה כמו מתמטיקה ואנגלית."
+          },
+          {
+            "value": 1,
+            "textEn": "The state should provide partial funding to schools without a core curriculum to preserve religious autonomy, but heavily incentivize core subjects.",
+            "textHe": "המדינה צריכה לספק תקצוב חלקי לבתי ספר ללא לימודי ליבה כדי לשמר אוטונומיה דתית, אך לתמרץ משמעותית לימודי ליבה."
+          },
+          {
+            "value": -2,
+            "textEn": "The state must completely defund any educational institution that refuses to teach the full core curriculum.",
+            "textHe": "המדינה חייבת לשלול תקצוב לחלוטין מכל מוסד חינוכי שמסרב ללמד תוכנית ליבה מלאה."
+          }
+        ]
+      },
+      {
+        "id": "q8_civil_marriage",
+        "type": "likert",
+        "categoryEn": "RELIGION & STATE",
+        "categoryHe": "דת ומדינה",
+        "textEn": "Israel must institute full civil marriage options for all citizens, completely independent of the Chief Rabbinate.",
+        "textHe": "על ישראל להנהיג אפשרויות של נישואים אזרחיים מלאים לכלל האזרחים, באופן בלתי תלוי לחלוטין ברבנות הראשית."
+      },
+      {
+        "id": "q9_judea_samaria_settlements",
+        "type": "likert",
+        "categoryEn": "SECURITY & ECONOMY",
+        "categoryHe": "ביטחון וכלכלה",
+        "textEn": "The government should aggressively expand settlements and formalize outposts in Judea and Samaria, recognizing it as a strategic and historical priority.",
+        "textHe": "הממשלה צריכה להרחיב באגרסיביות את ההתנחלויות ולהכשיר מאחזים ביהודה ושומרון, מתוך הכרה בכך כעדיפות אסטרטגית והיסטורית."
+      },
+      {
+        "id": "q10_temple_mount",
+        "type": "likert",
+        "categoryEn": "SECURITY & RELIGION",
+        "categoryHe": "ביטחון ודת",
+        "textEn": "Israel should actively enforce the right of Jews to pray openly on the Temple Mount, even at the risk of escalating tensions with the Arab world.",
+        "textHe": "על ישראל לאכוף באופן פעיל את זכותם של יהודים להתפלל בגלוי בהר הבית, גם במחיר של הסלמת המתיחות מול העולם הערבי."
+      },
+      {
+        "id": "q11_police_independence",
+        "type": "statement_pair",
+        "categoryEn": "GOVERNANCE",
+        "categoryHe": "משילות",
+        "statementAEn": "The Minister of National Security must have direct authority to set policy and dictate priorities for police investigations to ensure governance and accountability.",
+        "statementAHe": "לשר לביטחון לאומי חייבת להיות סמכות ישירה לקבוע מדיניות ולהכתיב סדרי עדיפויות לחקירות המשטרה כדי להבטיח משילות ואחריותיות.",
+        "statementBEn": "The police force must remain strictly independent and professional; politicians should not have the power to intervene in specific operational or investigative priorities.",
+        "statementBHe": "משטרת ישראל חייבת להישאר עצמאית ומקצועית לחלוטין; לפוליטיקאים אסור שתהיה סמכות להתערב בסדרי עדיפויות מבצעיים או חקירתיים ספציפיים."
+      },
+      {
+        "id": "q13_arab_sector_budgets",
+        "type": "likert",
+        "categoryEn": "GOVERNANCE & ECONOMY",
+        "categoryHe": "משילות וכלכלה",
+        "textEn": "The state must fully restore and expand dedicated five-year budgets for the economic development and policing of Arab municipalities to ensure civil equality and eradicate organized crime.",
+        "textHe": "המדינה חייבת להשיב במלואם ולהרחיב את תקציבי החומש הייעודיים לפיתוח כלכלי ושיטור בחברה הערבית כדי להבטיח שוויון אזרחי ולמגר את הפשיעה המאורגנת."
+      },
+      {
+        "id": "q14_free_market_protectionism",
+        "type": "likert",
+        "categoryEn": "ECONOMY",
+        "categoryHe": "כלכלה",
+        "textEn": "To lower the cost of living, Israel must aggressively remove import tariffs and regulations, even if it leads to the collapse of local agriculture and traditional industries.",
+        "textHe": "כדי להוריד את יוקר המחיה, ישראל חייבת לבטל באגרסיביות מכסי ייבוא ורגולציה, גם אם הדבר יוביל לקריסת החקלאות המקומית והתעשייה המסורתית."
+      },
+      {
+        "id": "q15_attorney_general_status",
+        "type": "statement_pair",
+        "categoryEn": "GOVERNANCE",
+        "categoryHe": "משילות",
+        "statementAEn": "The Attorney General’s position is merely advisory; the government should be free to implement its policies and hire private representation if she disagrees.",
+        "statementAHe": "תפקיד היועצת המשפטית לממשלה הוא מייעץ בלבד; על הממשלה להיות חופשית ליישם את מדיניותה ולשכור ייצוג פרטי במקרה של חוסר הסכמה.",
+        "statementBEn": "The Attorney General is the definitive interpreter of the law for the executive branch, and her legal directives must remain binding on the government.",
+        "statementBHe": "היועצת המשפטית לממשלה היא הפרשנית המוסמכת של הדין עבור הרשות המבצעת, והנחיותיה המשפטיות חייבות להישאר מחייבות כלפי הממשלה."
+      },
+      {
+        "id": "q16_public_sphere_religion",
+        "type": "likert",
+        "categoryEn": "RELIGION & IDENTITY",
+        "categoryHe": "דת וזהות",
+        "textEn": "The state should permit public authorities to host gender-segregated events and enforce strict religious standards in public institutions in order to accommodate the Haredi and religious publics.",
+        "textHe": "על המדינה לאפשר לרשויות ציבוריות לקיים אירועים בהפרדה מגדרית ולאכוף סטנדרטים דתיים מחמירים במוסדות ציבור כדי להתחשב בציבור החרדי והדתי."
+      },
+      {
+        "id": "q18_death_penalty_terrorists",
+        "type": "likert",
+        "categoryEn": "SECURITY & GOVERNANCE",
+        "categoryHe": "ביטחון ומשילות",
+        "textEn": "Israel must enact and actively enforce the death penalty for convicted terrorists.",
+        "textHe": "על ישראל לחוקק ולאכוף באופן פעיל עונש מוות למחבלים מורשעים."
+      },
+      {
+        "id": "q19_arab_parties_coalition",
+        "type": "statement_pair",
+        "categoryEn": "IDENTITY & GOVERNANCE",
+        "categoryHe": "זהות ומשילות",
+        "statementAEn": "Zionist parties must categorically refuse to form a governing coalition that relies on the support of Arab political parties.",
+        "statementAHe": "מפלגות ציוניות חייבות לסרב באופן קטגורי להקים קואליציה ממשלתית שנשענת על תמיכתן של מפלגות פוליטיות ערביות.",
+        "statementBEn": "It is legitimate and beneficial for Israel's democracy to include pragmatic Arab political parties in the governing coalition.",
+        "statementBHe": "זה לגיטימי ומועיל לדמוקרטיה הישראלית לשתף מפלגות פוליטיות ערביות פרגמטיות בקואליציה הממשלתית."
+      },
+      {
+        "id": "q20_day_after_leadership",
+        "type": "likert",
+        "categoryEn": "IDENTITY",
+        "categoryHe": "זהות",
+        "textEn": "Every senior political and military leader who was in power on October 7, 2023, must permanently resign from public life to allow a new generation to lead.",
+        "textHe": "כל מנהיג פוליטי וצבאי בכיר שהיה בשלטון ב-7 באוקטובר 2023, חייב להתפטר לצמיתות מהחיים הציבוריים כדי לאפשר לדור חדש להנהיג."
+      }
+    ];
+
+    let newQuestionsDrafts = [];
+    let currentActiveTab = 'md';
+
+    // Initialize the page
+    window.onload = function() {
+      loadDraftsFromStorage();
+      renderQuestions();
+      updateStatusCounters();
+      toggleFormTypeInputs();
+    };
+
+    function loadDraftsFromStorage() {
+      const savedNewDrafts = localStorage.getItem('draft_new_questions');
+      if (savedNewDrafts) {
+        newQuestionsDrafts = JSON.parse(savedNewDrafts);
+      }
+    }
+
+    function saveDraftsToStorage() {
+      localStorage.setItem('draft_new_questions', JSON.stringify(newQuestionsDrafts));
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      if (message) toast.innerText = message;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 2000);
+    }
+
+    function handleFeedbackInput(qid, val) {
+      if (val.trim() === '') {
+        localStorage.removeItem('feedback_q_' + qid);
+      } else {
+        localStorage.setItem('feedback_q_' + qid, val);
+      }
+      updateStatusCounters();
+    }
+
+    function handleDeleteToggle(qid, checked) {
+      if (checked) {
+        localStorage.setItem('delete_q_' + qid, 'true');
+        document.getElementById('card-' + qid).classList.add('marked-delete');
+      } else {
+        localStorage.removeItem('delete_q_' + qid);
+        document.getElementById('card-' + qid).classList.remove('marked-delete');
+      }
+      updateStatusCounters();
+    }
+
+    function updateStatusCounters() {
+      let revCount = 0;
+      let delCount = 0;
+
+      // Count local storage entries
+      initialQuestions.forEach(q => {
+        const feedback = localStorage.getItem('feedback_q_' + q.id);
+        const del = localStorage.getItem('delete_q_' + q.id);
+        if (feedback && feedback.trim() !== '') revCount++;
+        if (del === 'true') delCount++;
+      });
+
+      // Add feedback count from new questions as well
+      newQuestionsDrafts.forEach(q => {
+        const feedback = localStorage.getItem('feedback_q_' + q.id);
+        if (feedback && feedback.trim() !== '') revCount++;
+      });
+
+      document.getElementById('revision-count').innerText = revCount;
+      document.getElementById('deletion-count').innerText = delCount;
+      document.getElementById('new-drafts-count').innerText = newQuestionsDrafts.length;
+      document.getElementById('loaded-counter').innerText = `Loaded: ${initialQuestions.length + newQuestionsDrafts.length} questions`;
+    }
+
+    function clearAllDrafts() {
+      if (confirm('Are you sure you want to clear all written feedback and new drafts? This cannot be undone.')) {
+        initialQuestions.forEach(q => {
+          localStorage.removeItem('feedback_q_' + q.id);
+          localStorage.removeItem('delete_q_' + q.id);
+        });
+        newQuestionsDrafts.forEach(q => {
+          localStorage.removeItem('feedback_q_' + q.id);
+        });
+        newQuestionsDrafts = [];
+        saveDraftsToStorage();
+        
+        renderQuestions();
+        updateStatusCounters();
+        showToast('All drafts cleared!');
+      }
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById('questions-container');
+      container.innerHTML = '';
+
+      // Render existing questions
+      initialQuestions.forEach((q, idx) => {
+        container.appendChild(createQuestionCard(q, idx + 1, false));
+      });
+
+      // Render new drafts
+      if (newQuestionsDrafts.length > 0) {
+        const divider = document.createElement('div');
+        divider.innerHTML = `<h2 style="font-family: var(--font-heading-en); font-size: 2rem; margin: 24px 0 12px 0; border-bottom: 2px dashed var(--border-color); padding-bottom: 8px;">New Question Drafts (${newQuestionsDrafts.length})</h2>`;
+        container.appendChild(divider);
+
+        newQuestionsDrafts.forEach((q, idx) => {
+          container.appendChild(createQuestionCard(q, initialQuestions.length + idx + 1, true));
+        });
+      }
+    }
+
+    function createQuestionCard(q, num, isNewDraft) {
+      const card = document.createElement('div');
+      card.className = 'question-card';
+      card.id = 'card-' + q.id;
+
+      const isMarkedDelete = localStorage.getItem('delete_q_' + q.id) === 'true';
+      if (isMarkedDelete) {
+        card.classList.add('marked-delete');
+      }
+
+      const savedFeedback = localStorage.getItem('feedback_q_' + q.id) || '';
+
+      // Card Header
+      let headerHTML = `
+        <div class="card-header">
+          <div class="question-meta">
+            <span style="font-weight:700; color:var(--accent-cyan);">#${num}</span>
+            <span>ID: <code style="background:#222; padding:2px 6px;">${q.id}</code></span>
+            <span class="badge type-badge">${q.type.toUpperCase()}</span>
+            ${isNewDraft ? '<span class="badge draft-badge">DRAFT</span>' : ''}
+          </div>
+          <div class="question-meta">
+            <span class="badge">${q.categoryEn} / ${q.categoryHe}</span>
+          </div>
+        </div>
+      `;
+
+      // Bilingual Columns
+      let columnsHTML = '<div class="bilingual-columns">';
+      
+      // Column EN
+      columnsHTML += '<div class="column col-en"><span class="column-title">ENGLISH VERSION</span>';
+      if (q.type === 'likert' || q.type === 'multiple_choice') {
+        columnsHTML += `<div class="question-text-display">${q.textEn}</div>`;
+      } else if (q.type === 'statement_pair') {
+        columnsHTML += `
+          <div class="statement-box">
+            <span class="statement-label">STATEMENT A</span>
+            <div>${q.statementAEn}</div>
+          </div>
+          <div class="statement-box">
+            <span class="statement-label">STATEMENT B</span>
+            <div>${q.statementBEn}</div>
+          </div>
+        `;
+      }
+      if (q.type === 'multiple_choice' && q.options) {
+        columnsHTML += '<div style="margin-top: 16px;"><span class="statement-label">OPTIONS</span>';
+        q.options.forEach(opt => {
+          columnsHTML += `
+            <div class="option-item">
+              <span class="option-value">${opt.value > 0 ? '+' + opt.value : opt.value}</span>
+              <div>${opt.textEn}</div>
+            </div>
+          `;
+        });
+        columnsHTML += '</div>';
+      }
+      columnsHTML += '</div>'; // End col en
+
+      // Column HE
+      columnsHTML += '<div class="column col-he"><span class="column-title">גירסה עברית</span>';
+      if (q.type === 'likert' || q.type === 'multiple_choice') {
+        columnsHTML += `<div class="question-text-display">${q.textHe}</div>`;
+      } else if (q.type === 'statement_pair') {
+        columnsHTML += `
+          <div class="statement-box">
+            <span class="statement-label">הצהרה א'</span>
+            <div>${q.statementAHe}</div>
+          </div>
+          <div class="statement-box">
+            <span class="statement-label">הצהרה ב'</span>
+            <div>${q.statementBHe}</div>
+          </div>
+        `;
+      }
+      if (q.type === 'multiple_choice' && q.options) {
+        columnsHTML += '<div style="margin-top: 16px;"><span class="statement-label">אפשרויות</span>';
+        q.options.forEach(opt => {
+          columnsHTML += `
+            <div class="option-item">
+              <span class="option-value">${opt.value > 0 ? '+' + opt.value : opt.value}</span>
+              <div>${opt.textHe}</div>
+            </div>
+          `;
+        });
+        columnsHTML += '</div>';
+      }
+      columnsHTML += '</div>'; // End col he
+      
+      columnsHTML += '</div>'; // End columns
+
+      // Feedback Area
+      let feedbackHTML = `
+        <div class="feedback-section">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <label class="form-label" style="margin-bottom:0;" for="feedback-input-${q.id}">Suggestions / Comments for this question:</label>
+            ${!isNewDraft ? `
+              <label class="delete-toggle-container">
+                <input type="checkbox" class="delete-checkbox" onchange="handleDeleteToggle('${q.id}', this.checked)" ${isMarkedDelete ? 'checked' : ''}>
+                Mark for deletion / replacement
+              </label>
+            ` : `
+              <button class="brutalist-button danger" onclick="removeNewDraft('${q.id}')" style="padding:4px 8px; font-size:0.75rem; box-shadow:2px 2px 0px var(--border-color);">
+                Remove Draft
+              </button>
+            `}
+          </div>
+          <textarea id="feedback-input-${q.id}" class="feedback-textarea" placeholder="Suggest improvements, fix grammar or translation issues, or outline changes..." oninput="handleFeedbackInput('${q.id}', this.value)">${savedFeedback}</textarea>
+        </div>
+      `;
+
+      card.innerHTML = headerHTML + columnsHTML + feedbackHTML;
+      return card;
+    }
+
+    function toggleFormTypeInputs() {
+      const type = document.getElementById('new-qtype').value;
+      
+      const txt = document.getElementById('form-group-text');
+      const txtHe = document.getElementById('form-group-text-he');
+      const stmtAEn = document.getElementById('form-group-stmt-a-en');
+      const stmtAHe = document.getElementById('form-group-stmt-a-he');
+      const stmtBEn = document.getElementById('form-group-stmt-b-en');
+      const stmtBHe = document.getElementById('form-group-stmt-b-he');
+      const opts = document.getElementById('form-group-options');
+
+      const inputs = [
+        document.getElementById('new-text-en'),
+        document.getElementById('new-text-he'),
+        document.getElementById('new-stmt-a-en'),
+        document.getElementById('new-stmt-a-he'),
+        document.getElementById('new-stmt-b-en'),
+        document.getElementById('new-stmt-b-he')
+      ];
+
+      // Reset required attribute
+      inputs.forEach(i => i.removeAttribute('required'));
+
+      if (type === 'likert') {
+        txt.style.display = 'block';
+        txtHe.style.display = 'block';
+        document.getElementById('new-text-en').setAttribute('required', 'true');
+        document.getElementById('new-text-he').setAttribute('required', 'true');
+
+        stmtAEn.style.display = 'none';
+        stmtAHe.style.display = 'none';
+        stmtBEn.style.display = 'none';
+        stmtBHe.style.display = 'none';
+        opts.style.display = 'none';
+      } else if (type === 'statement_pair') {
+        txt.style.display = 'none';
+        txtHe.style.display = 'none';
+
+        stmtAEn.style.display = 'block';
+        stmtAHe.style.display = 'block';
+        stmtBEn.style.display = 'block';
+        stmtBHe.style.display = 'block';
+
+        document.getElementById('new-stmt-a-en').setAttribute('required', 'true');
+        document.getElementById('new-stmt-a-he').setAttribute('required', 'true');
+        document.getElementById('new-stmt-b-en').setAttribute('required', 'true');
+        document.getElementById('new-stmt-b-he').setAttribute('required', 'true');
+
+        opts.style.display = 'none';
+      } else if (type === 'multiple_choice') {
+        txt.style.display = 'block';
+        txtHe.style.display = 'block';
+        document.getElementById('new-text-en').setAttribute('required', 'true');
+        document.getElementById('new-text-he').setAttribute('required', 'true');
+
+        stmtAEn.style.display = 'none';
+        stmtAHe.style.display = 'none';
+        stmtBEn.style.display = 'none';
+        stmtBHe.style.display = 'none';
+        
+        opts.style.display = 'block';
+        
+        // Ensure at least 2 option rows exist
+        const container = document.getElementById('options-rows-container');
+        if (container.children.length === 0) {
+          addOptionRow(2);
+          addOptionRow(1);
+          addOptionRow(-2);
+        }
+      }
+    }
+
+    function addOptionRow(val = 0) {
+      const container = document.getElementById('options-rows-container');
+      const rowIdx = container.children.length;
+      
+      const row = document.createElement('div');
+      row.className = 'option-row-inputs';
+      row.id = 'opt-row-' + rowIdx;
+      
+      row.innerHTML = `
+        <input type="number" class="brutalist-input option-val-input" style="width: 70px;" value="${val}" placeholder="Val" required>
+        <input type="text" class="brutalist-input option-en-input" placeholder="English text..." required>
+        <input type="text" class="brutalist-input option-he-input" placeholder="טקסט בעברית..." required style="direction: rtl; text-align: right;">
+        <button type="button" class="brutalist-button danger" onclick="removeOptionRow(${rowIdx})" style="padding: 10px; width:40px; height:40px; justify-content:center; box-shadow:none;">✕</button>
+      `;
+      
+      container.appendChild(row);
+    }
+
+    function removeOptionRow(idx) {
+      const row = document.getElementById('opt-row-' + idx);
+      if (row) row.remove();
+    }
+
+    function handleAddNewQuestion(e) {
+      e.preventDefault();
+      
+      const id = document.getElementById('new-qid').value.trim();
+      
+      // Check for duplicates
+      if (initialQuestions.some(q => q.id === id) || newQuestionsDrafts.some(q => q.id === id)) {
+        alert('Question ID already exists! Please choose a unique ID.');
+        return;
+      }
+
+      const type = document.getElementById('new-qtype').value;
+      const categoryEn = document.getElementById('new-cat-en').value.trim();
+      const categoryHe = document.getElementById('new-cat-he').value.trim();
+
+      const newQ = { id, type, categoryEn, categoryHe };
+
+      if (type === 'likert') {
+        newQ.textEn = document.getElementById('new-text-en').value.trim();
+        newQ.textHe = document.getElementById('new-text-he').value.trim();
+      } else if (type === 'statement_pair') {
+        newQ.statementAEn = document.getElementById('new-stmt-a-en').value.trim();
+        newQ.statementAHe = document.getElementById('new-stmt-a-he').value.trim();
+        newQ.statementBEn = document.getElementById('new-stmt-b-en').value.trim();
+        newQ.statementBHe = document.getElementById('new-stmt-b-he').value.trim();
+      } else if (type === 'multiple_choice') {
+        newQ.textEn = document.getElementById('new-text-en').value.trim();
+        newQ.textHe = document.getElementById('new-text-he').value.trim();
+        
+        newQ.options = [];
+        const rows = document.querySelectorAll('.option-row-inputs');
+        rows.forEach(row => {
+          const val = parseInt(row.querySelector('.option-val-input').value, 10);
+          const en = row.querySelector('.option-en-input').value.trim();
+          const he = row.querySelector('.option-he-input').value.trim();
+          newQ.options.push({ value: val, textEn: en, textHe: he });
+        });
+
+        if (newQ.options.length < 2) {
+          alert('Please add at least 2 options for multiple choice questions.');
+          return;
+        }
+      }
+
+      newQuestionsDrafts.push(newQ);
+      saveDraftsToStorage();
+      
+      // Reset form
+      document.getElementById('new-question-form').reset();
+      document.getElementById('options-rows-container').innerHTML = '';
+      toggleFormTypeInputs();
+      
+      renderQuestions();
+      updateStatusCounters();
+      showToast('New question draft added!');
+      
+      // Scroll to new draft card
+      document.getElementById('card-' + id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function removeNewDraft(id) {
+      if (confirm('Remove this new draft question?')) {
+        newQuestionsDrafts = newQuestionsDrafts.filter(q => q.id !== id);
+        localStorage.removeItem('feedback_q_' + id);
+        saveDraftsToStorage();
+        renderQuestions();
+        updateStatusCounters();
+      }
+    }
+
+    // Compile feedback object
+    function getCompiledData() {
+      const feedbackObj = {
+        timestamp: new Date().toISOString(),
+        branchName: "feature/question-feedback",
+        revisions: {},
+        deletions: [],
+        newQuestions: []
+      };
+
+      // Add feedback/revisions for existing questions
+      initialQuestions.forEach(q => {
+        const comment = localStorage.getItem('feedback_q_' + q.id);
+        const del = localStorage.getItem('delete_q_' + q.id) === 'true';
+        
+        if (comment && comment.trim() !== '') {
+          feedbackObj.revisions[q.id] = comment.trim();
+        }
+        if (del) {
+          feedbackObj.deletions.push(q.id);
+        }
+      });
+
+      // Add new drafts and their optional comments
+      newQuestionsDrafts.forEach(q => {
+        const comment = localStorage.getItem('feedback_q_' + q.id);
+        const questionWithComment = { ...q };
+        if (comment && comment.trim() !== '') {
+          questionWithComment.feedbackComment = comment.trim();
+        }
+        feedbackObj.newQuestions.push(questionWithComment);
+      });
+
+      return feedbackObj;
+    }
+
+    // Compile Markdown Summary
+    function getCompiledMarkdown(data) {
+      let md = `# Feedback on Israeli Election Quiz Questions\n`;
+      md += `*Compiled at:* \`${data.timestamp}\`\n`;
+      md += `*Branch:* \`${data.branchName}\`\n\n`;
+
+      md += `## 1. Revisions & Suggestions\n`;
+      const revKeys = Object.keys(data.revisions);
+      if (revKeys.length === 0) {
+        md += `*No revisions suggested for existing questions.*\n`;
+      } else {
+        revKeys.forEach(qid => {
+          const original = initialQuestions.find(q => q.id === qid);
+          md += `### Question: \`${qid}\`\n`;
+          if (original.type === 'likert' || original.type === 'multiple_choice') {
+            md += `* **English:** "${original.textEn}"\n`;
+            md += `* **Hebrew:** "${original.textHe}"\n`;
+          } else {
+            md += `* **Statement A (EN):** "${original.statementAEn}"\n`;
+            md += `* **Statement B (EN):** "${original.statementBEn}"\n`;
+          }
+          md += `* **Feedback / Revisions:**\n\n  > ${data.revisions[qid].replace(/\n/g, '\n  > ')}\n\n`;
+        });
+      }
+
+      md += `\n## 2. Marked for Deletion / Replacement\n`;
+      if (data.deletions.length === 0) {
+        md += `*No questions marked for deletion.*\n`;
+      } else {
+        data.deletions.forEach(qid => {
+          md += `* \`${qid}\`\n`;
+        });
+      }
+
+      md += `\n## 3. New Proposed Questions (${data.newQuestions.length})\n`;
+      if (data.newQuestions.length === 0) {
+        md += `*No new questions proposed.*\n`;
+      } else {
+        data.newQuestions.forEach((q, idx) => {
+          md += `### [NEW] Question ${idx + 1}: \`${q.id}\`\n`;
+          md += `* **Type:** \`${q.type}\`\n`;
+          md += `* **Category:** \`${q.categoryEn}\` / \`${q.categoryHe}\`\n`;
+          if (q.type === 'likert' || q.type === 'multiple_choice') {
+            md += `* **Text (EN):** ${q.textEn}\n`;
+            md += `* **Text (HE):** ${q.textHe}\n`;
+          } else {
+            md += `* **Statement A (EN):** ${q.statementAEn}\n`;
+            md += `* **Statement A (HE):** ${q.statementAHe}\n`;
+            md += `* **Statement B (EN):** ${q.statementBEn}\n`;
+            md += `* **Statement B (HE):** ${q.statementBHe}\n`;
+          }
+          
+          if (q.type === 'multiple_choice' && q.options) {
+            md += `* **Options:**\n`;
+            q.options.forEach(opt => {
+              md += `  * Value \`${opt.value}\`: EN: "${opt.textEn}" / HE: "${opt.textHe}"\n`;
+            });
+          }
+          if (q.feedbackComment) {
+            md += `* **Additional Comment:**\n\n  > ${q.feedbackComment.replace(/\n/g, '\n  > ')}\n\n`;
+          }
+          md += `\n`;
+        });
+      }
+
+      return md;
+    }
+
+    function compileAndSubmit() {
+      const data = getCompiledData();
+      const hasFeedback = Object.keys(data.revisions).length > 0 || data.deletions.length > 0 || data.newQuestions.length > 0;
+
+      if (!hasFeedback) {
+        alert('You haven\'t entered any suggestions, marked any questions for deletion, or added new questions yet!');
+        return;
+      }
+
+      const mdText = getCompiledMarkdown(data);
+      const jsonText = JSON.stringify(data, null, 2);
+
+      document.getElementById('output-md').value = mdText;
+      document.getElementById('output-json').value = jsonText;
+
+      document.getElementById('result-modal').style.display = 'flex';
+      switchTab('md');
+    }
+
+    function closeModal() {
+      document.getElementById('result-modal').style.display = 'none';
+    }
+
+    function switchTab(tab) {
+      currentActiveTab = tab;
+      document.getElementById('tab-md').classList.toggle('active', tab === 'md');
+      document.getElementById('tab-json').classList.toggle('active', tab === 'json');
+      
+      document.getElementById('content-md').style.display = tab === 'md' ? 'block' : 'none';
+      document.getElementById('content-json').style.display = tab === 'json' ? 'block' : 'none';
+    }
+
+    function copyCompiledText() {
+      const textId = currentActiveTab === 'md' ? 'output-md' : 'output-json';
+      const el = document.getElementById(textId);
+      el.select();
+      document.execCommand('copy');
+      
+      const copyBtn = document.getElementById('copy-btn');
+      const originalText = copyBtn.innerText;
+      copyBtn.innerText = 'Copied! ✓';
+      setTimeout(() => {
+        copyBtn.innerText = originalText;
+      }, 1500);
+    }
+
+    function downloadJSONFile() {
+      const data = getCompiledData();
+      const jsonText = JSON.stringify(data, null, 2);
+      
+      const blob = new Blob([jsonText], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'feedback.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
