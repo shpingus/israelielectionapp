@@ -18,7 +18,8 @@
     "q18_death_penalty_terrorists": 1,
     "q19_arab_parties_coalition": 2,
     "q20_day_after_leadership": -2,
-    "q21_lgbt_equality": -1
+    "q21_lgbt_equality": -1,
+    "q22_nuclear_npt": -2
   },
   "together": {
     "q1_draft_crisis": 2,
@@ -39,7 +40,8 @@
     "q18_death_penalty_terrorists": -1,
     "q19_arab_parties_coalition": -2,
     "q20_day_after_leadership": 2,
-    "q21_lgbt_equality": 2
+    "q21_lgbt_equality": 2,
+    "q22_nuclear_npt": -2
   },
   "yashar": {
     "q1_draft_crisis": 2,
@@ -60,7 +62,8 @@
     "q18_death_penalty_terrorists": -2,
     "q19_arab_parties_coalition": -2,
     "q20_day_after_leadership": 2,
-    "q21_lgbt_equality": 2
+    "q21_lgbt_equality": 2,
+    "q22_nuclear_npt": -2
   },
   "democrats": {
     "q1_draft_crisis": 2,
@@ -81,7 +84,8 @@
     "q18_death_penalty_terrorists": -2,
     "q19_arab_parties_coalition": -2,
     "q20_day_after_leadership": 2,
-    "q21_lgbt_equality": 2
+    "q21_lgbt_equality": 2,
+    "q22_nuclear_npt": -2
   },
   "shas": {
     "q1_draft_crisis": -2,
@@ -102,7 +106,8 @@
     "q18_death_penalty_terrorists": 0,
     "q19_arab_parties_coalition": 1,
     "q20_day_after_leadership": -2,
-    "q21_lgbt_equality": -2
+    "q21_lgbt_equality": -2,
+    "q22_nuclear_npt": -2
   },
   "yisrael_beiteinu": {
     "q1_draft_crisis": 2,
@@ -123,7 +128,8 @@
     "q18_death_penalty_terrorists": 2,
     "q19_arab_parties_coalition": 2,
     "q20_day_after_leadership": 2,
-    "q21_lgbt_equality": 2
+    "q21_lgbt_equality": 2,
+    "q22_nuclear_npt": -2
   },
   "utj": {
     "q1_draft_crisis": -2,
@@ -144,7 +150,8 @@
     "q18_death_penalty_terrorists": 0,
     "q19_arab_parties_coalition": 1,
     "q20_day_after_leadership": -1,
-    "q21_lgbt_equality": -2
+    "q21_lgbt_equality": -2,
+    "q22_nuclear_npt": -2
   },
   "otzma_yehudit": {
     "q1_draft_crisis": 1,
@@ -165,7 +172,8 @@
     "q18_death_penalty_terrorists": 2,
     "q19_arab_parties_coalition": 2,
     "q20_day_after_leadership": -2,
-    "q21_lgbt_equality": -2
+    "q21_lgbt_equality": -2,
+    "q22_nuclear_npt": -2
   },
   "religious_zionism": {
     "q1_draft_crisis": 1,
@@ -186,7 +194,8 @@
     "q18_death_penalty_terrorists": 2,
     "q19_arab_parties_coalition": 2,
     "q20_day_after_leadership": -2,
-    "q21_lgbt_equality": -2
+    "q21_lgbt_equality": -2,
+    "q22_nuclear_npt": -2
   },
   "miluimnikim": {
     "q1_draft_crisis": 2,
@@ -207,7 +216,8 @@
     "q18_death_penalty_terrorists": 0,
     "q19_arab_parties_coalition": 2,
     "q20_day_after_leadership": 2,
-    "q21_lgbt_equality": 1
+    "q21_lgbt_equality": 1,
+    "q22_nuclear_npt": -2
   },
   "national_unity": {
     "q1_draft_crisis": 2,
@@ -228,7 +238,8 @@
     "q18_death_penalty_terrorists": -2,
     "q19_arab_parties_coalition": -2,
     "q20_day_after_leadership": 2,
-    "q21_lgbt_equality": 1
+    "q21_lgbt_equality": 1,
+    "q22_nuclear_npt": -2
   },
   "raam": {
     "q1_draft_crisis": 0,
@@ -249,7 +260,8 @@
     "q18_death_penalty_terrorists": -2,
     "q19_arab_parties_coalition": -2,
     "q20_day_after_leadership": 1,
-    "q21_lgbt_equality": -2
+    "q21_lgbt_equality": -2,
+    "q22_nuclear_npt": 2
   },
   "hadash_taal": {
     "q1_draft_crisis": -2,
@@ -270,7 +282,8 @@
     "q18_death_penalty_terrorists": -2,
     "q19_arab_parties_coalition": -2,
     "q20_day_after_leadership": 2,
-    "q21_lgbt_equality": 0
+    "q21_lgbt_equality": 0,
+    "q22_nuclear_npt": 2
   },
   "balad": {
     "q1_draft_crisis": -2,
@@ -291,6 +304,7 @@
     "q18_death_penalty_terrorists": -2,
     "q19_arab_parties_coalition": -2,
     "q20_day_after_leadership": 2,
-    "q21_lgbt_equality": 0
+    "q21_lgbt_equality": 0,
+    "q22_nuclear_npt": 2
   }
 }

@@ -199,5 +199,13 @@
     "categoryHe": "חברה וזכויות",
     "textEn": "The state should grant equal social benefits and rights to same-sex couples, including tax benefits and inheritance rights, on par with heterosexual couples.",
     "textHe": "על המדינה להעניק זכויות והטבות סוציאליות שוות לזוגות חד-מיניים, לרבות הטבות מס וזכויות ירושה, בדומה לזוגות הטרוסקסואלים."
+  },
+  {
+    "id": "q22_nuclear_npt",
+    "type": "likert",
+    "categoryEn": "SECURITY & DIPLOMACY",
+    "categoryHe": "ביטחון ומדיניות חוץ",
+    "textEn": "Israel should sign the Treaty on the Non-Proliferation of Nuclear Weapons (NPT), open its nuclear facilities to international inspection, and dismantle its alleged nuclear weapons program.",
+    "textHe": "על ישראל לחתום על האמנה למניעת הפצת נשק גרעיני (NPT), לפתוח את מתקניה הגרעיניים לפיקוח בינלאומי ולפרק את תוכנית הנשק הגרעיני המיוחסת לה."
   }
 ]
