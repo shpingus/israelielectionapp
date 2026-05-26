@@ -43,8 +43,9 @@ const DEBUG_MODE = true;
 
 // Track modular action clicks, changes, navigation
 export function trackAction(actionType, targetId = null, value = null, language = 'he') {
-  if (DEBUG_MODE) {
-    console.log(`[DEBUG] trackAction prevented DB write:`, { actionType, targetId, value, language });
+  const isLoggingDisabled = localStorage.getItem('disable_session_logging') === 'true';
+  if (DEBUG_MODE || isLoggingDisabled) {
+    console.log(`[DEBUG] trackAction prevented DB write (isLoggingDisabled: ${isLoggingDisabled}):`, { actionType, targetId, value, language });
     return;
   }
 
@@ -73,8 +74,9 @@ export function trackAction(actionType, targetId = null, value = null, language 
 
 // Finalize session results
 export function submitSessionResults(topParty, topScore, language) {
-  if (DEBUG_MODE) {
-    console.log(`[DEBUG] submitSessionResults prevented DB write:`, { topParty, topScore, language });
+  const isLoggingDisabled = localStorage.getItem('disable_session_logging') === 'true';
+  if (DEBUG_MODE || isLoggingDisabled) {
+    console.log(`[DEBUG] submitSessionResults prevented DB write (isLoggingDisabled: ${isLoggingDisabled}):`, { topParty, topScore, language });
     return Promise.resolve();
   }
 
@@ -110,8 +112,9 @@ export function submitConsiderationFeedback(choice) {
   // Log as a tracking action event
   trackAction('submit_feedback', 'considered_voting', choice, lang);
 
-  if (DEBUG_MODE) {
-    console.log(`[DEBUG] submitConsiderationFeedback prevented DB write:`, { choice, lang });
+  const isLoggingDisabled = localStorage.getItem('disable_session_logging') === 'true';
+  if (DEBUG_MODE || isLoggingDisabled) {
+    console.log(`[DEBUG] submitConsiderationFeedback prevented DB write (isLoggingDisabled: ${isLoggingDisabled}):`, { choice, lang });
     return Promise.resolve();
   }
 

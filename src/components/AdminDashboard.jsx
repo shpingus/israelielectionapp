@@ -18,6 +18,18 @@ export default function AdminDashboard({ onClose }) {
   const [queryLoading, setQueryLoading] = useState(false);
   const [queryResults, setQueryResults] = useState(null);
   const [queryError, setQueryError] = useState('');
+  
+  // Personal Session Logging State
+  const [isLoggingDisabled, setIsLoggingDisabled] = useState(() => localStorage.getItem('disable_session_logging') === 'true');
+
+  const handleToggleLogging = (checked) => {
+    setIsLoggingDisabled(checked);
+    if (checked) {
+      localStorage.setItem('disable_session_logging', 'true');
+    } else {
+      localStorage.removeItem('disable_session_logging');
+    }
+  };
 
   // Validate Token on Mount or Token Change
   useEffect(() => {
@@ -257,6 +269,62 @@ export default function AdminDashboard({ onClose }) {
           >
             {t('closeAdmin')}
           </button>
+        </div>
+      </div>
+      
+      {/* Session Logging Control Panel */}
+      <div 
+        className="brutalist-card" 
+        style={{ 
+          borderColor: 'var(--border-color, #121212)',
+          borderWidth: '3px',
+          boxShadow: 'var(--shadow-x, -6px) var(--shadow-y, 6px) 0px #121212',
+          marginBottom: '32px',
+          backgroundColor: '#FFFFFF',
+          padding: '20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '16px'
+        }}
+      >
+        <div>
+          <h4 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>
+            {language === 'he' ? 'מעקב סשן אישי' : 'Personal Session Tracking'}
+          </h4>
+          <p className="monospace-label" style={{ fontSize: '0.75rem', opacity: 0.7, margin: '4px 0 0 0' }}>
+            {language === 'he' 
+              ? 'חסמו או אפשרו שמירת נתוני שימוש וציוני התאמה בבסיס הנתונים עבור מכשיר זה.'
+              : 'Block or allow saving usage data and alignment scores to the database for this device.'}
+          </p>
+        </div>
+        <div>
+          <label 
+            className="monospace-label" 
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '10px', 
+              fontWeight: 700, 
+              cursor: 'pointer',
+              userSelect: 'none',
+              border: '2px solid #121212',
+              padding: '8px 16px',
+              backgroundColor: isLoggingDisabled ? 'var(--accent-coral, #FF5252)' : 'var(--accent-cyan, #00E5FF)',
+              boxShadow: '3px 3px 0px #121212'
+            }}
+          >
+            <input 
+              type="checkbox" 
+              checked={isLoggingDisabled}
+              onChange={(e) => handleToggleLogging(e.target.checked)}
+              style={{ width: '18px', height: '18px', cursor: 'pointer', accentColor: '#121212' }}
+            />
+            {isLoggingDisabled 
+              ? (language === 'he' ? 'הניטור כבוי ✕' : 'Logging Disabled ✕')
+              : (language === 'he' ? 'הניטור פעיל ✓' : 'Logging Enabled ✓')}
+          </label>
         </div>
       </div>
 
