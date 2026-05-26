@@ -4,8 +4,8 @@
     "type": "likert",
     "categoryEn": "SECURITY & IDENTITY",
     "categoryHe": "ביטחון וזהות",
-    "textEn": "The state must enact a universal conscription law immediately, applying criminal and severe financial sanctions against any draft-evading sector, without exception for yeshiva students.",
-    "textHe": "על המדינה לחוקק מיידית חוק גיוס לכולם, תוך הפעלת סנקציות פליליות וכלכליות חריפות נגד כל מגזר משתמט, ללא חריגים לתלמידי ישיבות."
+    "textEn": "The state must enact a universal conscription or national service law immediately, applying criminal and severe financial sanctions against any evading sector, without exception for yeshiva students.",
+    "textHe": "על המדינה לחוקק מיידית חוק גיוס או שירות לאומי לכולם, תוך הפעלת סנקציות פליליות וכלכליות חריפות נגד כל מגזר משתמט, ללא חריגים לתלמידי ישיבות."
   },
   {
     "id": "q2_gaza_future",
@@ -60,8 +60,8 @@
     "type": "likert",
     "categoryEn": "DIPLOMACY",
     "categoryHe": "מדיניות חוץ",
-    "textEn": "Israel should accept the creation of a demilitarized Palestinian state as part of a comprehensive regional normalization agreement with Saudi Arabia and other moderate Arab states.",
-    "textHe": "על ישראל להסכים להקמת מדינה פלסטינית מפורזת כחלק מהסכם נורמליזציה אזורי כולל עם סעודיה ומדינות ערב מתונות נוספות."
+    "textEn": "Israel should accept the creation of a demilitarized (weaponless) Palestinian state as part of a comprehensive regional normalization agreement with Saudi Arabia and other moderate Arab states.",
+    "textHe": "על ישראל להסכים להקמת מדינה פלסטינית מפורזת (ללא נשק) כחלק מהסכם נורמליזציה אזורי כולל עם סעודיה ומדינות ערב מתונות נוספות."
   },
   {
     "id": "q6_shabbat_transport",
@@ -70,8 +70,8 @@
     "categoryHe": "דת ומדינה",
     "statementAEn": "Local municipalities should have the authority to operate public transportation on Shabbat based on the needs and character of their residents.",
     "statementAHe": "לרשויות המקומיות צריכה להיות סמכות להפעיל תחבורה ציבורית בשבת בהתאם לצרכים ולאופי של תושביהן.",
-    "statementBEn": "The state must strictly preserve the status quo by prohibiting the operation of national and municipal public transportation on Shabbat.",
-    "statementBHe": "על המדינה לשמור בקפדנות על הסטטוס קוו ולמנוע הפעלת תחבורה ציבורית ארצית ועירונית בשבת."
+    "statementBEn": "The state must preserve the status quo by prohibiting the operation of national and municipal public transportation on Shabbat.",
+    "statementBHe": "על המדינה לשמור על הסטטוס קוו ולמנוע הפעלת תחבורה ציבורית ארצית ועירונית בשבת."
   },
   {
     "id": "q7_haredi_education",
@@ -103,8 +103,8 @@
     "type": "likert",
     "categoryEn": "RELIGION & STATE",
     "categoryHe": "דת ומדינה",
-    "textEn": "Israel must institute full civil marriage options for all citizens, completely independent of the Chief Rabbinate.",
-    "textHe": "על ישראל להנהיג אפשרויות של נישואים אזרחיים מלאים לכלל האזרחים, באופן בלתי תלוי לחלוטין ברבנות הראשית."
+    "textEn": "Israel must institute full civil marriage options for all citizens, completely independent of all religious institutions.",
+    "textHe": "על ישראל להנהיג אפשרויות של נישואים אזרחיים מלאים לכלל האזרחים, באופן בלתי תלוי לחלוטין בכלל המוסדות הדתיים."
   },
   {
     "id": "q9_judea_samaria_settlements",
@@ -119,8 +119,8 @@
     "type": "likert",
     "categoryEn": "SECURITY & RELIGION",
     "categoryHe": "ביטחון ודת",
-    "textEn": "Israel should actively enforce the right of Jews to pray openly on the Temple Mount, even at the risk of escalating tensions with the Arab world.",
-    "textHe": "על ישראל לאכוף באופן פעיל את זכותם של יהודים להתפלל בגלוי בהר הבית, גם במחיר של הסלמת המתיחות מול העולם הערבי."
+    "textEn": "Israel should actively permit the ability of Jews to pray openly on the Temple Mount, even at the risk of escalating tensions with the Arab world.",
+    "textHe": "על ישראל לאפשר באופן פעיל את אפשרותם של יהודים להתפלל בגלוי בהר הבית, גם במחיר של הסלמת המתיחות מול העולם הערבי."
   },
   {
     "id": "q11_police_independence",
@@ -145,8 +145,8 @@
     "type": "likert",
     "categoryEn": "ECONOMY",
     "categoryHe": "כלכלה",
-    "textEn": "To lower the cost of living, Israel must aggressively remove import tariffs and regulations, even if it leads to the collapse of local agriculture and traditional industries.",
-    "textHe": "כדי להוריד את יוקר המחיה, ישראל חייבת לבטל באגרסיביות מכסי ייבוא ורגולציה, גם אם הדבר יוביל לקריסת החקלאות המקומית והתעשייה המסורתית."
+    "textEn": "To lower the cost of living, Israel must aggressively remove import tariffs and regulations, even if it adversely affects local agriculture and traditional industries.",
+    "textHe": "כדי להוריד את יוקר המחיה, ישראל חייבת לבטל באגרסיביות מכסי ייבוא ורגולציה, גם אם הדבר יפגע בחקלאות המקומית ובתעשייה המסורתית."
   },
   {
     "id": "q15_attorney_general_status",
@@ -163,8 +163,8 @@
     "type": "likert",
     "categoryEn": "RELIGION & IDENTITY",
     "categoryHe": "דת וזהות",
-    "textEn": "The state should permit public authorities to host gender-segregated events and enforce strict religious standards in public institutions in order to accommodate the Haredi and religious publics.",
-    "textHe": "על המדינה לאפשר לרשויות ציבוריות לקיים אירועים בהפרדה מגדרית ולאכוף סטנדרטים דתיים מחמירים במוסדות ציבור כדי להתחשב בציבור החרדי והדתי."
+    "textEn": "The state should permit public authorities to host gender-segregated events and enforce religious standards in public institutions in order to accommodate the Haredi and religious publics.",
+    "textHe": "על המדינה לאפשר לרשויות ציבוריות לקיים אירועים בהפרדה מגדרית ולאכוף סטנדרטים דתיים במוסדות ציבור כדי להתחשב בציבור החרדי והדתי."
   },
   {
     "id": "q18_death_penalty_terrorists",
@@ -191,5 +191,13 @@
     "categoryHe": "זהות",
     "textEn": "Every senior political and military leader who was in power on October 7, 2023, must permanently resign from public life to allow a new generation to lead.",
     "textHe": "כל מנהיג פוליטי וצבאי בכיר שהיה בשלטון ב-7 באוקטובר 2023, חייב להתפטר לצמיתות מהחיים הציבוריים כדי לאפשר לדור חדש להנהיג."
+  },
+  {
+    "id": "q21_lgbt_equality",
+    "type": "likert",
+    "categoryEn": "SOCIETY & RIGHTS",
+    "categoryHe": "חברה וזכויות",
+    "textEn": "The state should grant equal social benefits and rights to same-sex couples, including tax benefits and inheritance rights, on par with heterosexual couples.",
+    "textHe": "על המדינה להעניק זכויות והטבות סוציאליות שוות לזוגות חד-מיניים, לרבות הטבות מס וזכויות ירושה, בדומה לזוגות הטרוסקסואלים."
   }
 ]
